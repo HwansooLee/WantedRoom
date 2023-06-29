@@ -9,7 +9,7 @@ realtorNo varchar2(16) unique);
 
 create table item(
 itemNo number primary key,
-id varchar2(30) not null
+id varchar2(30) not null,
 foreign key(id) references member (id),
 addr varchar2(100) not null,
 deposit number default 0,
@@ -78,21 +78,4 @@ foreign key(id) references member(id),
 itemNo number not null,
 foreign key (itemNo) references item(itemNo));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+commit;

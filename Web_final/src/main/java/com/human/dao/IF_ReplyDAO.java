@@ -6,6 +6,7 @@ import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
 
 public interface IF_ReplyDAO {
+	// page
 	public void insertReply(ReplyVO rvo) throws Exception;
 	public List<ReplyVO> selectReplyAll(PageVO pvo) throws Exception;
 	public ReplyVO selectReplyOne(int rno) throws Exception;

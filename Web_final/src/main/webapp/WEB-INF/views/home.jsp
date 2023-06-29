@@ -1,17 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <html>
 <head>
 	<title>Home</title>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
-<h1>
-	Hello world!  
-</h1>
+	<!-- 홈페이지 로고 -->
+	<nav>
+		[매물 등록]
+		[리뷰]
+		[로그인]
+		[회원가입]
+	</nav>
+	<form action="" >
+			<!-- 검색창 -->
+	</form>
 
-<P>  The time on the server is ${serverTime}. </P>
-<P>  HeyHey gitTest 22 </P>
-<P>  test from J </P>
-<P>  HeyHey gitTest from H</P>
+	<!-- 매물 리스트 -->
+	
+	<footer>
+		<!-- 개발자 정보 -->
+	</footer>
 </body>
+	<script>
+
+	</script>
 </html>

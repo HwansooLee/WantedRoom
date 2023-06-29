@@ -46,13 +46,11 @@ create table store(
 addr varchar2(100) primary key,
 name varchar2(45) not null);
 
-
 create table board(
 boardNo number primary key,
 id varchar2(30) not null,
 foreign key (id) references member(id),
-itemNo number not null,
-foreign key (itemNo) references item(itemNo),
+addr varchar2(100) not null,
 title varchar2(40) not null,
 content varchar2(300) not null,
 inDate date default sysdate,

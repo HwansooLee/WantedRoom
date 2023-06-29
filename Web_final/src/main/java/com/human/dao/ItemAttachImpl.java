@@ -2,22 +2,25 @@ package com.human.dao;
 
 import com.human.VO.ItemAttachVO;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.util.List;
 
+@Repository
 public class ItemAttachImpl implements IF_ItemAttachDAO{
     private final static String mapperQuery = "com.human.dao.IF_ItemAttachDAO";
     @Inject
-    SqlSession sqlSession;
+    private SqlSession sqlSession;
 
     @Override
     public void insert(ItemAttachVO vo) {
-        sqlSession.insert(mapperQuery + ".insert", vo);
+//        sqlSession.insert(mapperQuery + ".insert", vo);
     }
 
     @Override
     public List<ItemAttachVO> selectAll(int itemNo) {
-        return sqlSession.selectList(mapperQuery + ".selectAll", itemNo);
+//        return sqlSession.selectList(mapperQuery + ".selectAll", itemNo);
+    	return null;
     }
 }

@@ -1,5 +1,14 @@
 package com.human.dao;
 
-public interface IF_MemberDAO {
+import java.util.List;
 
+import com.human.VO.MemberVO;
+import com.human.VO.PageVO;
+
+public interface IF_MemberDAO {
+	public void insertMember(MemberVO mvo) throws Exception;
+	public List<MemberVO> selectMemberAll(PageVO pvo)throws Exception;
+	public MemberVO selectMemberOne(String id) throws Exception;
+	public void deleteId(String id) throws Exception;
+	public void updateId(MemberVO mvo) throws Exception;
 }

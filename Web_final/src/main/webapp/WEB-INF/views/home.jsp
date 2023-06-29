@@ -12,6 +12,6 @@
 <P>  The time on the server is ${serverTime}. </P>
 <P>  HeyHey gitTest 22 </P>
 <P>  test from J </P>
-<P>  HeyHey gitTest from H 123123</P>
+<P>  HeyHey gitTest from H</P>
 </body>
 </html>

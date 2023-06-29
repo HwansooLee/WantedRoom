@@ -22,3 +22,12 @@ ERD 작성
 
 6/28 오후
 flow chart 작성
+
+6/29 오전
+usecase diagram 작성
+table info 작성
+
+6/29 오후
+dao interface 설계
+- 회의를 통한 게시판 컨셉변경 주변 동네의 리뷰를 작성할수 있는 게시판으로 변경
+- spring에서 홈 안열리는 버그 수정 : maven 설정 변경

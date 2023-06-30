@@ -8,7 +8,7 @@
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
-	.dragAndDropDiv {
+	.dropzone {
 		border: 2px dashed #92AAB0;
 		width: 650px;
 		height: 200px;
@@ -19,7 +19,7 @@
 		font-size:200%;
 		display: table-cell;
 	}
-	.dragAndDropDiv.highlight{
+	.dropzone.highlight{
 		border-color: purple;
 	}
 </style>
@@ -48,8 +48,10 @@
 
 		<!-- upload multiple files -->
 		매물사진등록(최대 10개)<br>
-		<div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div>
-		<input type="file" name="file" value="파일 추가" style="display: none;" multiple="multiple"/><br>
+		<div id="dropzone" class="dropzone">Drag & Drop Files Here or Browse Files
+			<input type="file" name="file" value="파일 추가" style="display: none;" multiple="multiple"/><br>
+		</div>
+		
 		선택 파일 리스트<br>
 		<table border="1" id="fileList">
 			<thead>
@@ -106,35 +108,40 @@
 		let fileInput = $("[name='file']");
 		let fileList = [];
 		// drag and drop
-		let dragAndDrop = $(".dragAndDropDiv");
-		['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-			dragAndDrop.on(eventName, preventDefaults, false)
-		});
-		function preventDefaults(e) {
+		var dropzone = document.getElementById('dropzone');
+		var dropzone_input = dropzone.querySelector('flie[name="file"]');
+		var multiple = dropzone_input.getAttribute('multiple') ? true : false;
+
+		['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function(event) {
+		dropzone.addEventListener(event, function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-		}
-		['dragenter', 'dragover'].forEach(eventName => {
-			dragAndDrop.on(eventName, highlight, false)
+			});
 		});
-		['dragleave', 'drop'].forEach(eventName => {
-			dragAndDrop.on(eventName, unhighlight, false)
+
+		dropzone.addEventListener('dragover', function(e) {
+		this.classList.add('dropzone-dragging');
+		}, false);
+
+		dropzone.addEventListener('dragleave', function(e) {
+		this.classList.remove('dropzone-dragging');
+		}, false);
+
+		dropzone.addEventListener('drop', function(e) {
+		this.classList.remove('dropzone-dragging');
+		var files = e.dataTransfer.files;
+		
+		var for_alert = "";
+		Array.prototype.forEach.call(files, file => {
+			alert(file.name)
 		});
-		function highlight(e) {
-			dragAndDrop.classList.add('highlight');
-		}
-		function unhighlight(e) {
-			dragAndDrop.classList.remove('highlight');
-		}
-		dragAndDrop.on('drop', handleDrop, false);
-		function handleDrop(e) {
-			let dt = e.dataTransfer;
-			let files = dt.files;
-			handleFiles(files);
-		}
-		function handleFiles(files) {
-  			([...files]).forEach(uploadFile);
-		}
+
+		
+		}, false);
+
+		dropzone.addEventListener('click', function(e) {
+		dropzone_input.click();
+		});
 
 
 		// 선택한 파일 삭제

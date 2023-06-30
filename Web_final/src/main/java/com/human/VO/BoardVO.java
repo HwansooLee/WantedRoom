@@ -3,13 +3,22 @@ package com.human.VO;
 public class BoardVO {
     private int boardNo;
     private String id;
-    private int itemNo;
+    private String addr;
     private String title;
     private String content;
     private String inDate;
     private String views;
+    private String nickname;
 
-    public int getBoardNo() {
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public int getBoardNo() {
         return boardNo;
     }
 
@@ -25,15 +34,15 @@ public class BoardVO {
         this.id = id;
     }
 
-    public int getItemNo() {
-        return itemNo;
-    }
+    public String getAddr() {
+		return addr;
+	}
 
-    public void setItemNo(int itemNo) {
-        this.itemNo = itemNo;
-    }
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 
-    public String getTitle() {
+	public String getTitle() {
         return title;
     }
 

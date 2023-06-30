@@ -1,5 +1,8 @@
 package com.human.VO;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class ItemVO {
     private int itemNo;
     private String id;
@@ -9,6 +12,12 @@ public class ItemVO {
     private String detail;
     private String inDate;
     private String status;
+    // itemAttach
+    private ArrayList<String> fileName;
+    // itemTags
+    private String parking;
+    private String elevator;
+    private String buildingType;
 
     public int getItemNo() {
         return itemNo;
@@ -72,5 +81,37 @@ public class ItemVO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public ArrayList<String> getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(ArrayList<String> fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getParking() {
+        return parking;
+    }
+
+    public void setParking(String parking) {
+        this.parking = parking;
+    }
+
+    public String getElevator() {
+        return elevator;
+    }
+
+    public void setElevator(String elevator) {
+        this.elevator = elevator;
+    }
+
+    public String getBuildingType() {
+        return buildingType;
+    }
+
+    public void setBuildingType(String buildingType) {
+        this.buildingType = buildingType;
     }
 }

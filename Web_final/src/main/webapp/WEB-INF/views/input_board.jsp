@@ -13,7 +13,8 @@
 	<img src = "././resources/image/logo.png" width = "200">
 </a>
 <form action="inputBoardSave" method = "post" id = "frm">
-	<input type = "text" name = "id" value = "${id}" readonly><br>
+	<!-- 디버깅을 위해 임시로 testid로 테이블에 넣어서 만듦 로그인기능 구현되면 수정 필요 -->
+	<input type = "text" name = "id" value = "atestid" readonly><br>
 	제목<br>
 	<input type = "text" name = "title" class = "boardInput"><br>
 	주소<br>

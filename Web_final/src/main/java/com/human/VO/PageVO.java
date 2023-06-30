@@ -14,7 +14,16 @@ public class PageVO {
 	private boolean next;
 	
 	private String sword;
+	private String sorted; // 정렬기준
 	
+	public String getSorted() {
+		return sorted;
+	}
+
+	public void setSorted(String sorted) {
+		this.sorted = sorted;
+	}
+
 	public String getSword() {
 		return sword;
 	}

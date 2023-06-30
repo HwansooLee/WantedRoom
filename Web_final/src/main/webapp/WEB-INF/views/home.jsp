@@ -10,7 +10,7 @@
 <body>
 	<!-- 홈페이지 로고 -->
 	<nav>
-		<a href="addItem">[매물 등록]</a>
+		<a href="addItemForm">[매물 등록]</a>
 		[리뷰]
 		[로그인]
 		[회원가입]

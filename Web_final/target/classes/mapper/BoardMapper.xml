@@ -4,11 +4,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.human.dao.IF_BoardDAO">
     <insert id="insert" parameterType="com.human.VO.BoardVO">
-        insert into board values (boardNoSeq.nextval, #{id}, #{itemNo}, #{title},
-                                #{content}, #{inDate}, #{views} )
+        insert into board values (boardNoSeq.nextval, #{id}, #{addr}, #{title},
+                                #{content}, default , default )
     </insert>
-    <select id="selectAll" parameterType="int" resultType="com.human.VO.BoardVO">
+    <select id="selectOne" parameterType="int" resultType="com.human.VO.BoardVO">
         select * from board where boardNo=#{boardNo}
+    </select>
+    
+    <select id="boardCnt" parameterType = "String" resultType = "int">
+    	select count(*) from board
+    	<if test = "value != null">
+    		where addr like '%'||#{value}||'%'
+    	</if>
+    </select>
+    
+    <select id="selectAll" parameterType = "com.human.VO.PageVO" 
+    resultType = "com.human.VO.BoardVO">
+    	select *
+		from (select rownum as rn, sub.* 
+		from (select b.*, m.nickname
+		from board b
+		join member m
+		on m.id = b.id
+		<if test = 'sword != null and sword != ""'>
+			where b.addr like '%'||#{sword}||'%'
+		</if>
+		<if test = 'sorted != null and sorted != ""'>
+			order by ${sorted} desc
+		</if>
+		) sub) bd
+		where bd.rn between #{startNo} and #{endNo}
     </select>
 
 

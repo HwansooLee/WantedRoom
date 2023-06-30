@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Handles requests for the application home page.
  */
@@ -34,5 +36,9 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
+	public String input_s(Locale locale, Model model, HttpSession session) {
+		return "addItem";
 	}
 }

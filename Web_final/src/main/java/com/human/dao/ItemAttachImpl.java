@@ -1,6 +1,5 @@
 package com.human.dao;
 
-import com.human.VO.ItemAttachVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -13,14 +12,4 @@ public class ItemAttachImpl implements IF_ItemAttachDAO{
     @Inject
     private SqlSession sqlSession;
 
-    @Override
-    public void insert(ItemAttachVO vo) {
-//        sqlSession.insert(mapperQuery + ".insert", vo);
-    }
-
-    @Override
-    public List<ItemAttachVO> selectAll(int itemNo) {
-//        return sqlSession.selectList(mapperQuery + ".selectAll", itemNo);
-    	return null;
-    }
 }

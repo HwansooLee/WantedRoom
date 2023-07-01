@@ -81,4 +81,4 @@ commit;
 
 -- 디버깅을 위한 임의의 회원 생성
 insert into member values ('testid','testnickname','testpwd','testrealorNo');
-insert into member values ('atestid','atestnickname','atestpwd','atestrealorNo');
+insert into member values ('atestid','aaa','atestpwd','atestrealorNo');

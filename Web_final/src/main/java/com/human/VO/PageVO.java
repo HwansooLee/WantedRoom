@@ -16,6 +16,16 @@ public class PageVO {
 	private String sword;
 	private String sorted; // 정렬기준
 	
+	private int boardNo; // 댓글 목록 받아오기 위한 boardNo
+	
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
 	public String getSorted() {
 		return sorted;
 	}

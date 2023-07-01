@@ -5,6 +5,7 @@ import java.util.List;
 import com.human.VO.BoardVO;
 import com.human.VO.ItemVO;
 import com.human.VO.PageVO;
+import com.human.VO.ReplyVO;
 
 public interface IF_RealtorService {
     public void addItem(ItemVO ivo);
@@ -12,4 +13,7 @@ public interface IF_RealtorService {
 	public int boardCnt(String sword) throws Exception;
 	public List<BoardVO> listAll(PageVO pvo) throws Exception;
 	public BoardVO boardDetail(int boardNo) throws Exception;
+	public void addReply(ReplyVO rvo) throws Exception;
+	public int replyCnt(int boardNo) throws Exception;
+	public List<ReplyVO> getReplyList(PageVO pvo) throws Exception;
 }

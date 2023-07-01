@@ -9,13 +9,18 @@ import org.springframework.stereotype.Service;
 import com.human.VO.BoardVO;
 import com.human.VO.ItemVO;
 import com.human.VO.PageVO;
+import com.human.VO.ReplyVO;
 import com.human.dao.IF_BoardDAO;
+import com.human.dao.IF_ReplyDAO;
 
 @Service
 public class RealtorServiceImpl implements IF_RealtorService{
 	
 	@Inject
 	IF_BoardDAO boarddao;
+	
+	@Inject
+	IF_ReplyDAO replydao;
 
     @Override
     public void addItem(ItemVO ivo) {
@@ -41,5 +46,20 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	public BoardVO boardDetail(int boardNo) throws Exception {
 		boarddao.viewCnt(boardNo);
 		return boarddao.selectOne(boardNo);
+	}
+
+	@Override
+	public void addReply(ReplyVO rvo) throws Exception {
+		replydao.insertReply(rvo);
+	}
+
+	@Override
+	public int replyCnt(int boardNo) throws Exception {
+		return replydao.replyCnt(boardNo);
+	}
+
+	@Override
+	public List<ReplyVO> getReplyList(PageVO pvo) throws Exception {
+		return replydao.selectReplyAll(pvo);
 	}
 }

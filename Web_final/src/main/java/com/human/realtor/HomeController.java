@@ -1,12 +1,8 @@
 package com.human.realtor;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Locale;
-
-import com.human.VO.ItemVO;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.human.VO.BoardVO;
+import com.human.VO.ItemVO;
 import com.human.VO.PageVO;
+import com.human.VO.ReplyVO;
 import com.human.service.IF_RealtorService;
 
 /**
@@ -145,8 +144,36 @@ public class HomeController {
 		// 게시글 조회시 조회수 올라가야 한다.
 		
 		// 게시글 번호로 댓글도 조회해서 댓글도 모델만들어 보내주어야 한다.
+		// 댓글은 비동기 방식으로 조회
 		BoardVO bvo = realtorsrv.boardDetail(boardNo);
 		model.addAttribute("boardvo",bvo);
 		return "detail_board";
 	}
+	
+	@RequestMapping(value = "/inputReply", method = RequestMethod.POST)
+	@ResponseBody // 이 어노테이션을 붙임으로서 모델이 아닌 객체 자체를 response 해줄수 있다.
+	public List<ReplyVO> inputReply(@RequestBody ReplyVO rvo) throws Exception{
+		// 비동기 통신 json으로 파라미터를 받는다
+//		System.out.println(rvo.getContent()); // 값 제대로 받아오는지 확인
+//		System.out.println(rvo.getId());
+//		System.out.println(rvo.getBoardNo());
+		realtorsrv.addReply(rvo); // DB에 댓글 insert
+		// 댓글 리스트를 가져와야 한다 이때 페이징을 할것인가..
+		
+		return null;
+	}
+	
+	@RequestMapping(value = "/replyList", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String,Object> getReplyList(@RequestBody PageVO pvo) throws Exception {
+		pvo.setTotalCount(realtorsrv.replyCnt(pvo.getBoardNo()));
+		pvo.calPage();
+		List<ReplyVO> rlist = realtorsrv.getReplyList(pvo);
+		// map으로 리스트와 pagevo를 같이 넘겨준다.
+		HashMap<String,Object> hmap = new HashMap<>();
+		hmap.put("rlist", rlist);
+		hmap.put("pagevo",pvo);
+		return hmap;
+	}
+	
 }

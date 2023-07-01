@@ -3,4 +3,17 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.human.dao.IF_ReplyDAO">
+	<insert id="insert" parameterType = "com.human.VO.ReplyVO">
+		insert into reply values(replyNoSeq.nextval,#{id},#{boardNo},#{content},default,default)
+	</insert>
+	<select id="replyCnt" parameterType = "int"
+	resultType = "int">
+		select count(*) from reply where boardNo = #{value}
+	</select>
+	<select id="listAll" parameterType = "com.human.VO.PageVO"
+	resultType = "com.human.VO.ReplyVO">
+		select *
+		from (select rownum as rn, r.* from reply r)
+		where rn between #{startNo} and #{endNo}
+	</select>
 </mapper>

@@ -20,14 +20,12 @@ public class ReplyImpl implements IF_ReplyDAO{
 
 	@Override
 	public void insertReply(ReplyVO rvo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert(mapperQuery+".insert",rvo);
 	}
 
 	@Override
 	public List<ReplyVO> selectReplyAll(PageVO pvo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(mapperQuery+".listAll",pvo);
 	}
 
 	@Override
@@ -40,6 +38,11 @@ public class ReplyImpl implements IF_ReplyDAO{
 	public void deleteReply(int rno) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int replyCnt(int boardNo) throws Exception {
+		return sqlSession.selectOne(mapperQuery+".replyCnt",boardNo);
 	}
 
 }

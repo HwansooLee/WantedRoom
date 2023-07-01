@@ -36,7 +36,7 @@
 		<tr>
 			<td>${boardvo.boardNo}</td>
 			<td>${boardvo.nickname}</td>
-			<td><a href = "">${boardvo.title}</a></td>
+			<td><a href = "detailBoard?boardno=${boardvo.boardNo}">${boardvo.title}</a></td>
 			<td>${boardvo.addr}</td>
 			<td>${boardvo.views}</td>
 			<td>${boardvo.inDate}</td>

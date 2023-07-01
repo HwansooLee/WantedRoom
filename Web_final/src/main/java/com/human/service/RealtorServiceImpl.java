@@ -36,4 +36,10 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	public List<BoardVO> listAll(PageVO pvo) throws Exception {
 		return boarddao.selectAll(pvo);
 	}
+
+	@Override
+	public BoardVO boardDetail(int boardNo) throws Exception {
+		boarddao.viewCnt(boardNo);
+		return boarddao.selectOne(boardNo);
+	}
 }

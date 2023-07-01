@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -134,5 +135,18 @@ public class HomeController {
 		model.addAttribute("blist",blist);		
 		
 		return "list_board";
+	}
+	
+	@RequestMapping(value = "/detailBoard", method = RequestMethod.GET)
+	public String detailBoard(Locale locale, Model model,
+			@RequestParam("boardno") Integer boardNo) throws Exception{
+		// 게시글 번호를 파라미터로 받아서 쿼리 실행
+		// 닉네임도 받아와야 하므로 join 사용
+		// 게시글 조회시 조회수 올라가야 한다.
+		
+		// 게시글 번호로 댓글도 조회해서 댓글도 모델만들어 보내주어야 한다.
+		BoardVO bvo = realtorsrv.boardDetail(boardNo);
+		model.addAttribute("boardvo",bvo);
+		return "detail_board";
 	}
 }

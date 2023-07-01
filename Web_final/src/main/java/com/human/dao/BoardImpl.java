@@ -23,8 +23,7 @@ public class BoardImpl implements IF_BoardDAO{
 
     @Override
     public BoardVO selectOne(int boardNo) throws Exception{
-//        return sqlSession.selectOne(mapperQuery + ".selectOne", boardNo);
-    	return null;
+        return sqlSession.selectOne(mapperQuery + ".selectOne", boardNo);
     }
 
     @Override
@@ -35,5 +34,10 @@ public class BoardImpl implements IF_BoardDAO{
 	@Override
 	public int boardCnt(String sword) throws Exception {
 		return sqlSession.selectOne(mapperQuery+".boardCnt",sword);
+	}
+
+	@Override
+	public void viewCnt(int boardNo) throws Exception {
+		sqlSession.update(mapperQuery+".viewCnt",boardNo);
 	}
 }

@@ -11,4 +11,5 @@ public interface IF_RealtorService {
     public void addBoard(BoardVO bvo) throws Exception;
 	public int boardCnt(String sword) throws Exception;
 	public List<BoardVO> listAll(PageVO pvo) throws Exception;
+	public BoardVO boardDetail(int boardNo) throws Exception;
 }

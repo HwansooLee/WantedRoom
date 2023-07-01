@@ -2,7 +2,7 @@ create user final identified  by 1111;
 grant dba to final;
 
 create table member(
-id varchar2(30)  primary key,
+id varchar2(30)  primary key on delete cascade,
 nickname varchar2(12) not null unique,
 pwd varchar2(20) not null,
 realtorNo varchar2(16) unique);

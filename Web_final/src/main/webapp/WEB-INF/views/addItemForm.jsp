@@ -8,20 +8,7 @@
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
-	.dropzone {
-		border: 2px dashed #92AAB0;
-		width: 650px;
-		height: 200px;
-		color: #92AAB0;
-		text-align: center;
-		vertical-align: middle;
-		padding: 10px 0px 10px 10px;
-		font-size:200%;
-		display: table-cell;
-	}
-	.dropzone.highlight{
-		border-color: purple;
-	}
+
 </style>
 <body>
 	<!-- 홈페이지 로고 -->
@@ -41,17 +28,19 @@
 		월세<input type="text" name="rent"><br>
 		상세설명<br><textarea name="detail" rows="2" cols="50" maxlength="50"></textarea><br>
 		주차가능여부<br>
-		<input type="botton" name="parking" value="주차불가"><br>
-		<input type="botton" name="elevator" value="주차불가"><br>
-		<input type="botton" name="buildingType" value="주차불가"><br>
+		<input type="button" name="parking" value="주차불가"><br>
+		엘리베이터여부<br>
+		<input type="button" name="elevator" value="없음"><br>
+		건물 종류<br>
+		<input type="button" name="buildingType" value="아파트"><br>
 		
 
 		<!-- upload multiple files -->
 		매물사진등록(최대 10개)<br>
-		<div id="dropzone" class="dropzone">Drag & Drop Files Here or Browse Files
-			<input type="file" name="file" value="파일 추가" style="display: none;" multiple="multiple"/><br>
-		</div>
-		
+
+		<!-- <input type="file" name="file" value="파일 추가" style="display: none;" multiple="multiple"/><br> -->
+		<input type="file" name="file" value="파일 추가" multiple="multiple"/><br>
+		<input type="button" id="cancelAttach" value="첨부취소"><br>
 		선택 파일 리스트<br>
 		<table border="1" id="fileList">
 			<thead>
@@ -108,45 +97,22 @@
 		let fileInput = $("[name='file']");
 		let fileList = [];
 		// drag and drop
-		var dropzone = document.getElementById('dropzone');
-		var dropzone_input = dropzone.querySelector('flie[name="file"]');
-		var multiple = dropzone_input.getAttribute('multiple') ? true : false;
 
-		['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function(event) {
-		dropzone.addEventListener(event, function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-			});
-		});
-
-		dropzone.addEventListener('dragover', function(e) {
-		this.classList.add('dropzone-dragging');
-		}, false);
-
-		dropzone.addEventListener('dragleave', function(e) {
-		this.classList.remove('dropzone-dragging');
-		}, false);
-
-		dropzone.addEventListener('drop', function(e) {
-		this.classList.remove('dropzone-dragging');
-		var files = e.dataTransfer.files;
-		
-		var for_alert = "";
-		Array.prototype.forEach.call(files, file => {
-			alert(file.name)
-		});
-
-		
-		}, false);
-
-		dropzone.addEventListener('click', function(e) {
-		dropzone_input.click();
-		});
-
-
+	
 		// 선택한 파일 삭제
+		function removeFile(index) {
+			const dt = new DataTransfer();
+			const { files } = fileInput[0];
+			for (let i = 0; i < files.length; i++) {
+				const file = files[i];
+				if (index !== i)
+				dt.items.add(file);
+			}
+			fileInput[0].files = dt.files;
+		}
 		function remove(elem){
 			let rowNum = elem.parentNode.parentNode.rowIndex;
+			removeFile(rowNum - 1);
 			fileList.splice(rowNum - 1, 1);
 			document.getElementById('fileList').deleteRow(rowNum);
 		}
@@ -172,18 +138,18 @@
 				}
 			}
 
-			var files = document.getElementsByName("file")[0].files;
-			if (!files.length) {
-				return;
-			}
-			var file = files[0];
-			// Create a new one with the data but a new name
-			var newFile = new File([file], "replace.jpg", {
-			type: file.type,
-			});
-			// Build the FormData to send
-			var data = new FormData();
-			data.set("file", newFile);
+			// var files = document.getElementsByName("file")[0].files;
+			// if (!files.length) {
+			// 	return;
+			// }
+			// var file = files[0];
+			// // Create a new one with the data but a new name
+			// var newFile = new File([file], "replace.jpg", {
+			// type: file.type,
+			// });
+			// // Build the FormData to send
+			// var data = new FormData();
+			// data.set("file", newFile);
 		});
 		// 보증금 유효성 검사
 		let deposit = $("[name='deposit']");
@@ -210,6 +176,16 @@
 			for(f of fileList)
 				console.log(f.name);
 
+			if( $("[name='addr']").value == '' ){
+				alert('매물의 주소를 입력하세요.');
+				return;
+			}else if( deposit[0].value == '' ){
+				alert('보증금을 입력하세요.');
+				return;
+			}else if( rent[0].value == '' ){
+				alert('월세를 입력하세요.');
+				return;
+			}
 			$('#form').submit();
 		});
 	</script>

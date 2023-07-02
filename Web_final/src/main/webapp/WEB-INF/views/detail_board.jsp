@@ -8,6 +8,8 @@
 <title>게시글 상세보기 폼</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href = "././resources/css/detail_board.css"></link>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <body>
 <table border = "1" width = "800">
 	<tr>
@@ -30,6 +32,7 @@
 <textarea rows = "30" cols = "115" readonly>
 	${boardvo.content}
 </textarea>
+
 <!-- 여기는 댓글 공간 -->
 <br>
 <!-- 댓글수는 비동기방식으로 받아오는 객체가 null이 아닌경우 삼항연산자로 업데이트 해줄것 -->
@@ -46,6 +49,7 @@
 </div>
 <div id = pageArea>
 </div>
+
 </body>
 <script type="text/javascript">
 	var boardNo = ${boardvo.boardNo};
@@ -85,7 +89,7 @@
 					insertRow += item.inDate;
 					insertRow += '</td>';
 					insertRow += '<td>';
-					insertRow += item.likes;
+					insertRow += '<i id="like-button" class="fa fa-2x fa-heart-o not-liked" onclick = "toggleButton(this)"></i>' + item.likes;
 					insertRow += '</td>';
 					insertRow += '</tr>';
 					replyTable.append(insertRow);
@@ -100,7 +104,7 @@
 					insertPageArea += '<a onclick = ' + "getReplyList(" + i + ")" + '>' + i + '  </a>';
 				}
 				if(data.pagevo.next){
-					insertPageArea += '<a onclick = ' + "getReplyList(" + data.pagevo.endPage + 1 + ")" + '>  [다음페이지]  </a>';
+					insertPageArea += '<a onclick = ' + "getReplyList(" + data.pagevo.endPage + 1 + ")" + '>[다음페이지]</a>';
 				}
 				pageArea.append(insertPageArea);
 			}
@@ -144,5 +148,20 @@
 			replyCon.val('');
 		}
 	});
+	
+	//
+	function toggleButton(button) {
+    	button.classList.remove('liked-shaked');
+    	button.classList.toggle('liked');
+    	button.classList.toggle('not-liked');
+    	button.classList.toggle('fa-heart-o');
+    	button.classList.toggle('fa-heart');
+
+    	if(button.classList.contains("liked")) {
+        	button.classList.add('liked-shaked');
+    	}
+	}
+	
+	
 </script>
 </html>

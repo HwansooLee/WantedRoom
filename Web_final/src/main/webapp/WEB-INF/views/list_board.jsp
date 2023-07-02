@@ -46,13 +46,13 @@
 <!-- 페이지 번호 들어갈 위치 -->
 <div>
 	<c:if test="${pagevo.prev}">
-		<a href = "${pagevo.startPage - 1}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">[이전 페이지]</a>
+		<a href = "boardList?page=${pagevo.startPage - 1}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">[이전 페이지]</a>
 	</c:if>
 	<c:forEach begin = "${pagevo.startPage}" end = "${pagevo.endPage}" var = "idx">
 		<a href = "boardList?page=${idx}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">${idx}</a>
 	</c:forEach>
 	<c:if test="${pagevo.next}">
-		<a href = "${pagevo.endPage + 1}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">[다음 페이지]</a>
+		<a href = "boardList?page=${pagevo.endPage + 1}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">[다음 페이지]</a>
 	</c:if>
 </div>
 

@@ -152,7 +152,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/inputReply", method = RequestMethod.POST)
 	@ResponseBody // 이 어노테이션을 붙임으로서 모델이 아닌 객체 자체를 response 해줄수 있다.
-	public List<ReplyVO> inputReply(@RequestBody ReplyVO rvo) throws Exception{
+	public boolean inputReply(@RequestBody ReplyVO rvo) throws Exception{
 		// 비동기 통신 json으로 파라미터를 받는다
 //		System.out.println(rvo.getContent()); // 값 제대로 받아오는지 확인
 //		System.out.println(rvo.getId());
@@ -160,7 +160,7 @@ public class HomeController {
 		realtorsrv.addReply(rvo); // DB에 댓글 insert
 		// 댓글 리스트를 가져와야 한다 이때 페이징을 할것인가..
 		
-		return null;
+		return true;
 	}
 	
 	@RequestMapping(value = "/replyList", method = RequestMethod.POST)

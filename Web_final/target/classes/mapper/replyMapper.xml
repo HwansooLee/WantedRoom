@@ -13,7 +13,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listAll" parameterType = "com.human.VO.PageVO"
 	resultType = "com.human.VO.ReplyVO">
 		select *
-		from (select rownum as rn, r.* from reply r)
+		from (select rownum as rn, sub.*
+		from (select r.* , m.nickname
+		from reply r
+		join member m
+		on m.id = r.id
+		order by r.inDate desc) sub)
 		where rn between #{startNo} and #{endNo}
 	</select>
 </mapper>

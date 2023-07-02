@@ -7,8 +7,17 @@ public class ReplyVO {
     private String content;
     private String inDate;
     private int likes;
+    private String nickname;
 
-    public int getReplyNo() {
+    public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public int getReplyNo() {
         return replyNo;
     }
 

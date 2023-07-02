@@ -40,22 +40,26 @@
 <input type = "button" value = "작성" id = "replyBtn">
 <!-- 달린 댓글들의 공간  좋아요 버튼 누르면 비동기 방식으로 업데이트 -->
 <input type = "hidden" value = "" id = "page">
-<table border = "1" width = "800" id = "replyTable">	
-</table>
+<div>
+	<table border = "1" width = "800" id = "replyTable">	
+	</table>
+</div>
+<div id = pageArea>
+</div>
 </body>
 <script type="text/javascript">
 	var boardNo = ${boardvo.boardNo};
 	var page = $('#page');
 	
 	$(document).ready(() =>{
-		getReplyList();
+		getReplyList(page.val());
 	});
 	
-	function getReplyList(){ // 댓글 리스트 가져오는 함수
+	function getReplyList(pageNum){ // 댓글 리스트 가져오는 함수.. 인자로 페이지 번호를 받는다.
 		let replyTable = $('#replyTable');
-		
+		let pageArea = $('#pageArea');
 		let data = {
-			"page" : (page.val() == '') ? 1 : page.val(),
+			"page" : (pageNum == '') ? 1 : pageNum,
 			"boardNo" : boardNo
 		}
 		$.ajax({
@@ -72,7 +76,7 @@
 				$.each(data.rlist, function(idx,item){
 					let insertRow = '<tr>';
 					insertRow += '<td>';
-					insertRow += item.id;
+					insertRow += item.nickname;
 					insertRow += '</td>';
 					insertRow += '<td>';
 					insertRow += item.content;
@@ -85,10 +89,20 @@
 					insertRow += '</td>';
 					insertRow += '</tr>';
 					replyTable.append(insertRow);
-					// 댓글 페이징 영역
 				});
-				
-				
+				// 댓글 페이징 영역
+				pageArea.html(''); // 기존 페이지 중복 되지 않게 지워주기
+				let insertPageArea = '';
+				if(data.pagevo.prev){	
+					insertPageArea += '<a onclick = ' + "getReplyList(" + data.pagevo.startPage - 1 + ")" + '>  [이전페이지]  </a>';
+				}
+				for(i = data.pagevo.startPage; i <= data.pagevo.endPage; i++){
+					insertPageArea += '<a onclick = ' + "getReplyList(" + i + ")" + '>' + i + '  </a>';
+				}
+				if(data.pagevo.next){
+					insertPageArea += '<a onclick = ' + "getReplyList(" + data.pagevo.endPage + 1 + ")" + '>  [다음페이지]  </a>';
+				}
+				pageArea.append(insertPageArea);
 			}
 			,error : function(jqXHR,textStatus,errorThrown){
 				console.log(jqXHR);
@@ -119,7 +133,7 @@
 				,success : function(data){ // data가 의미하는것은 controller로부터 받아오는 response 객체를 의미한다.
 					// console.log(data); 데이터 확인용
 					// 이곳에서 댓글리스트를 갱신해준다.
-					getReplyList();
+					getReplyList(page.val());
 				}
 				,error : function(jqXHR,textStatus,errorThrown){
 					console.log(jqXHR);

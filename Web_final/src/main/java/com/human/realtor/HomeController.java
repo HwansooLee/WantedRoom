@@ -1,10 +1,7 @@
 package com.human.realtor;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -57,6 +54,9 @@ public class HomeController {
 		System.out.println(ivo.getDeposit());
 		System.out.println(ivo.getRent());
 		System.out.println(ivo.getDetail());
+		System.out.println(ivo.getParking());
+		System.out.println(ivo.getElevator());
+		System.out.println(ivo.getBuildingType());
 //		System.out.println("in ivo,");
 //		for(String s:ivo.getFileName())
 //			System.out.println(s);
@@ -65,8 +65,15 @@ public class HomeController {
 			System.out.println("files are empty");
 		else{
 			System.out.println(file.length);
-			for(MultipartFile f:file)
-				System.out.println(f.getOriginalFilename());
+			for(MultipartFile f:file){
+				if( f.getOriginalFilename() == null )
+					System.out.println("is null");
+				else if(Objects.equals(f.getOriginalFilename(), ""))
+					System.out.println("is empty");
+				else
+					System.out.println(f.getOriginalFilename());
+			}
+
 		}
 
 

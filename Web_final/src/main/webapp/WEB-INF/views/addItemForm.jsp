@@ -27,32 +27,39 @@
 		보증금<input type="text" name="deposit"><br>
 		월세<input type="text" name="rent"><br>
 		상세설명<br><textarea name="detail" rows="2" cols="50" maxlength="50"></textarea><br>
-		주차가능여부<br>
-		<input type="button" name="parking" value="주차불가"><br>
+
+		주차가능여부<br> 
+		<input type="radio" id="canNotPark" name="parking" value="불가능" checked>
+		<label for="canNotPark">불가능</label>
+		<input type="radio" id="canPark" name="parking" value="가능">
+		<label for="canPark">가능</label><br>
 		엘리베이터여부<br>
-		<input type="button" name="elevator" value="없음"><br>
+		<input type="radio" id="noElevator" name="elevator" value="없음" checked>
+		<label for="noElevator">없음</label>
+		<input type="radio" id="haveElevator" name="elevator" value="있음">
+		<label for="haveElevator">있음</label><br>
 		건물 종류<br>
-		<input type="button" name="buildingType" value="아파트"><br>
-		
+		<input type="radio" id="apartment" name="buildingType" value="아파트" checked>
+		<label for="apartment">아파트</label>
+		<input type="radio" id="villa" name="buildingType" value="빌라">
+		<label for="villa">빌라</label>
+		<input type="radio" id="oneroom" name="buildingType" value="원룸">
+		<label for="oneroom">원룸</label><br>
 
 		<!-- upload multiple files -->
 		매물사진등록(최대 10개)<br>
 
 		<!-- <input type="file" name="file" value="파일 추가" style="display: none;" multiple="multiple"/><br> -->
 		<input type="file" name="file" value="파일 추가" multiple="multiple"/><br>
-		<input type="button" id="cancelAttach" value="첨부취소"><br>
-		선택 파일 리스트<br>
+		첨부 파일 리스트<br>
 		<table border="1" id="fileList">
 			<thead>
 				<th width="500">파일명</th>
 				<th>삭제하기</th>
 			</thead>
 			<tbody>
-
 			</tbody>
-
 		</table>
-
 
 		<input type="button" value="등록" id="addBtn">
 	</form>
@@ -64,8 +71,8 @@
 	<script>
 		// 상세설명
 		let detail = $("[name='detail']");
-		const defaultMsg = "매물에 대한 상세 설명을 입력하세요.";
-		detail[0].value = defaultMsg;
+		const DEFAULT_MSG = "매물에 대한 상세 설명을 입력하세요.";
+		detail[0].value = DEFAULT_MSG;
 		let isDetailEmpty = true;
 		// 한글을 글자당 2 바이트로 계산하는 함수(JS 기본 함수는 3바이트로 취급함)
 		String.prototype.getBytes = function() {
@@ -83,12 +90,12 @@
 			return int_char_count;
 		}
 		detail.on('click', ()=>{
-			if( detail[0].value == defaultMsg )
+			if( detail[0].value == DEFAULT_MSG )
 				detail[0].value = "";
 		})
 		detail.on('focusout', ()=>{
 			if( detail[0].value == "" )
-				detail[0].value = defaultMsg;
+				detail[0].value = DEFAULT_MSG;
 		})
 		/**** 파일 선택 ****/
 		const FILE_NUM_MAX = 10;
@@ -186,6 +193,8 @@
 				alert('월세를 입력하세요.');
 				return;
 			}
+			if( $("[name='detail']")[0].value == DEFAULT_MSG )
+				$("[name='detail']")[0].value = '';
 			$('#form').submit();
 		});
 	</script>

@@ -23,3 +23,5 @@ select * from itemTags;
 delete from itemTags where itemNo=0;
 delete from itemAttach where itemNo=0;
 delete from item where itemNo=0;
+
+select * from member;

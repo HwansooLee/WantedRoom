@@ -11,6 +11,17 @@ import com.human.util.FileDataUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.human.VO.BoardVO;
+import com.human.VO.ItemVO;
+import com.human.VO.LikesVO;
+import com.human.VO.MemberVO;
+import com.human.VO.PageVO;
+import com.human.VO.ReplyVO;
+import com.human.dao.IF_BoardDAO;
+import com.human.dao.IF_LikesDAO;
+import com.human.dao.IF_MemberDAO;
+import com.human.dao.IF_ReplyDAO;
+
 @Service
 public class RealtorServiceImpl implements IF_RealtorService{
 	
@@ -22,6 +33,9 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	
 	@Inject
 	IF_LikesDAO likesdao;
+	
+	@Inject
+	IF_MemberDAO memberdao;
 
 	@Inject
 	private IF_ItemDAO itemDao;
@@ -77,8 +91,30 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	}
 
 	@Override
-	public void addLikes(LikesVO lvo) throws Exception {
-		likesdao.insert(lvo);
+	public void likesFlag(LikesVO lvo) throws Exception {
+		if(lvo.isFlag()) { // 좋아요한 경우
+			likesdao.insert(lvo);
+		}else { // 좋아요 취소한경우
+			likesdao.delete(lvo);
+		}
+		// 좋아요수 갱신
+		replydao.updateLikes(lvo);
+	}
+
+	@Override
+	public boolean nicknameChk(String nickname) throws Exception {
+		String temp = memberdao.nicknameChk(nickname);
+		System.out.println(temp);
+		if(temp == null || temp.isEmpty()) {
+			return true;
+		}
+		return false;
+		
+	}
+
+	@Override
+	public void insertMember(MemberVO mvo) throws Exception {
+		memberdao.insertMember(mvo);
 	}
 
 	@Override

@@ -3,4 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.human.dao.IF_MemberDAO">
+	<select id="nicknameChk" parameterType = "String" resultType = "String">
+		select nickname from member where nickname = #{value}
+	</select>
+	<insert id = "insert" parameterType = "com.human.VO.MemberVO">
+		insert into member values(#{id},#{nickname},#{pwd},
+		<if test = "realtorNo == null">
+			null)
+		</if>
+		<if test = "realtorNo != null">
+			#{realtorNo})
+		</if>
+	</insert>
 </mapper>

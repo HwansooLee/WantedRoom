@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.human.VO.LikesVO;
 import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
 
@@ -43,6 +44,11 @@ public class ReplyImpl implements IF_ReplyDAO{
 	@Override
 	public int replyCnt(int boardNo) throws Exception {
 		return sqlSession.selectOne(mapperQuery+".replyCnt",boardNo);
+	}
+
+	@Override
+	public void updateLikes(LikesVO lvo) throws Exception {
+		sqlSession.update(mapperQuery+".updateLikesCnt",lvo);
 	}
 
 }

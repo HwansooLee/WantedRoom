@@ -1,7 +1,11 @@
 package com.human.realtor;
 
 import java.io.File;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -22,6 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.human.VO.BoardVO;
+import com.human.VO.ItemVO;
+import com.human.VO.LikesVO;
+import com.human.VO.MemberVO;
+import com.human.VO.PageVO;
+import com.human.VO.ReplyVO;
 import com.human.service.IF_RealtorService;
 
 /**
@@ -167,6 +177,32 @@ public class HomeController {
 		hmap.put("rlist", rlist);
 		hmap.put("pagevo",pvo);
 		return hmap;
+	}
+	
+	@RequestMapping(value = "/likes", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean likesUpdate(@RequestBody LikesVO lvo)throws Exception {
+		realtorsrv.likesFlag(lvo); // 좋아요 정보 갱신
+		return true;
+	}
+	
+	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
+	public String signUp(Locale locale, Model model) { // 회원가입 폼으로 이동
+		return "signUp";
+	}
+	
+	@RequestMapping(value = "/nicknameChk", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean nicknameChk(@RequestBody MemberVO mvo) throws Exception{
+		return realtorsrv.nicknameChk(mvo.getNickname());
+	}
+	
+	@RequestMapping(value = "/signUp_save", method = RequestMethod.POST)
+	public String signUpSave(Locale locale, Model model,
+			@ModelAttribute("") MemberVO mvo) throws Exception{
+		if(mvo.getRealtorNo().isEmpty()) mvo.setRealtorNo(null);
+		realtorsrv.insertMember(mvo);
+		return "home";
 	}
 	
 }

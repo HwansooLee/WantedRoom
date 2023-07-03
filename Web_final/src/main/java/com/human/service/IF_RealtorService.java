@@ -6,6 +6,7 @@ import java.util.List;
 import com.human.VO.BoardVO;
 import com.human.VO.ItemVO;
 import com.human.VO.LikesVO;
+import com.human.VO.MemberVO;
 import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,4 +26,7 @@ public interface IF_RealtorService {
 	public List<String> getAttachFileNames(int itemNo) throws Exception;
 	public void deleteItem(int itemNo) throws Exception;
 	public void modifyItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception;
+	public void likesFlag(LikesVO lvo) throws Exception;
+	public boolean nicknameChk(String nickname) throws Exception;
+	public void insertMember(MemberVO mvo) throws Exception;
 }

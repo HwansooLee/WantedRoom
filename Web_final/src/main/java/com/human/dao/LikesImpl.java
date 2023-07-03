@@ -20,4 +20,9 @@ public class LikesImpl implements IF_LikesDAO{
 		sqlSession.insert(mapperQuery+".insert",lvo);
 	}
 
+	@Override
+	public void delete(LikesVO lvo) throws Exception {
+		sqlSession.delete(mapperQuery+".delete",lvo);
+	}
+
 }

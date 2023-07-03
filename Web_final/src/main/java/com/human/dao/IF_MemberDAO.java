@@ -11,4 +11,5 @@ public interface IF_MemberDAO {
 	public MemberVO selectMemberOne(String id) throws Exception;
 	public void deleteId(String id) throws Exception;
 	public void updateId(MemberVO mvo) throws Exception;
+	public String nicknameChk(String nickname) throws Exception;
 }

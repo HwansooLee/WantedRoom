@@ -16,8 +16,10 @@
 		[로그인]
 		[회원가입]
 	</nav>
-	<form action="" >
-			<!-- 검색창 -->
+	<!-- 검색창 -->
+	<form action="searchItem" method="get">
+		<input type="text" name="searchWord" placeholder="검색할 주소 입력">
+		<input type="submit" value="검색">
 	</form>
 
 	<!-- 매물 리스트 -->

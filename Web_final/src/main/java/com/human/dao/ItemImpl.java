@@ -13,39 +13,41 @@ import com.human.VO.PageVO;
 @Repository
 public class ItemImpl implements IF_ItemDAO{
 	
-	private static String mapperQuery = "com.human.dao.IF_ItemDAO";
+	private static final String mapperQuery = "com.human.dao.IF_ItemDAO";
 	
 	@Inject
 	private SqlSession sqlSession;
 
 	@Override
 	public void insertItem(ItemVO ivo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert(mapperQuery+".insert", ivo);
 	}
 
 	@Override
 	public List<ItemVO> selectItemAll(PageVO pvo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(mapperQuery+".selectAll", pvo);
 	}
 
 	@Override
 	public ItemVO selectItemOne(int ino) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(mapperQuery+".select", ino);
 	}
 
 	@Override
 	public void deleteItem(int ino) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.delete(mapperQuery+".delete", ino);
 	}
 
 	@Override
 	public void updateItem(ItemVO ivo) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getNextItemNo() {
+		return sqlSession.selectOne(mapperQuery+".selectNextVal");
 	}
 
 }

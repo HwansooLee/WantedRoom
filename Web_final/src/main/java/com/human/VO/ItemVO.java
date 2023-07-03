@@ -13,7 +13,7 @@ public class ItemVO {
     private String inDate;
     private String status;
     // itemAttach
-    private ArrayList<String> fileName;
+    private String fileName;
     // itemTags
     private String parking;
     private String elevator;
@@ -83,14 +83,6 @@ public class ItemVO {
         this.status = status;
     }
 
-    public ArrayList<String> getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(ArrayList<String> fileName) {
-        this.fileName = fileName;
-    }
-
     public String getParking() {
         return parking;
     }
@@ -113,5 +105,12 @@ public class ItemVO {
 
     public void setBuildingType(String buildingType) {
         this.buildingType = buildingType;
+    }
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

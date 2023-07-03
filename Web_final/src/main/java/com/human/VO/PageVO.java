@@ -17,6 +17,7 @@ public class PageVO {
 	private String sorted; // 정렬기준
 	
 	private int boardNo; // 댓글 목록 받아오기 위한 boardNo
+	private int itemNo;
 	
 	public int getBoardNo() {
 		return boardNo;

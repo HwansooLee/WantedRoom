@@ -23,10 +23,12 @@
 	</form>
 	<!-- add item -->
 	<form action="addItem" method="post" enctype="multipart/form-data" id="form">
+		아이디<input type="text" name="id" value="testUser1" readonly><br>
 		주소<input type="text" name="addr"><br>
 		보증금<input type="text" name="deposit"><br>
 		월세<input type="text" name="rent"><br>
-		상세설명<br><textarea name="detail" rows="2" cols="50" maxlength="50"></textarea><br>
+		상세설명<br><textarea name="detail" rows="2" cols="50" maxlength="50"
+		placeholder="매물에 대한 상세 설명을 입력하세요."></textarea><br>
 
 		주차가능여부<br> 
 		<input type="radio" id="canNotPark" name="parking" value="불가능" checked>
@@ -71,8 +73,8 @@
 	<script>
 		// 상세설명
 		let detail = $("[name='detail']");
-		const DEFAULT_MSG = "매물에 대한 상세 설명을 입력하세요.";
-		detail[0].value = DEFAULT_MSG;
+		// const DEFAULT_MSG = "매물에 대한 상세 설명을 입력하세요.";
+		// detail[0].value = DEFAULT_MSG;
 		let isDetailEmpty = true;
 		// 한글을 글자당 2 바이트로 계산하는 함수(JS 기본 함수는 3바이트로 취급함)
 		String.prototype.getBytes = function() {
@@ -89,14 +91,14 @@
 			}
 			return int_char_count;
 		}
-		detail.on('click', ()=>{
-			if( detail[0].value == DEFAULT_MSG )
-				detail[0].value = "";
-		})
-		detail.on('focusout', ()=>{
-			if( detail[0].value == "" )
-				detail[0].value = DEFAULT_MSG;
-		})
+		// detail.on('click', ()=>{
+		// 	if( detail[0].value == DEFAULT_MSG )
+		// 		detail[0].value = "";
+		// })
+		// detail.on('focusout', ()=>{
+		// 	if( detail[0].value == "" )
+		// 		detail[0].value = DEFAULT_MSG;
+		// })
 		/**** 파일 선택 ****/
 		const FILE_NUM_MAX = 10;
 		const ALLOWED_EXT = ['jpg', 'jpeg', 'bmp'];
@@ -193,8 +195,8 @@
 				alert('월세를 입력하세요.');
 				return;
 			}
-			if( $("[name='detail']")[0].value == DEFAULT_MSG )
-				$("[name='detail']")[0].value = '';
+			// if( $("[name='detail']")[0].value == DEFAULT_MSG )
+			// 	$("[name='detail']")[0].value = '';
 			$('#form').submit();
 		});
 	</script>

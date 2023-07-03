@@ -6,6 +6,9 @@ import java.util.*;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import com.human.VO.*;
+import com.human.dao.IF_ItemAttachDAO;
+import com.human.util.FileDataUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,10 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.human.VO.BoardVO;
-import com.human.VO.ItemVO;
-import com.human.VO.PageVO;
-import com.human.VO.ReplyVO;
 import com.human.service.IF_RealtorService;
 
 /**
@@ -33,7 +32,9 @@ public class HomeController {
 	
 	@Inject
 	IF_RealtorService realtorsrv;
-	
+	@Inject
+	private FileDataUtil fileDataUtil;
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -49,36 +50,40 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
 	public String addItem(Locale locale, Model model, HttpSession session,
-						  @ModelAttribute("newItem") ItemVO ivo, MultipartFile[] file) {
-		System.out.println(ivo.getAddr());
-		System.out.println(ivo.getDeposit());
-		System.out.println(ivo.getRent());
-		System.out.println(ivo.getDetail());
-		System.out.println(ivo.getParking());
-		System.out.println(ivo.getElevator());
-		System.out.println(ivo.getBuildingType());
-//		System.out.println("in ivo,");
-//		for(String s:ivo.getFileName())
-//			System.out.println(s);
-		System.out.println("in files,");
-		if( file == null )
-			System.out.println("files are empty");
-		else{
-			System.out.println(file.length);
-			for(MultipartFile f:file){
-				if( f.getOriginalFilename() == null )
-					System.out.println("is null");
-				else if(Objects.equals(f.getOriginalFilename(), ""))
-					System.out.println("is empty");
-				else
-					System.out.println(f.getOriginalFilename());
-			}
-
-		}
-
-
+						  @ModelAttribute("newItem") ItemVO ivo, MultipartFile[] file)
+							throws Exception{
+		ArrayList<String> fileNames = fileDataUtil.fileUpload(file);
+		realtorsrv.addItem(ivo, fileNames);
 		return "addItemForm";
 	}
+	@RequestMapping(value = "/searchItem", method = RequestMethod.GET)
+	public String searchItem(Locale locale, Model model,
+							 @RequestParam("searchWord") String searchWord)
+							 throws Exception{
+		model.addAttribute("itemList", realtorsrv.getItemList(searchWord));
+		return "itemList";
+	}
+	@RequestMapping(value = "/itemDetail", method = RequestMethod.GET)
+	public String showItemDetail(Locale locale, Model model,
+							 @RequestParam("itemNo") int itemNo)
+							 throws Exception{
+		ItemVO ivo = realtorsrv.getItemDetail(itemNo);
+		List<String> fileNames = realtorsrv.getAttachFileNames(itemNo);
+		ivo.setFileName(fileNames.get(0));
+		model.addAttribute("item", ivo);
+		model.addAttribute("fileNames", fileNames);
+		return "itemDetail";
+	}
+	@RequestMapping(value = "/deleteItem", method = RequestMethod.GET)
+	public String deleteItem(Locale locale, Model model,
+							 @RequestParam("itemNo") int itemNo)
+			throws Exception{
+		realtorsrv.deleteItem(itemNo);
+		for(String s:realtorsrv.getAttachFileNames(itemNo))
+			fileDataUtil.deleteFile(s);
+		return "itemList";
+	}
+
 	@RequestMapping(value = "/fileUpload/post") //ajax에서 호출하는 부분
 	@ResponseBody
 	public String upload(MultipartHttpServletRequest multipartRequest) { //Multipart로 받는다.

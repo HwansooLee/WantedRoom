@@ -7,6 +7,8 @@ nickname varchar2(12) not null unique,
 pwd varchar2(20) not null,
 realtorNo varchar2(16) unique);
 
+insert into member values ('testUser1', 'testUser1', '1234', '12345-1234-12345');
+
 create table item(
 itemNo number primary key,
 id varchar2(30) not null,
@@ -20,14 +22,16 @@ status varchar2(8) not null check(status in ('계약가능','계약완료')));
 
 alter table item modify deposit not null;
 alter table item modify rent not null;
+alter table item modify status default '계약가능';
 
 create sequence itemNoSeq;
+
+select itemNoSeq.nextval from dual;
 
 create table itemAttach(
 itemNo number not null,
 foreign key(itemNo) references item(itemNo),
 fileName varchar2(45) not null);
-
 
 create table itemTags(
 itemNo number not null,

@@ -20,7 +20,6 @@ public interface IF_RealtorService {
 	public void addReply(ReplyVO rvo) throws Exception;
 	public int replyCnt(int boardNo) throws Exception;
 	public List<ReplyVO> getReplyList(PageVO pvo) throws Exception;
-	public void addLikes(LikesVO lvo) throws Exception;
     public List<ItemVO> getItemList(String searchWord) throws Exception;
 	public ItemVO getItemDetail(int itemNo) throws Exception;
 	public List<String> getAttachFileNames(int itemNo) throws Exception;

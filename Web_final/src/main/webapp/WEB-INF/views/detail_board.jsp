@@ -89,7 +89,11 @@
 					insertRow += item.inDate;
 					insertRow += '</td>';
 					insertRow += '<td>';
-					insertRow += '<i id="like-button" class="fa fa-2x fa-heart-o not-liked" onclick = "toggleButton(this)"></i>' + item.likes;
+					if(item.likesNo != null){ // 이미 좋아요 누른 버튼의 경우
+						insertRow += '<i id ="like-button" class="fa fa-2x liked fa-heart liked-shaked" onclick = "toggleButton(this,' + item.replyNo + ')"></i>' + item.likes;
+					}else{
+						insertRow += '<i id ="like-button" class="fa fa-2x fa-heart-o not-liked" onclick = "toggleButton(this,' + item.replyNo + ')"></i>' + item.likes;
+					}	
 					insertRow += '</td>';
 					insertRow += '</tr>';
 					replyTable.append(insertRow);
@@ -150,16 +154,44 @@
 	});
 	
 	//
-	function toggleButton(button) {
+	function toggleButton(button,info) {
+		
+		let likesInfo = { // json으로 보낼 객체
+				"id" : "testid", // session에서 받아오는 걸로 수정해야 한다
+				"replyNo" : info,
+				flag : false // default false
+		}
+		
     	button.classList.remove('liked-shaked');
     	button.classList.toggle('liked');
     	button.classList.toggle('not-liked');
     	button.classList.toggle('fa-heart-o');
     	button.classList.toggle('fa-heart');
 
-    	if(button.classList.contains("liked")) {
-        	button.classList.add('liked-shaked');
+    	if(button.classList.contains("liked")) { // 좋아요 취소
+        	button.classList.add('liked-shaked');	
     	}
+    	
+    	if(button.classList.contains('liked-shaked')){ // 좋아요 눌렀을때 
+    		// console.log(info); // info는 댓글 번호를 의미한다
+    		likesInfo.flag = true;
+    	}
+    	
+    	$.ajax({
+    		url : "likes"
+			,type : "POST"
+			,dataType : "JSON"
+			,data : JSON.stringify(likesInfo) // 제대로 보내지는지 확인이 필요하다.
+			,contentType : "application/json" // 여기까지는 서버로 전송
+			,success : function(data){ // data가 의미하는것은 controller로부터 받아오는 response 객체를 의미한다.
+				getReplyList(page.val()); // 좋아요 정보도 갱신해주어야 한다.
+			}
+			,error : function(jqXHR,textStatus,errorThrown){
+				console.log(jqXHR);
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
+    	});
 	}
 	
 	

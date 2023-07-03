@@ -2,6 +2,7 @@ package com.human.dao;
 
 import java.util.List;
 
+import com.human.VO.LikesVO;
 import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
 
@@ -12,4 +13,5 @@ public interface IF_ReplyDAO {
 	public ReplyVO selectReplyOne(int rno) throws Exception;
 	public void deleteReply(int rno) throws Exception;
 	public int replyCnt(int boardNo) throws Exception;
+	public void updateLikes(LikesVO lvo) throws Exception;
 }

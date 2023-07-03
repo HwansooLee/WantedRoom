@@ -14,11 +14,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	resultType = "com.human.VO.ReplyVO">
 		select *
 		from (select rownum as rn, sub.*
-		from (select r.* , m.nickname
+		from (select r.* , m.nickname, l.replyNo as likesNo
 		from reply r
 		join member m
 		on m.id = r.id
+		left join likes l
+		on r.replyNo = l.replyNo
 		order by r.inDate desc) sub)
 		where rn between #{startNo} and #{endNo}
 	</select>
+	
+	<update id="updateLikesCnt" parameterType = "com.human.VO.LikesVO">
+		update reply set
+		<if test = "flag">
+			likes = likes + 1
+		</if>
+		<if test="!flag">
+			likes = likes - 1
+		 </if>
+		where replyNo = #{replyNo}
+	</update>
 </mapper>

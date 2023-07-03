@@ -6,4 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id = "insert" parameterType = "com.human.VO.LikesVO">
 		insert into likes values (#{replyNo},#{id})
 	</insert>
+	<delete id="delete" parameterType = "com.human.VO.LikesVO">
+		delete from likes 
+		where replyNo = #{replyNo}
+		and id = #{id}
+	</delete>
 </mapper>

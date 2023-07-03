@@ -96,11 +96,11 @@ create table likes(
 -- 대강 이런식으로 가져와야 할듯
 select *
 from (select rownum as rn, sub.*
-from (select r.* , m.nickname , l.replyNo as rno -- rno가 null이면 false null이 아니면 해당 번호의 likesflag = true
+from (select r.* , m.nickname , l.replyNo as likesNo -- rno가 null이면 false null이 아니면 해당 번호의 likesflag = true
 from reply r
 join member m
 on m.id = r.id
 left join likes l
-on m.id = l.id
+on r.replyNo = l.replyNo
 order by r.inDate desc) sub)
 where rn between 1 and 5;

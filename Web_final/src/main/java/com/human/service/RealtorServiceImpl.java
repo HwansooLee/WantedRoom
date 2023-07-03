@@ -69,7 +69,13 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	}
 
 	@Override
-	public void addLikes(LikesVO lvo) throws Exception {
-		likesdao.insert(lvo);
+	public void likesFlag(LikesVO lvo) throws Exception {
+		if(lvo.isFlag()) { // 좋아요한 경우
+			likesdao.insert(lvo);
+		}else { // 좋아요 취소한경우
+			likesdao.delete(lvo);
+		}
+		// 좋아요수 갱신
+		replydao.updateLikes(lvo);
 	}
 }

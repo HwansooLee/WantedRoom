@@ -8,8 +8,17 @@ public class ReplyVO {
     private String inDate;
     private int likes;
     private String nickname;
+    private Integer likesNo; // 좋아요한 댓글 번호
 
-    public String getNickname() {
+    public Integer getLikesNo() {
+		return likesNo;
+	}
+
+	public void setLikesNo(Integer likesNo) {
+		this.likesNo = likesNo;
+	}
+
+	public String getNickname() {
 		return nickname;
 	}
 

@@ -17,5 +17,5 @@ public interface IF_RealtorService {
 	public void addReply(ReplyVO rvo) throws Exception;
 	public int replyCnt(int boardNo) throws Exception;
 	public List<ReplyVO> getReplyList(PageVO pvo) throws Exception;
-	public void addLikes(LikesVO lvo) throws Exception;
+	public void likesFlag(LikesVO lvo) throws Exception;
 }

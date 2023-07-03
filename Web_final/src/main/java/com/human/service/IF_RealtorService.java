@@ -28,4 +28,5 @@ public interface IF_RealtorService {
 	public void likesFlag(LikesVO lvo) throws Exception;
 	public boolean nicknameChk(String nickname) throws Exception;
 	public void insertMember(MemberVO mvo) throws Exception;
+	public MemberVO idChk(String id) throws Exception;
 }

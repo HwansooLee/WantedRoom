@@ -59,3 +59,4 @@ https://data.seoul.go.kr/dataList/OA-15550/S/1/datasetView.do
 
 7/3 오후
 회원가입 기능 구현 완료 - 이메일 인증 구현해야함
+로그인 기능 구현 완료 - 세션 부분 미구현(sevlet-context)

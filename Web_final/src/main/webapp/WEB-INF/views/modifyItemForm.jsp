@@ -22,30 +22,38 @@
 			<!-- 검색창 -->
 	</form>
 	<!-- add item -->
-	<form action="addItem" method="post" enctype="multipart/form-data" id="form">
-		아이디<input type="text" name="id" value="testUser1" readonly><br>
-		주소<input type="text" name="addr"><br>
-		보증금<input type="text" name="deposit"><br>
-		월세<input type="text" name="rent"><br>
+	<form action="modifyItem" method="post" enctype="multipart/form-data" id="form">
+		아이디<input type="text" name="id" value="${item.id}" readonly><br>
+		주소<input type="text" name="addr" value="${item.addr}"><br>
+		보증금<input type="text" name="deposit" value="${item.deposit}"><br>
+		월세<input type="text" name="rent" value="${item.rent}"><br>
 		상세설명<br><textarea name="detail" rows="2" cols="50" maxlength="50"
-		placeholder="매물에 대한 상세 설명을 입력하세요."></textarea><br>
+		placeholder="매물에 대한 상세 설명을 입력하세요.">${item.detail}</textarea><br>
+		
 
 		주차가능여부<br>
-		<input type="radio" id="canNotPark" name="parking" value="불가능" checked>
+		<input type="radio" id="canNotPark" name="parking" value="불가능"
+			${item.parking == '불가능' ? 'checked' : ''}>
 		<label for="canNotPark">불가능</label>
-		<input type="radio" id="canPark" name="parking" value="가능">
+		<input type="radio" id="canPark" name="parking" value="가능" 
+			${item.parking == '가능' ? 'checked' : ''}>
 		<label for="canPark">가능</label><br>
 		엘리베이터여부<br>
-		<input type="radio" id="noElevator" name="elevator" value="없음" checked>
+		<input type="radio" id="noElevator" name="elevator" value="없음"
+			${item.elevator == '없음' ? 'checked' : ''}>
 		<label for="noElevator">없음</label>
-		<input type="radio" id="haveElevator" name="elevator" value="있음">
+		<input type="radio" id="haveElevator" name="elevator" value="있음"
+			${item.elevator == '있음' ? 'checked' : ''}>
 		<label for="haveElevator">있음</label><br>
 		건물 종류<br>
-		<input type="radio" id="apartment" name="buildingType" value="아파트" checked>
+		<input type="radio" id="apartment" name="buildingType" value="아파트"
+			${item.buildingType == '아파트' ? 'checked' : ''}>
 		<label for="apartment">아파트</label>
-		<input type="radio" id="villa" name="buildingType" value="빌라">
+		<input type="radio" id="villa" name="buildingType" value="빌라"
+			${item.buildingType == '빌라' ? 'checked' : ''}>
 		<label for="villa">빌라</label>
-		<input type="radio" id="oneroom" name="buildingType" value="원룸">
+		<input type="radio" id="oneroom" name="buildingType" value="원룸"
+			${item.buildingType == '원룸' ? 'checked' : ''}>
 		<label for="oneroom">원룸</label><br>
 
 		<!-- upload multiple files -->

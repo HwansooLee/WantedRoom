@@ -24,4 +24,5 @@ public interface IF_RealtorService {
 	public ItemVO getItemDetail(int itemNo) throws Exception;
 	public List<String> getAttachFileNames(int itemNo) throws Exception;
 	public void deleteItem(int itemNo) throws Exception;
+	public void modifyItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception;
 }

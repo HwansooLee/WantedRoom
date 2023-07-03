@@ -48,9 +48,15 @@ public class FileDataUtil {
 //        re.setHeader("Content-Disposition", "attachment; filename=" + filename);
         return new FileSystemResource(file);
     }
-
+    @SuppressWarnings("all")
     public void deleteFile(String fileName) {
         File file = new File(uploadPath + "/" + fileName);
         file.delete();
+    }
+    public boolean isFileArrEmpty(MultipartFile[] file){
+        for(MultipartFile f:file)
+            if( !f.getOriginalFilename().equals("") )
+                return false;
+        return true;
     }
 }

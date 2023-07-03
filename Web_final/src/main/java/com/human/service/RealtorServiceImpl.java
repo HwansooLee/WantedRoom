@@ -108,4 +108,12 @@ public class RealtorServiceImpl implements IF_RealtorService{
 		itemTagsDao.delete(itemNo);
 		itemDao.deleteItem(itemNo);
 	}
+
+	@Override
+	public void modifyItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception {
+		if( fileNames != null ){
+
+		}
+
+	}
 }

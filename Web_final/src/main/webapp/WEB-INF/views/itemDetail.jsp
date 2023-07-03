@@ -41,6 +41,7 @@
         <img src="download?fileName=${imgName}" height="300"><br>
     </c:forEach><br>
     <span>매물등록일 : ${item.inDate}</span><br>
+    <a href="modifyItemForm?itemNo=${item.itemNo}">수정</a>
     <a href="deleteItem?itemNo=${item.itemNo}">삭제</a>
 
 	<footer>

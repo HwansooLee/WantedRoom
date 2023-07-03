@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import com.human.VO.BoardVO;
 import com.human.VO.ItemVO;
 import com.human.VO.LikesVO;
+import com.human.VO.MemberVO;
 import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
 import com.human.dao.IF_BoardDAO;
 import com.human.dao.IF_LikesDAO;
+import com.human.dao.IF_MemberDAO;
 import com.human.dao.IF_ReplyDAO;
 
 @Service
@@ -26,6 +28,9 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	
 	@Inject
 	IF_LikesDAO likesdao;
+	
+	@Inject
+	IF_MemberDAO memberdao;
 
     @Override
     public void addItem(ItemVO ivo) {
@@ -77,5 +82,21 @@ public class RealtorServiceImpl implements IF_RealtorService{
 		}
 		// 좋아요수 갱신
 		replydao.updateLikes(lvo);
+	}
+
+	@Override
+	public boolean nicknameChk(String nickname) throws Exception {
+		String temp = memberdao.nicknameChk(nickname);
+		System.out.println(temp);
+		if(temp == null || temp.isEmpty()) {
+			return true;
+		}
+		return false;
+		
+	}
+
+	@Override
+	public void insertMember(MemberVO mvo) throws Exception {
+		memberdao.insertMember(mvo);
 	}
 }

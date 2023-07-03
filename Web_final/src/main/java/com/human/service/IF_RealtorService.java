@@ -5,6 +5,7 @@ import java.util.List;
 import com.human.VO.BoardVO;
 import com.human.VO.ItemVO;
 import com.human.VO.LikesVO;
+import com.human.VO.MemberVO;
 import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
 
@@ -18,4 +19,6 @@ public interface IF_RealtorService {
 	public int replyCnt(int boardNo) throws Exception;
 	public List<ReplyVO> getReplyList(PageVO pvo) throws Exception;
 	public void likesFlag(LikesVO lvo) throws Exception;
+	public boolean nicknameChk(String nickname) throws Exception;
+	public void insertMember(MemberVO mvo) throws Exception;
 }

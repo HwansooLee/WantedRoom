@@ -20,8 +20,7 @@ public class MemberImpl implements IF_MemberDAO{
 
 	@Override
 	public void insertMember(MemberVO mvo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert(mapperQuery+".insert",mvo);
 	}
 
 	@Override
@@ -46,6 +45,11 @@ public class MemberImpl implements IF_MemberDAO{
 	public void updateId(MemberVO mvo) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String nicknameChk(String nickname) throws Exception {
+		return sqlSession.selectOne(mapperQuery+".nicknameChk",nickname);
 	}
 
 }

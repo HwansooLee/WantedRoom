@@ -21,7 +21,7 @@
 			<a href = "signUp">[회원가입]</a>
 		</c:if>
 		<c:if test = "${id ne null}">
-			<a href = "">[${nickname}]</a>
+			<a href = "myPage">[${nickname}]</a>
 			<a href = "signOut">[로그아웃]</a>
 		</c:if>
 	</nav>

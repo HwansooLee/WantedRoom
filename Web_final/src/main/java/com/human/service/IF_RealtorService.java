@@ -20,7 +20,7 @@ public interface IF_RealtorService {
 	public void addReply(ReplyVO rvo) throws Exception;
 	public int replyCnt(int boardNo) throws Exception;
 	public List<ReplyVO> getReplyList(PageVO pvo) throws Exception;
-    public List<ItemVO> getItemList(String searchWord) throws Exception;
+    public List<ItemVO> getItemList(PageVO pvo) throws Exception;
 	public ItemVO getItemDetail(int itemNo) throws Exception;
 	public List<String> getAttachFileNames(int itemNo) throws Exception;
 	public void deleteAttach(String fileName);
@@ -31,4 +31,5 @@ public interface IF_RealtorService {
 	public boolean nicknameChk(String nickname) throws Exception;
 	public void insertMember(MemberVO mvo) throws Exception;
 	public MemberVO idChk(String id) throws Exception;
+	public int getCnt(String sword);
 }

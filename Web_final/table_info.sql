@@ -113,3 +113,19 @@ left join likes l
 on r.replyNo = l.replyNo
 order by r.inDate desc) sub)
 where rn between 1 and 5;
+
+-- nickname(member) / content(reply) / inDate(reply) / likes(reply) for boardNo(board)
+-- step 1 get replys on this board
+select r.* from board b, reply r where b.boardNo=23 and r.boardNo=23;
+-- step 2 add nicknames to this board
+select rr.*, m.nickname
+    from (select r.* from board b, reply r where b.boardNo=23 and r.boardNo=23) rr, member m
+    where rr.id = m.id;
+-- step 3 add who liked for each reply
+select * from(
+    select rrr.*, l.id as likeId, ROW_NUMBER() over(PARTITION by rrr.replyNo order by rrr.id) as rn 
+        from ( select rr.*, m.nickname
+            from (select r.* from board b, reply r where b.boardNo=23 and r.boardNo=23) rr, member m
+            where rr.id = m.id ) rrr left join likes l on rrr.replyNo=l.replyNo
+        order by rrr.replyNo desc)
+    where rn<=1;

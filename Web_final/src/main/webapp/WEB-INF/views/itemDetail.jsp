@@ -26,7 +26,7 @@
 	</form>
 
 	<!-- 상세 보기 -->
-    <input type="button" value="${item.status}">
+    <input type="button" value="${item.status}"><br>
     <img src="download?fileName=${item.fileName}"><br>
     <span>이미지 : ${item.fileName}</span><br>
     <span>매물번호 : ${item.itemNo}</span><br>

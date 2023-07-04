@@ -27,7 +27,7 @@
 	</nav>
 	<!-- 검색창 -->
 	<form action="searchItem" method="get">
-		<input type="text" name="searchWord" placeholder="검색할 주소 입력">
+		<input type="text" name="sword" placeholder="검색할 주소 입력">
 		<input type="submit" value="검색">
 	</form>
 

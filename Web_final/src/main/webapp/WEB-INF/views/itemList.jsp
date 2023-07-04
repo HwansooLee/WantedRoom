@@ -35,7 +35,7 @@
 	</nav>
 	<!-- 검색창 -->
 	<form action="searchItem" method="get">
-		<input type="text" name="searchWord" placeholder="검색할 주소 입력">
+		<input type="text" name="sword" placeholder="검색할 주소 입력">
 		<input type="submit" value="검색">
 	</form>
 
@@ -56,6 +56,21 @@
 			</a>
 		</div>
 	</c:forEach>
+	<!-- paging -->
+	<hr>
+	<table>
+		<tr>
+			<c:if test="${pageVO.prev}">
+				<a href="searchItem?page=${pageVO.startPage -1}&sword=${pageVO.sword}">[이전]</a>
+			</c:if>&emsp;
+			<c:forEach begin="${pageVO.startPage}" end="${pageVO.endPage}" var="idx">
+				<a href="searchItem?page=${idx}&sword=${pageVO.sword}">${idx}</a>&emsp;
+			</c:forEach>
+			<c:if test="${pageVO.next}">
+				<a href="searchItem?page=${pageVO.endPage +1}&sword=${pageVO.sword}">[다음]</a>
+			</c:if>
+		</tr>
+	</table>
 
 	<footer>
 		<!-- 개발자 정보 -->

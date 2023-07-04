@@ -25,7 +25,6 @@ public class ItemImpl implements IF_ItemDAO{
 
 	@Override
 	public List<ItemVO> selectItemAll(PageVO pvo) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList(mapperQuery+".selectAll", pvo);
 	}
 
@@ -52,6 +51,11 @@ public class ItemImpl implements IF_ItemDAO{
 	@Override
 	public int getNextItemNo() {
 		return sqlSession.selectOne(mapperQuery+".selectNextVal");
+	}
+
+	@Override
+	public int selectItemCnt(String sword) {
+		return sqlSession.selectOne(mapperQuery+".selectCnt", sword);
 	}
 
 }

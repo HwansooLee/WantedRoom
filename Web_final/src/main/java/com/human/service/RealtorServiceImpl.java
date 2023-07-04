@@ -117,9 +117,7 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	}
 
 	@Override
-	public List<ItemVO> getItemList(String searchWord) throws Exception{
-		PageVO pvo = new PageVO();
-		pvo.setSword(searchWord);
+	public List<ItemVO> getItemList(PageVO pvo) throws Exception{
 		return itemDao.selectItemAll(pvo);
 	}
 
@@ -139,7 +137,6 @@ public class RealtorServiceImpl implements IF_RealtorService{
 
 	@Override
 	public void deleteAttach(String fileName) {
-		System.out.println("!");
 		itemAttachDao.deleteByName(fileName);
 	}
 
@@ -165,5 +162,10 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	@Override
 	public MemberVO idChk(String id) throws Exception {
 		return memberdao.selectMemberOne(id);
+	}
+
+	@Override
+	public int getCnt(String sword) {
+		return itemDao.selectItemCnt(sword);
 	}
 }

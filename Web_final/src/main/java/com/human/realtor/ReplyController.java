@@ -40,9 +40,11 @@ public class ReplyController {
 	
 	@RequestMapping(value = "/replyList", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String,Object> getReplyList(@RequestBody PageVO pvo) throws Exception {
+	public HashMap<String,Object> getReplyList(@RequestBody PageVO pvo,
+			HttpSession session) throws Exception {
 		pvo.setTotalCount(realtorsrv.replyCnt(pvo.getBoardNo()));
 		pvo.calPage();
+		pvo.setNowUser((String) session.getAttribute("id"));
 		List<ReplyVO> rlist = realtorsrv.getReplyList(pvo);
 		// map으로 리스트와 pagevo를 같이 넘겨준다.
 		HashMap<String,Object> hmap = new HashMap<>();

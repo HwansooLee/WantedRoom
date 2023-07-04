@@ -67,7 +67,7 @@ replyNo number primary key,
 id varchar2(30) not null,
 foreign key(id) references member(id),
 boardNo number not null,
-foreign key(boardNo) references board(boardNo),
+foreign key(boardNo) references board(boardNo) on delete cascade, -- 테이블 수정
 content varchar2(300) not null,
 inDate date default sysdate,
 likes number default 0);
@@ -91,16 +91,21 @@ insert into member values ('atestid','aaa','atestpwd','atestrealorNo');
 -- 좋아요 누른 사람을 저장해야한다.
 create table likes(
     replyNo number,
-    foreign key(replyNo) references reply(replyNo),
+    foreign key(replyNo) references reply(replyNo) on delete cascade, -- 테이블 수정
     id varchar2(30),
     foreign key(id) references member(id)
 );
 
+-- 테이블 수정을 위한 드랖
+drop table likes;
+drop table reply;
 
 -- 대강 이런식으로 가져와야 할듯
 select *
 from (select rownum as rn, sub.*
-from (select r.* , m.nickname , l.replyNo as likesNo -- rno가 null이면 false null이 아니면 해당 번호의 likesflag = true
+from (select r.* , m.nickname , 
+(select id from likes where id = 'qqq@qqqq'
+and replyNo = l.replyNo) as nowUser -- nowUser가 null이면 false null이 아니면 해당 번호의 likesflag = true
 from reply r
 join member m
 on m.id = r.id

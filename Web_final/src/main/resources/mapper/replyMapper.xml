@@ -14,7 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	resultType = "com.human.VO.ReplyVO">
 		select *
 		from (select rownum as rn, sub.*
-		from (select r.* , m.nickname, l.replyNo as likesNo
+		from (select r.* , m.nickname,
+		(select id from likes where id = #{nowUser}
+		and replyNo = l.replyNo) as nowUser
 		from reply r
 		join member m
 		on m.id = r.id

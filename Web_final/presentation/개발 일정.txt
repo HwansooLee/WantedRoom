@@ -61,6 +61,7 @@ https://data.seoul.go.kr/dataList/OA-15550/S/1/datasetView.do
 회원가입 기능 구현 완료 - 이메일 인증 구현해야함
 로그인 기능 구현 완료 - 세션 부분 미구현(sevlet-context)
 
-7/4 오전
+7/4 
 세션기능 구현 완료
 컨트롤러 분리 완료
+좋아요 기능 버그 fix완료

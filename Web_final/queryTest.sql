@@ -27,3 +27,22 @@ delete from item where itemNo=19;
 select * from member;
 
 update item set inDate=sysdate where itemNo=22;
+
+-- 찜하기에도 사용할듯
+select *
+from
+(select sub2.*,
+ROW_NUMBER() over(partition by sub2.replyNo order by likeId) as rn
+from
+(select m.nickname ,r.*,
+case when l.id = 'qqq@qqqq' then 'yes'
+else null
+end as likeId
+from reply r
+join member m
+on m.id = r.id
+left join likes l
+on r.replyNo = l.replyNo
+where boardNo = 23) sub2)
+where rn <= 1
+;

@@ -18,7 +18,7 @@ import com.human.service.IF_RealtorService;
 public class MyPageController {
 	
 	@Inject
-	IF_RealtorService realtorservice;
+	IF_RealtorService realtorsrv;
 	
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(Locale locale, Model model,
@@ -29,8 +29,11 @@ public class MyPageController {
 	@RequestMapping(value = "/myBoardList", method = RequestMethod.GET)
 	public String myBoardList(Locale locale, Model model,
 			HttpSession session,
-			@ModelAttribute("") PageVO pvo) {
+			@ModelAttribute("") PageVO pvo) throws Exception{
 		String id = (String) session.getAttribute("id");
+		if(pvo.getPage() == null) pvo.setPage(1);
+		pvo.setTotalCount(realtorsrv.boardCnt(pvo.getSword()));
+		pvo.calPage();
 		
 		return "myBoardList";
 	}

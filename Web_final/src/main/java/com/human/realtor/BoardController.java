@@ -42,8 +42,7 @@ public class BoardController {
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
 	public String boardList(Locale locale, Model model,
 			@ModelAttribute("") PageVO pvo) throws Exception {
-		if (pvo.getPage() == null)
-			pvo.setPage(1);
+		if (pvo.getPage() == null) pvo.setPage(1);
 		pvo.setTotalCount(realtorsrv.boardCnt(pvo.getSword()));
 		pvo.calPage();
 

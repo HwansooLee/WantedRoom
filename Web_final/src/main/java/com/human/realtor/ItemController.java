@@ -1,6 +1,7 @@
 package com.human.realtor;
 
 import com.human.VO.ItemVO;
+import com.human.VO.PageVO;
 import com.human.service.IF_RealtorService;
 import com.human.util.FileDataUtil;
 import org.springframework.stereotype.Controller;
@@ -37,9 +38,14 @@ public class ItemController {
     }
     @RequestMapping(value = "/searchItem", method = RequestMethod.GET)
     public String searchItem(Locale locale, Model model,
-                             @RequestParam("searchWord") String searchWord)
+                             @ModelAttribute("") PageVO pvo)
             throws Exception{
-        model.addAttribute("itemList", realtorsrv.getItemList(searchWord));
+        if( pvo.getPage() == null )
+            pvo.setPage(1);
+        pvo.setTotalCount( realtorsrv.getCnt(pvo.getSword()) );
+        pvo.calPage();
+        model.addAttribute("itemList", realtorsrv.getItemList(pvo));
+        model.addAttribute("pageVO", pvo);
         return "itemList";
     }
     @RequestMapping(value = "/itemDetail", method = RequestMethod.GET)

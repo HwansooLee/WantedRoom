@@ -13,8 +13,7 @@
 	<img src = "././resources/image/logo.png" width = "200">
 </a>
 <form action="inputBoardSave" method = "post" id = "frm">
-	<!-- 디버깅을 위해 임시로 testid로 테이블에 넣어서 만듦 로그인기능 구현되면 수정 필요 -->
-	<input type = "text" name = "id" value = "atestid" readonly><br>
+	<input type = "text" name = "id" value = "${id}" readonly><br>
 	제목<br>
 	<input type = "text" name = "title" class = "boardInput"><br>
 	주소<br>
@@ -32,9 +31,9 @@
 	// 제목이 비어있는가
 	// 유효한 주소인가 >> v2.0
 	// 내용이 비어있는가
-	btn.on('click',() =>{
+	btn.on('click',() => {
 		for(i = 0; i < 3; i++){
-			if(input[i].value == ''){
+			if(input[i].value == '') {
 				return alert('공란이 있습니다.');
 			}
 		}

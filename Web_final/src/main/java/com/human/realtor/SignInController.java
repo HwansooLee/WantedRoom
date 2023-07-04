@@ -8,8 +8,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.human.VO.MemberVO;
 import com.human.service.IF_RealtorService;
@@ -19,6 +22,25 @@ public class SignInController {
 	
 	@Inject
 	IF_RealtorService realtorsrv;
+	
+	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
+	public String signUp(Locale locale, Model model) { // 회원가입 폼으로 이동
+		return "signUp";
+	}
+	
+	@RequestMapping(value = "/nicknameChk", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean nicknameChk(@RequestBody MemberVO mvo) throws Exception{
+		return realtorsrv.nicknameChk(mvo.getNickname());
+	}
+	
+	@RequestMapping(value = "/signUp_save", method = RequestMethod.POST)
+	public String signUpSave(Locale locale, Model model,
+			@ModelAttribute("") MemberVO mvo) throws Exception{
+		if(mvo.getRealtorNo().isEmpty()) mvo.setRealtorNo(null);
+		realtorsrv.insertMember(mvo);
+		return "home";
+	}
 	
 	@RequestMapping(value = "/signIn", method = RequestMethod.GET)
 	public String signIn(Locale locale, Model model){

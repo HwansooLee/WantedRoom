@@ -17,6 +17,10 @@
 		<input type = "password" name = "pwd">
 		<div style = "color:red">${wrongInfo}</div>
 		<br>
+		<div>
+		<input type = "checkbox" id = "keepSignIn">
+		<font color = 'blue' size="1">로그인 상태 유지</font>
+		</div>
 		<input type = "button" value = "Login" id = "submitBtn">
 	</form>
 	<a href = "signUp">[회원가입]</a>

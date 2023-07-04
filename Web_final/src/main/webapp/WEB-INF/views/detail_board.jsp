@@ -120,7 +120,7 @@
 		});
 	}
 
-	$('#replyBtn').on('click',(e) =>{ // 댓글 등록 부분
+	$('#replyBtn').on('click',(e) => { // 댓글 등록 부분
 		let replyCon = $('#replyCon');
 		
 		// 유효성 체크 필요
@@ -130,7 +130,7 @@
 			let data = {
 				"content" : replyCon.val(),
 				"boardNo" : boardNo,
-				"id" : "testid" // 임시로 테스트 아이디로 작성 session으로 받아오는걸로 수정해야 한다.
+				"id" : null // session으로 받아온다.
 			};
 			$.ajax({
 				url : "inputReply"
@@ -157,7 +157,7 @@
 	function toggleButton(button,info) {
 		
 		let likesInfo = { // json으로 보낼 객체
-				"id" : "testid", // session에서 받아오는 걸로 수정해야 한다
+				"id" : null, // session에서 받는다
 				"replyNo" : info,
 				flag : false // default false
 		}

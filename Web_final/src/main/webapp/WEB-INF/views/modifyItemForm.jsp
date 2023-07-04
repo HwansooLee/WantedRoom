@@ -11,7 +11,10 @@
 
 </style>
 <body>
-	<!-- 홈페이지 로고 -->
+    <!-- 홈페이지 로고 -->
+    <a href = "<%=request.getContextPath()%>/">
+        <img src = "././resources/image/logo.png" width = "200">
+    </a>
 	<nav>
 		<a href="addItemForm">[매물 등록]</a>
 		[리뷰]
@@ -68,6 +71,18 @@
 				<th>삭제하기</th>
 			</thead>
 			<tbody>
+				<c:forEach var="attach" items="${attachs}">
+					<tr>
+						<td>
+							<img src="download?fileName=${attach}" height="100">
+							<br>${attach}
+						</td>
+						<td>
+							<input type="button" value="첨부파일삭제" 
+								name="removeAttachBtn" onclick=removeAttach(this)>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 
@@ -81,8 +96,6 @@
 	<script>
 		// 상세설명
 		let detail = $("[name='detail']");
-		// const DEFAULT_MSG = "매물에 대한 상세 설명을 입력하세요.";
-		// detail[0].value = DEFAULT_MSG;
 		let isDetailEmpty = true;
 		// 한글을 글자당 2 바이트로 계산하는 함수(JS 기본 함수는 3바이트로 취급함)
 		String.prototype.getBytes = function() {
@@ -99,14 +112,6 @@
 			}
 			return int_char_count;
 		}
-		// detail.on('click', ()=>{
-		// 	if( detail[0].value == DEFAULT_MSG )
-		// 		detail[0].value = "";
-		// })
-		// detail.on('focusout', ()=>{
-		// 	if( detail[0].value == "" )
-		// 		detail[0].value = DEFAULT_MSG;
-		// })
 		/**** 파일 선택 ****/
 		const FILE_NUM_MAX = 10;
 		const ALLOWED_EXT = ['jpg', 'jpeg', 'bmp'];
@@ -114,7 +119,6 @@
 		let fileInput = $("[name='file']");
 		let fileList = [];
 		// drag and drop
-
 
 		// 선택한 파일 삭제
 		function removeFile(index) {
@@ -132,6 +136,11 @@
 			removeFile(rowNum - 1);
 			fileList.splice(rowNum - 1, 1);
 			document.getElementById('fileList').deleteRow(rowNum);
+		}
+		function removeAttach(elem){
+			let rowNum = elem.parentNode.parentNode.rowIndex;
+			document.getElementById('fileList').deleteRow(rowNum);
+			
 		}
 		fileInput.on('change', (e)=>{
 			for (let i = 0; i < fileInput[0].files.length; i++){

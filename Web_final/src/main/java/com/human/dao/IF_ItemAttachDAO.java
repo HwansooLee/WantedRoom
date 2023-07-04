@@ -10,4 +10,5 @@ public interface IF_ItemAttachDAO {
     public void insertMultiple(int itemNo, ArrayList<String> fileNames);
     public List<ItemAttachVO> selectAll(int itemNo);
     public void delete(int itemNo);
+    public void deleteByName(String fileName);
 }

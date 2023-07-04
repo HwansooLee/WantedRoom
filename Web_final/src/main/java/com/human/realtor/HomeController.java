@@ -94,18 +94,26 @@ public class HomeController {
 							 @RequestParam("itemNo") int itemNo)
 			throws Exception{
 		model.addAttribute("item", realtorsrv.getItemDetail(itemNo));
+		model.addAttribute("attachs", realtorsrv.getAttachFileNames(itemNo));
+		for(String s:realtorsrv.getAttachFileNames(itemNo))
+			System.out.println(s);
 		return "modifyItemForm";
 	}
 	@RequestMapping(value = "/modifyItem", method = RequestMethod.POST)
 	public String modifyItem(Locale locale, Model model, HttpSession session,
 						  @ModelAttribute("newItem") ItemVO ivo, MultipartFile[] file)
 			throws Exception{
-		if( !fileDataUtil.isFileArrEmpty(file) ){
-			// delete previous attachs
-
-		}
 //		realtorsrv.modifyItem(ivo, );
 		return "itemList";
+	}
+	@RequestMapping(value = "/deleteAttach", method = RequestMethod.GET)
+	@ResponseBody
+	public void deleteAttach(Locale locale, Model model, HttpSession session,
+							 @ModelAttribute("attachName") String attachName)
+			throws Exception{
+		fileDataUtil.deleteFile(attachName);
+		realtorsrv.deleteAttach(attachName);
+//		return "redirect:modifyItemForm";
 	}
 
 	@RequestMapping(value = "/inputBoard", method = RequestMethod.GET)

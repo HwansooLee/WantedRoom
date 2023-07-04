@@ -31,8 +31,7 @@ public class MemberImpl implements IF_MemberDAO{
 
 	@Override
 	public MemberVO selectMemberOne(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(mapperQuery+".selectOne",id);
 	}
 
 	@Override

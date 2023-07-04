@@ -26,16 +26,16 @@ import com.human.dao.IF_ReplyDAO;
 public class RealtorServiceImpl implements IF_RealtorService{
 	
 	@Inject
-	IF_BoardDAO boarddao;
+	private IF_BoardDAO boarddao;
 	
 	@Inject
-	IF_ReplyDAO replydao;
+	private IF_ReplyDAO replydao;
 	
 	@Inject
-	IF_LikesDAO likesdao;
+	private IF_LikesDAO likesdao;
 	
 	@Inject
-	IF_MemberDAO memberdao;
+	private IF_MemberDAO memberdao;
 
 	@Inject
 	private IF_ItemDAO itemDao;
@@ -104,7 +104,6 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	@Override
 	public boolean nicknameChk(String nickname) throws Exception {
 		String temp = memberdao.nicknameChk(nickname);
-		System.out.println(temp);
 		if(temp == null || temp.isEmpty()) {
 			return true;
 		}
@@ -157,5 +156,10 @@ public class RealtorServiceImpl implements IF_RealtorService{
 
 		}
 
+	}
+
+	@Override
+	public MemberVO idChk(String id) throws Exception {
+		return memberdao.selectMemberOne(id);
 	}
 }

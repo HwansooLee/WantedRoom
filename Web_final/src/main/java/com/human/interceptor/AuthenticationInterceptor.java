@@ -9,22 +9,22 @@ import javax.servlet.http.HttpSession;
 
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+    		Object handler) throws Exception {
         System.out.println("pre handle");
         // check login user by interceptor
-//        HttpSession session = request.getSession();
-//        Object obj = session.getAttribute("nowUser");
-//
-//        if( obj == null ){ // not logined
-//            response.sendRedirect(request.getContextPath() + "/");
-//            return false;
-//        }
-
+        HttpSession session = request.getSession();
+        Object nowId = session.getAttribute("id");
+        if(nowId == null) {
+        	response.sendRedirect(request.getContextPath() + "/signIn");
+        	return false;
+        }
         return true;
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response,
+    		Object handler, ModelAndView modelAndView) throws Exception {
         System.out.println("Post handle");
         super.postHandle(request, response, handler, modelAndView);
     }

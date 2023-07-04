@@ -1,14 +1,13 @@
 package com.human.realtor;
 
-import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import com.human.VO.*;
-import com.human.dao.IF_ItemAttachDAO;
-import com.human.util.FileDataUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.human.VO.BoardVO;
 import com.human.VO.ItemVO;
@@ -29,6 +27,7 @@ import com.human.VO.MemberVO;
 import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
 import com.human.service.IF_RealtorService;
+import com.human.util.FileDataUtil;
 
 /**
  * Handles requests for the application home page.
@@ -56,8 +55,7 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
 	public String addItem(Locale locale, Model model, HttpSession session,
-						  @ModelAttribute("newItem") ItemVO ivo, MultipartFile[] file)
-							throws Exception{
+			@ModelAttribute("newItem") ItemVO ivo, MultipartFile[] file) throws Exception{
 		ArrayList<String> fileNames = fileDataUtil.fileUpload(file);
 		realtorsrv.addItem(ivo, fileNames);
 		return "addItemForm";

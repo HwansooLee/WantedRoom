@@ -23,6 +23,7 @@ public interface IF_RealtorService {
     public List<ItemVO> getItemList(String searchWord) throws Exception;
 	public ItemVO getItemDetail(int itemNo) throws Exception;
 	public List<String> getAttachFileNames(int itemNo) throws Exception;
+	public void deleteAttach(String fileName);
 	public void deleteItem(int itemNo) throws Exception;
 	public void modifyItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception;
 	public void likesFlag(LikesVO lvo) throws Exception;

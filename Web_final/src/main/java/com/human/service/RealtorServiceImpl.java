@@ -138,6 +138,12 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	}
 
 	@Override
+	public void deleteAttach(String fileName) {
+		System.out.println("!");
+		itemAttachDao.deleteByName(fileName);
+	}
+
+	@Override
 	public void deleteItem(int itemNo) throws Exception {
 		itemAttachDao.delete(itemNo);
 		itemTagsDao.delete(itemNo);

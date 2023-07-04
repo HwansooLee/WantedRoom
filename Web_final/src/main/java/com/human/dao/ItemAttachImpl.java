@@ -34,4 +34,9 @@ public class ItemAttachImpl implements IF_ItemAttachDAO{
     public void delete(int itemNo) {
         sqlSession.delete(mapperQuery+".delete", itemNo);
     }
+
+    @Override
+    public void deleteByName(String fileName) {
+        sqlSession.delete(mapperQuery+".deleteByName", fileName);
+    }
 }

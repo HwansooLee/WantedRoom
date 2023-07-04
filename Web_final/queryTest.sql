@@ -20,8 +20,8 @@ select i.*, t.PARKING, t.ELEVATOR, t.BUILDINGTYPE from item i, itemTags t
     where i.itemNo = 5 and i.itemNo = t.itemNo;
 
 select * from itemTags;
-delete from itemTags where itemNo=0;
-delete from itemAttach where itemNo=0;
-delete from item where itemNo=0;
+delete from itemTags where itemNo=19;
+delete from itemAttach where itemNo=19;
+delete from item where itemNo=19;
 
 select * from member;

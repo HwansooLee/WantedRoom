@@ -44,5 +44,9 @@
     	update board set views = views + 1 where boardNo = #{value}
     </update>
 
+	<select id = "mylist" parameterType = "com.human.VO.PageVO"
+	resultType = "com.human.VO.BoardVO">
+		
+	</select>
 
 </mapper>

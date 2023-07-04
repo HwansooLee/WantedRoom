@@ -8,14 +8,14 @@ public class ReplyVO {
     private String inDate;
     private int likes;
     private String nickname;
-    private Integer likesNo; // 좋아요한 댓글 번호
+    private String nowUser; // 현재 유저가 좋아요를 했는가
 
-    public Integer getLikesNo() {
-		return likesNo;
+	public String getNowUser() {
+		return nowUser;
 	}
 
-	public void setLikesNo(Integer likesNo) {
-		this.likesNo = likesNo;
+	public void setNowUser(String nowUser) {
+		this.nowUser = nowUser;
 	}
 
 	public String getNickname() {

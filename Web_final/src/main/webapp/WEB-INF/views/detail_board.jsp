@@ -89,7 +89,7 @@
 					insertRow += item.inDate;
 					insertRow += '</td>';
 					insertRow += '<td>';
-					if(item.likesNo != null){ // 이미 좋아요 누른 버튼의 경우
+					if(item.nowUser != null){ // 이미 좋아요 누른 버튼의 경우
 						insertRow += '<i id ="like-button" class="fa fa-2x liked fa-heart liked-shaked" onclick = "toggleButton(this,' + item.replyNo + ')"></i>' + item.likes;
 					}else{
 						insertRow += '<i id ="like-button" class="fa fa-2x fa-heart-o not-liked" onclick = "toggleButton(this,' + item.replyNo + ')"></i>' + item.likes;

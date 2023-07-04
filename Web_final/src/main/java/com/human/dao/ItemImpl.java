@@ -41,8 +41,12 @@ public class ItemImpl implements IF_ItemDAO{
 
 	@Override
 	public void updateItem(ItemVO ivo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update(mapperQuery+".update", ivo);
+	}
+
+	@Override
+	public void updateItemAsSold(int itemNo) {
+		sqlSession.update(mapperQuery+".updateStatusSold", itemNo);
 	}
 
 	@Override

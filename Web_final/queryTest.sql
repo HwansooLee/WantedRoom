@@ -25,3 +25,5 @@ delete from itemAttach where itemNo=19;
 delete from item where itemNo=19;
 
 select * from member;
+
+update item set inDate=sysdate where itemNo=22;

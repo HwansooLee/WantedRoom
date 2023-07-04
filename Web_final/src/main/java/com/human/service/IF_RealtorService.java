@@ -26,6 +26,7 @@ public interface IF_RealtorService {
 	public void deleteAttach(String fileName);
 	public void deleteItem(int itemNo) throws Exception;
 	public void modifyItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception;
+	public void setItemSold(int itemNo);
 	public void likesFlag(LikesVO lvo) throws Exception;
 	public boolean nicknameChk(String nickname) throws Exception;
 	public void insertMember(MemberVO mvo) throws Exception;

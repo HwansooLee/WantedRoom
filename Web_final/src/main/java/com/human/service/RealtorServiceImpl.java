@@ -152,10 +152,14 @@ public class RealtorServiceImpl implements IF_RealtorService{
 
 	@Override
 	public void modifyItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception {
-		if( fileNames != null ){
+		if( fileNames.size() > 0 )
+			itemAttachDao.insertMultiple(ivo.getItemNo(), fileNames);
+		itemDao.updateItem(ivo);
+	}
 
-		}
-
+	@Override
+	public void setItemSold(int itemNo) {
+		itemDao.updateItemAsSold(itemNo);
 	}
 
 	@Override

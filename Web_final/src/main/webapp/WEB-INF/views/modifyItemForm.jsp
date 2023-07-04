@@ -27,6 +27,7 @@
 	<!-- add item -->
 	<form action="modifyItem" method="post" enctype="multipart/form-data" id="form">
 		아이디<input type="text" name="id" value="${item.id}" readonly><br>
+		매물번호<input type="text" name="itemNo" value="${item.itemNo}" readonly><br>
 		주소<input type="text" name="addr" value="${item.addr}"><br>
 		보증금<input type="text" name="deposit" value="${item.deposit}"><br>
 		월세<input type="text" name="rent" value="${item.rent}"><br>
@@ -73,10 +74,7 @@
 			<tbody>
 				<c:forEach var="attach" items="${attachs}">
 					<tr>
-						<td>
-							<img src="download?fileName=${attach}" height="100">
-							<br>${attach}
-						</td>
+						<td><img src="download?fileName=${attach}" height="100"><br>${attach}</td>
 						<td>
 							<input type="button" value="첨부파일삭제" 
 								name="removeAttachBtn" onclick=removeAttach(this)>
@@ -86,7 +84,10 @@
 			</tbody>
 		</table>
 
-		<input type="button" value="등록" id="addBtn">
+		<c:if test="${item.status == '계약가능'}">
+			<input type="button" value="계약완료" id="setSoldBtn">
+		</c:if>
+		<input type="button" value="저장" id="addBtn">
 	</form>
 
 	<footer>
@@ -139,8 +140,19 @@
 		}
 		function removeAttach(elem){
 			let rowNum = elem.parentNode.parentNode.rowIndex;
-			document.getElementById('fileList').deleteRow(rowNum);
-			
+			let attachNameVal = elem.parentNode.parentNode.childNodes[1].children[0].getAttribute('src');
+			attachNameVal = attachNameVal.split('fileName=')[1];
+			console.log(attachNameVal);
+			$.ajax({
+				url: 'deleteAttach',
+				type: 'POST',
+				data:{
+					attachName : attachNameVal
+				},
+				success: ()=>{
+					document.getElementById('fileList').deleteRow(rowNum);
+				}
+			});			
 		}
 		fileInput.on('change', (e)=>{
 			for (let i = 0; i < fileInput[0].files.length; i++){
@@ -194,8 +206,26 @@
 			}
 		});
 
-
-
+		// 계약완료로 설정
+		const AGREE_MSG = '계약완료';
+		$('#setSoldBtn').on('click', ()=>{
+			let checkResult = prompt('계약완료로 설정하면 되돌릴 수 없습니다. 계약완료로 설정하려면 계약완료라고 입력하세요.');
+			let itemNoVal = $('[name="itemNo"]').val();
+			console.log(itemNoVal);
+			if( checkResult == AGREE_MSG ){
+				$.ajax({
+					url: 'setItemSold',
+					type: 'POST',
+					data:{
+						itemNo : itemNoVal
+					},
+					success: ()=>{
+						alert('계약완료로 설정하였습니다.');
+					}
+				});	
+			}else
+				alert('계약완료 변경을 취소합니다.');
+		});
 		// 저장
 		$('#addBtn').on('click', ()=>{
 			console.log( fileList.length );

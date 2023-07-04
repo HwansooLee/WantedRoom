@@ -12,4 +12,6 @@ public interface IF_BoardDAO {
     public List<BoardVO> selectAll(PageVO pvo) throws Exception;
     public int boardCnt(String sword) throws Exception;
     public void viewCnt(int boardNo) throws Exception;
+    public int myBoardCnt(String id) throws Exception;
+    public List<BoardVO> myBoardList(PageVO pvo) throws Exception;
 }

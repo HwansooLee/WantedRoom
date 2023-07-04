@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
 <a href = "<%=request.getContextPath()%>/">
-	<img src = "././resources/image/logo.png" width = "200">
+	<img src = "resources/image/logo.png" width = "200">
 </a>
 <form action="inputBoardSave" method = "post" id = "frm">
 	<input type = "text" name = "id" value = "${id}" readonly><br>

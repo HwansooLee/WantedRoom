@@ -32,4 +32,6 @@ public interface IF_RealtorService {
 	public void insertMember(MemberVO mvo) throws Exception;
 	public MemberVO idChk(String id) throws Exception;
 	public int getCnt(String sword);
+	public int myBoardCnt(String id) throws Exception;
+	public List<BoardVO> myList(PageVO pvo) throws Exception;
 }

@@ -32,4 +32,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="delete" parameterType="int">
         delete from item where itemNo=#{itemNo}
     </delete>
+    <update id="update" parameterType="com.human.VO.ItemVO">
+        update item set addr=#{addr}, deposit=#{deposit}, rent=#{rent}, detail=#{detail}, inDate=sysdate where itemNo=#{itemNo}
+    </update>
+    <update id="updateStatusSold" parameterType="int">
+        update item set status='계약완료' where itemNo=#{itemNo}
+    </update>
 </mapper>

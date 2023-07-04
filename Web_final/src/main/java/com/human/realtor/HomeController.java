@@ -51,6 +51,9 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/addItemForm", method = RequestMethod.GET)
 	public String showAddItemForm(Locale locale, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		System.out.println(id);
+		model.addAttribute("id", id);
 		return "addItemForm";
 	}
 	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
@@ -101,16 +104,24 @@ public class HomeController {
 	public String modifyItem(Locale locale, Model model, HttpSession session,
 						  @ModelAttribute("newItem") ItemVO ivo, MultipartFile[] file)
 			throws Exception{
-//		realtorsrv.modifyItem(ivo, );
+		ArrayList<String> fileNames = fileDataUtil.fileUpload(file);
+		realtorsrv.modifyItem(ivo, fileNames);
 		return "itemList";
 	}
-	@RequestMapping(value = "/deleteAttach", method = RequestMethod.GET)
+	@RequestMapping(value = "/setItemSold", method = RequestMethod.POST)
+	@ResponseBody
+	public void setItemSold(Locale locale, Model model, HttpSession session,
+							 @ModelAttribute("itemNo") int itemNo)
+			throws Exception{
+		realtorsrv.setItemSold(itemNo);
+	}
+
+	@RequestMapping(value = "/deleteAttach", method = RequestMethod.POST)
 	@ResponseBody
 	public void deleteAttach(Locale locale, Model model, HttpSession session,
 							 @ModelAttribute("attachName") String attachName)
 			throws Exception{
 		fileDataUtil.deleteFile(attachName);
 		realtorsrv.deleteAttach(attachName);
-//		return "redirect:modifyItemForm";
 	}
 }

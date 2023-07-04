@@ -12,5 +12,6 @@ public interface IF_ItemDAO {
 	public ItemVO selectItemOne(int ino) throws Exception;
 	public void deleteItem(int ino) throws Exception;
 	public void updateItem(ItemVO ivo) throws Exception;
+	public void updateItemAsSold(int itemNo);
     public int getNextItemNo();
 }

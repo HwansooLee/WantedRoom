@@ -26,7 +26,7 @@
 	</form>
 	<!-- add item -->
 	<form action="addItem" method="post" enctype="multipart/form-data" id="form">
-		아이디<input type="text" name="id" value="testUser1" readonly><br>
+		<input type="text" name="id" value="${id}" readonly hidden><br>
 		주소<input type="text" name="addr"><br>
 		보증금<input type="text" name="deposit"><br>
 		월세<input type="text" name="rent"><br>

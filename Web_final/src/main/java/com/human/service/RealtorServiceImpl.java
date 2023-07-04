@@ -168,4 +168,14 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	public int getCnt(String sword) {
 		return itemDao.selectItemCnt(sword);
 	}
+
+	@Override
+	public int myBoardCnt(String id) throws Exception {
+		return boarddao.myBoardCnt(id);
+	}
+
+	@Override
+	public List<BoardVO> myList(PageVO pvo) throws Exception {
+		return boarddao.myBoardList(pvo);
+	}
 }

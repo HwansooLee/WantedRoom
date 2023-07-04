@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
 <a href = "<%=request.getContextPath()%>/">
-	<img src = "././resources/image/logo.png" width = "200">
+	<img src = "resources/image/logo.png" width = "200">
 </a>
 <a href = "inputBoard">
 	<input type = "button" value = "게시글 작성">
@@ -22,27 +22,29 @@
 		<td>주소</td>
 		<td>조회수</td>
 		<td>등록일</td>
+		<td>수정/삭제</td>
 	</tr>
 	<c:forEach var = "boardvo" items = "${blist}">
 		<tr>
 			<td>${boardvo.boardNo}</td>
-			<td><a href = "detailBoard?boardno=${boardvo.boardNo}">${boardvo.title}</a></td>
+			<td>${boardvo.title}</td>
 			<td>${boardvo.addr}</td>
 			<td>${boardvo.views}</td>
 			<td>${boardvo.inDate}</td>
+			<td><a href = "">mod</a>/<a href = "">del</a></td>
 		</tr>
 	</c:forEach>
 </table>
 <!-- 페이지 번호 들어갈 위치 -->
 <div>
 	<c:if test="${pagevo.prev}">
-		<a href = "boardList?page=${pagevo.startPage - 1}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">[이전 페이지]</a>
+		<a href = "myBoardList?page=${pagevo.startPage - 1}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">[이전 페이지]</a>
 	</c:if>
 	<c:forEach begin = "${pagevo.startPage}" end = "${pagevo.endPage}" var = "idx">
-		<a href = "boardList?page=${idx}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">${idx}</a>
+		<a href = "myBoardList?page=${idx}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">${idx}</a>
 	</c:forEach>
 	<c:if test="${pagevo.next}">
-		<a href = "boardList?page=${pagevo.endPage + 1}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">[다음 페이지]</a>
+		<a href = "myBoardList?page=${pagevo.endPage + 1}&sword=${pagevo.sword}&sorted=${pagevo.sorted}">[다음 페이지]</a>
 	</c:if>
 </div>
 

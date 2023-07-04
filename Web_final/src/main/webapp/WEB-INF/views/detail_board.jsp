@@ -11,6 +11,9 @@
 <link rel="stylesheet" href = "././resources/css/detail_board.css"></link>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <body>
+<a href = "<%=request.getContextPath()%>/">
+	<img src = "resources/image/logo.png" width = "200">
+</a>
 <table border = "1" width = "800">
 	<tr>
 		<td>게시글번호</td>

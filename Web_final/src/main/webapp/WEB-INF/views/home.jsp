@@ -10,7 +10,7 @@
 <body>
 	<!-- 홈페이지 로고 -->
 	<a href = "<%=request.getContextPath()%>/">
-		<img src = "././resources/image/logo.png" width = "200">
+		<img src = "resources/image/logo.png" width = "200">
 	</a>
 	<nav>
 		<a href="addItemForm">[매물 등록]</a>

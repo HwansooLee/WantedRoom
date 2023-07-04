@@ -104,7 +104,6 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	@Override
 	public boolean nicknameChk(String nickname) throws Exception {
 		String temp = memberdao.nicknameChk(nickname);
-		System.out.println(temp);
 		if(temp == null || temp.isEmpty()) {
 			return true;
 		}

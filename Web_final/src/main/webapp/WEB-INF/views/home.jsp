@@ -15,7 +15,7 @@
 	<nav>
 		<a href="addItemForm">[매물 등록]</a>
 		<!-- 리뷰게시판은 세션확인을 통해 이용이 가능하게 한다. -->
-		<a href="" id = "review">[리뷰]</a>
+		<a href="boardList">[리뷰]</a>
 		<c:if test = "${id eq null}">
 			<a href = "signIn">[로그인]</a>
 			<a href = "signUp">[회원가입]</a>

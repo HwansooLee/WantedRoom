@@ -19,6 +19,7 @@
 		<br>
 		<input type = "button" value = "Login" id = "submitBtn">
 	</form>
+	<a href = "signUp">[회원가입]</a>
 </body>
 <script type="text/javascript">
 	var idFlag = false;

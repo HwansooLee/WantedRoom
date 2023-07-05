@@ -60,6 +60,7 @@ public class SignInController {
 		// 회원임
 		session.setAttribute("id", mvo.getId());
 		session.setAttribute("nickname", mvo.getNickname());
+		session.setAttribute("realtorNo", mvo.getRealtorNo());
 		return "home";
 	}
 	

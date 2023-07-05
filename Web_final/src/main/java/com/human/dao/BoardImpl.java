@@ -40,4 +40,24 @@ public class BoardImpl implements IF_BoardDAO{
 	public void viewCnt(int boardNo) throws Exception {
 		sqlSession.update(mapperQuery+".viewCnt",boardNo);
 	}
+
+	@Override
+	public int myBoardCnt(String id) throws Exception {
+		return sqlSession.selectOne(mapperQuery+".myListCnt",id);
+	}
+
+	@Override
+	public List<BoardVO> myBoardList(PageVO pvo) throws Exception {
+		return sqlSession.selectList(mapperQuery+".mylist",pvo);
+	}
+
+	@Override
+	public void modify(BoardVO bvo) throws Exception {
+		sqlSession.update(mapperQuery+".modify",bvo);
+	}
+
+	@Override
+	public void delete(int boardNo) throws Exception {
+		sqlSession.delete(mapperQuery+".delete",boardNo);
+	}
 }

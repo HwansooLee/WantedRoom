@@ -168,4 +168,49 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	public int getCnt(String sword, String id) {
 		return itemDao.selectItemCnt(sword, id);
 	}
+
+	@Override
+	public int myBoardCnt(String id) throws Exception {
+		return boarddao.myBoardCnt(id);
+	}
+
+	@Override
+	public List<BoardVO> myList(PageVO pvo) throws Exception {
+		return boarddao.myBoardList(pvo);
+	}
+
+	@Override
+	public BoardVO getBoardOne(int boardNo) throws Exception {
+		return boarddao.selectOne(boardNo);
+	}
+
+	@Override
+	public void modBoard(BoardVO bvo) throws Exception {
+		boarddao.modify(bvo);
+	}
+
+	@Override
+	public void delBoard(int boardNo) throws Exception {
+		boarddao.delete(boardNo);
+	}
+
+	@Override
+	public List<ReplyVO> getMyReplyList(PageVO pvo) throws Exception {
+		return replydao.myReplyAll(pvo);
+	}
+
+	@Override
+	public int myReplyCnt(String id) throws Exception {
+		return replydao.myReplyCnt(id);
+	}
+
+	@Override
+	public void delReply(int replyNo) throws Exception {
+		replydao.deleteReply(replyNo);
+	}
+
+	@Override
+	public void regRealtorNo(MemberVO mvo) throws Exception {
+		memberdao.updateId(mvo);
+	}
 }

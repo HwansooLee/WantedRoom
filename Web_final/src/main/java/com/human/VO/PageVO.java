@@ -18,7 +18,7 @@ public class PageVO {
 	
 	private int boardNo; // 댓글 목록 받아오기 위한 boardNo
 	private int itemNo;
-	private String nowUser; // 쿼리문을 위한 장치
+	private String nowUser; // 쿼리문을 위한 장치 아이디를 의미
 	
 	public String getNowUser() {
 		return nowUser;

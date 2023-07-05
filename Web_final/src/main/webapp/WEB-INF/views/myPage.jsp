@@ -11,7 +11,7 @@
 <body>
     	<!-- 홈페이지 로고 -->
 	<a href = "<%=request.getContextPath()%>/">
-		<img src = "././resources/image/logo.png" width = "200">
+		<img src = "resources/image/logo.png" width = "200">
 	</a>
 	<nav>
 		<a href="addItemForm">[매물 등록]</a>
@@ -26,11 +26,14 @@
 			<a href = "signOut">[로그아웃]</a>
 		</c:if>
 	</nav><hr>
-    <!-- 등록번호인증이 안된 회원만 세션으로 걸러서 나오게 한다 -->
-    <a href = "">[공인중개사 등록번호 등록하기]</a>
-    <a href = "myBoardList">[리뷰 게시글 관리]</a> <!-- 리뷰말고 다른 표현 생각할 필요가 있어보임 -->
-    <a href = "">[댓글관리]</a>
-    <!-- 등록번호인증된 회원만 세션으로 걸러서 나오게 한다 -->
-    <a href = "myItemList?sword=">[매물 게시글 관리]</a>
+<c:if test = "${realtorNo eq null}">
+	<a href = "registerRealtorNo">[공인중개사 등록번호 등록하기]</a>
+</c:if>
+<a href = "myBoardList">[리뷰 게시글 관리]</a> <!-- 리뷰말고 다른 표현 생각할 필요가 있어보임 -->
+<a href = "myReplyList">[댓글관리]</a>
+<!-- 등록번호인증된 회원만 세션으로 걸러서 나오게 한다 -->
+<c:if test = "${realtorNo ne null}">
+	<a href = "">[매물 게시글 관리]</a>
+</c:if>
 </body>
 </html>

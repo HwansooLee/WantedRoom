@@ -42,8 +42,7 @@ public class MemberImpl implements IF_MemberDAO{
 
 	@Override
 	public void updateId(MemberVO mvo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update(mapperQuery+".update",mvo);
 	}
 
 	@Override

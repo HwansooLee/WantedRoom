@@ -43,10 +43,29 @@
     <update id="viewCnt" parameterType = "int">
     	update board set views = views + 1 where boardNo = #{value}
     </update>
+    
+    <select id = "myListCnt" parameterType = "String" resultType = "int">
+    	select count(*) from board where id = #{value}
+    </select>
 
 	<select id = "mylist" parameterType = "com.human.VO.PageVO"
 	resultType = "com.human.VO.BoardVO">
-		
+		select *
+		from (select rownum rn , sub.*
+		from (select * 
+		from board 
+		where id = #{nowUser}
+		order by inDate desc) sub) 
+		where rn between #{startNo} and #{endNo}
 	</select>
-
+	
+	<update id="modify" parameterType = "com.human.VO.BoardVO">
+		update board set title = #{title}, addr = #{addr}, content = #{content}
+		where boardNo = #{boardNo}
+	</update>
+	
+	<delete id="delete" parameterType = "int">
+		delete from board where boardNo = #{value}
+	</delete>
+	
 </mapper>

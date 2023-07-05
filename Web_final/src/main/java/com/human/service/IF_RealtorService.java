@@ -31,5 +31,5 @@ public interface IF_RealtorService {
 	public boolean nicknameChk(String nickname) throws Exception;
 	public void insertMember(MemberVO mvo) throws Exception;
 	public MemberVO idChk(String id) throws Exception;
-	public int getCnt(String sword);
+	public int getCnt(String sword, String id);
 }

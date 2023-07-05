@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" %>
 <html>
 <head>
 	<title>Home</title>
@@ -17,9 +16,16 @@
     </a>
 	<nav>
 		<a href="addItemForm">[매물 등록]</a>
-		[리뷰]
-		[로그인]
-		[회원가입]
+		<!-- 리뷰게시판은 세션확인을 통해 이용이 가능하게 한다. -->
+		<a href="boardList">[리뷰]</a>
+		<c:if test = "${id eq null}">
+			<a href = "signIn">[로그인]</a>
+			<a href = "signUp">[회원가입]</a>
+		</c:if>
+		<c:if test = "${id ne null}">
+			<a href = "myPage">[${nickname}]</a>
+			<a href = "signOut">[로그아웃]</a>
+		</c:if>
 	</nav>
 	<form action="" >
 			<!-- 검색창 -->
@@ -76,8 +82,6 @@
 	<script>
 		// 상세설명
 		let detail = $("[name='detail']");
-		// const DEFAULT_MSG = "매물에 대한 상세 설명을 입력하세요.";
-		// detail[0].value = DEFAULT_MSG;
 		let isDetailEmpty = true;
 		// 한글을 글자당 2 바이트로 계산하는 함수(JS 기본 함수는 3바이트로 취급함)
 		String.prototype.getBytes = function() {
@@ -94,14 +98,6 @@
 			}
 			return int_char_count;
 		}
-		// detail.on('click', ()=>{
-		// 	if( detail[0].value == DEFAULT_MSG )
-		// 		detail[0].value = "";
-		// })
-		// detail.on('focusout', ()=>{
-		// 	if( detail[0].value == "" )
-		// 		detail[0].value = DEFAULT_MSG;
-		// })
 		/**** 파일 선택 ****/
 		const FILE_NUM_MAX = 10;
 		const ALLOWED_EXT = ['jpg', 'jpeg', 'bmp'];
@@ -139,7 +135,7 @@
 						continue;
 					}
 					fileList.push(fileInput[0].files[i]);
-					let row = document.getElementById('fileList').insertRow();
+					let row = document.querySelector('tbody').insertRow();
 					let cell1 = row.insertCell(0);
 					let cell2 = row.insertCell(1);
 					cell1.innerHTML = fileName;
@@ -149,19 +145,6 @@
 					break;
 				}
 			}
-
-			// var files = document.getElementsByName("file")[0].files;
-			// if (!files.length) {
-			// 	return;
-			// }
-			// var file = files[0];
-			// // Create a new one with the data but a new name
-			// var newFile = new File([file], "replace.jpg", {
-			// type: file.type,
-			// });
-			// // Build the FormData to send
-			// var data = new FormData();
-			// data.set("file", newFile);
 		});
 		// 보증금 유효성 검사
 		let deposit = $("[name='deposit']");
@@ -180,8 +163,6 @@
 			}
 		});
 
-
-
 		// 저장
 		$('#addBtn').on('click', ()=>{
 			console.log( fileList.length );
@@ -197,9 +178,10 @@
 			}else if( rent[0].value == '' ){
 				alert('월세를 입력하세요.');
 				return;
+			}else if( $('#fileList >tbody >tr').length == 0 ){
+				alert('매물 사진을 1 장 이상 첨부하세요');
+				return;
 			}
-			// if( $("[name='detail']")[0].value == DEFAULT_MSG )
-			// 	$("[name='detail']")[0].value = '';
 			$('#form').submit();
 		});
 	</script>

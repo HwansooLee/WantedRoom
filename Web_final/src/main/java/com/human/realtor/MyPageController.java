@@ -34,7 +34,19 @@ public class MyPageController {
 		if(pvo.getPage() == null) pvo.setPage(1);
 		pvo.setTotalCount(realtorsrv.boardCnt(pvo.getSword()));
 		pvo.calPage();
-		
 		return "myBoardList";
+	}
+	@RequestMapping(value = "/myItemList", method = RequestMethod.GET)
+	public String getMyItems(Locale locale, Model model, HttpSession session,
+							  @ModelAttribute("") PageVO pvo) throws Exception{
+		String id = (String) session.getAttribute("id");
+		pvo.setNowUser(id);
+		if( pvo.getPage() == null )
+			pvo.setPage(1);
+		pvo.setTotalCount( realtorsrv.getCnt(null, id) );
+		pvo.calPage();
+		model.addAttribute("itemList", realtorsrv.getItemList(pvo));
+		model.addAttribute("pageVO", pvo);
+		return "myItemList";
 	}
 }

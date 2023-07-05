@@ -14,5 +14,5 @@ public interface IF_ItemDAO {
 	public void updateItem(ItemVO ivo) throws Exception;
 	public void updateItemAsSold(int itemNo);
     public int getNextItemNo();
-	public int selectItemCnt(String sword);
+	public int selectItemCnt(String sword, String id);
 }

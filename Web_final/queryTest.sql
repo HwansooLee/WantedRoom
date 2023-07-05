@@ -12,7 +12,7 @@ select * from
     (select i.*, a.FILENAME, t.PARKING, t.ELEVATOR, t.BUILDINGTYPE, 
     ROW_NUMBER() over(PARTITION by i.itemNo order by a.fileName) as rn
         from item i, ITEMATTACH a, ITEMTAGS t
-        where i.addr like '%상계동%' and i.ITEMNO = a.ITEMNO and a.ITEMNO = t.ITEMNO
+        where i.addr like '%상계동%' and id='dde@naver.com' and i.ITEMNO = a.ITEMNO and a.ITEMNO = t.ITEMNO
         )
     where rn <= 1;
 
@@ -116,3 +116,6 @@ commit;
     
 select count(*) from item where addr like '상계동';
 select count(*) from item where addr like '';
+
+select * from item where id='dde@naver.com';
+select * from item where id='bbb@bbb.com';

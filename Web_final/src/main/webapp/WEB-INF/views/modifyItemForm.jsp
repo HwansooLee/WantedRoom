@@ -8,7 +8,9 @@
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
-
+	#setSoldBtn{
+		background-color: aquamarine;
+	}
 </style>
 <body>
     <!-- 홈페이지 로고 -->
@@ -165,7 +167,7 @@
 						continue;
 					}
 					fileList.push(fileInput[0].files[i]);
-					let row = document.getElementById('fileList').insertRow();
+					let row = document.querySelector('tbody').insertRow();
 					let cell1 = row.insertCell(0);
 					let cell2 = row.insertCell(1);
 					cell1.innerHTML = fileName;
@@ -175,19 +177,6 @@
 					break;
 				}
 			}
-
-			// var files = document.getElementsByName("file")[0].files;
-			// if (!files.length) {
-			// 	return;
-			// }
-			// var file = files[0];
-			// // Create a new one with the data but a new name
-			// var newFile = new File([file], "replace.jpg", {
-			// type: file.type,
-			// });
-			// // Build the FormData to send
-			// var data = new FormData();
-			// data.set("file", newFile);
 		});
 		// 보증금 유효성 검사
 		let deposit = $("[name='deposit']");
@@ -208,10 +197,9 @@
 
 		// 계약완료로 설정
 		const AGREE_MSG = '계약완료';
-		$('#setSoldBtn').on('click', ()=>{
+		$('#setSoldBtn').on('click', (e)=>{
 			let checkResult = prompt('계약완료로 설정하면 되돌릴 수 없습니다. 계약완료로 설정하려면 계약완료라고 입력하세요.');
 			let itemNoVal = $('[name="itemNo"]').val();
-			console.log(itemNoVal);
 			if( checkResult == AGREE_MSG ){
 				$.ajax({
 					url: 'setItemSold',
@@ -221,6 +209,7 @@
 					},
 					success: ()=>{
 						alert('계약완료로 설정하였습니다.');
+						$(e.target).css('display', 'none');
 					}
 				});	
 			}else
@@ -228,10 +217,6 @@
 		});
 		// 저장
 		$('#addBtn').on('click', ()=>{
-			console.log( fileList.length );
-			for(f of fileList)
-				console.log(f.name);
-
 			if( $("[name='addr']").value == '' ){
 				alert('매물의 주소를 입력하세요.');
 				return;
@@ -241,10 +226,12 @@
 			}else if( rent[0].value == '' ){
 				alert('월세를 입력하세요.');
 				return;
+			}else if( $('#fileList >tbody >tr').length == 0 ){
+				alert('매물 사진을 1 장 이상 첨부하세요');
+				return;
 			}
-			// if( $("[name='detail']")[0].value == DEFAULT_MSG )
-			// 	$("[name='detail']")[0].value = '';
 			$('#form').submit();
+			alert('수정되었습니다');
 		});
 	</script>
 </html>

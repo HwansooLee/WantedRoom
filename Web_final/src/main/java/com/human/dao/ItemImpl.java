@@ -1,5 +1,6 @@
 package com.human.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -54,8 +55,11 @@ public class ItemImpl implements IF_ItemDAO{
 	}
 
 	@Override
-	public int selectItemCnt(String sword) {
-		return sqlSession.selectOne(mapperQuery+".selectCnt", sword);
+	public int selectItemCnt(String sword, String id) {
+		HashMap<String, String> hmap = new HashMap<>();
+		hmap.put("sword", sword);
+		hmap.put("id", id);
+		return sqlSession.selectOne(mapperQuery+".selectCnt", hmap);
 	}
 
 }

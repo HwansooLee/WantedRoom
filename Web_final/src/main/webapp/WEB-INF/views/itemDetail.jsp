@@ -45,13 +45,29 @@
     </c:forEach><br>
     <span>매물등록일 : ${item.inDate}</span><br>
     <a href="modifyItemForm?itemNo=${item.itemNo}">수정</a>
-    <a href="deleteItem?itemNo=${item.itemNo}">삭제</a>
+    <form action="myItemList?sword=" id="frm">
+        <input type="button" value="삭제" id="modifyItemBtn">
+        <input type="hidden" value="${item.itemNo}">
+    </form>
 
 	<footer>
 		<!-- 개발자 정보 -->
 	</footer>
 </body>
 	<script>
-
+        $('#modifyItemBtn').on('click', (e)=>{
+            let itemNoVal = $(e.target).next().val();
+            $.ajax({
+					url: 'deleteItem',
+					type: 'POST',
+					data:{
+						itemNo : itemNoVal
+					},
+					success: ()=>{
+						alert('삭제완료하였습니다.');
+                        $('#frm').submit();
+					}
+				});	
+        })
 	</script>
 </html>

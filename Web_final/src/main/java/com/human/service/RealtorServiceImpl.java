@@ -165,7 +165,7 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	}
 
 	@Override
-	public int getCnt(String sword) {
-		return itemDao.selectItemCnt(sword);
+	public int getCnt(String sword, String id) {
+		return itemDao.selectItemCnt(sword, id);
 	}
 }

@@ -7,19 +7,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select itemNoSeq.nextval from dual
     </select>
     <select id="selectAll" parameterType="com.human.VO.PageVO" resultType="com.human.VO.ItemVO">
-<!--        select * from-->
-<!--            (select i.*, a.FILENAME, t.PARKING, t.ELEVATOR, t.BUILDINGTYPE,-->
-<!--            ROW_NUMBER() over(PARTITION by i.itemNo order by a.fileName desc) as rn-->
-<!--                from item i, ITEMATTACH a, ITEMTAGS t-->
-<!--                where i.itemNo = a.itemNo and a.itemNo = t.itemNo-->
-<!--                <if test="sword != null">-->
-<!--                    and i.addr like '%'||#{sword}||'%'-->
-<!--                </if>-->
-<!--            )-->
-<!--        &lt;!&ndash;  '<' will cause error in xml so cover it with ![CDATA[ yourCode ]]  &ndash;&gt;-->
-<!--        <![CDATA[-->
-<!--        where rn <= 1-->
-<!--        ]]>-->
         select * from (
             select s.*, rownum as newRn from (
                 select * from
@@ -27,20 +14,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                     ROW_NUMBER() over(PARTITION by i.itemNo order by a.fileName) as rn
                     from item i, ITEMATTACH a, ITEMTAGS t
                         where i.ITEMNO = a.ITEMNO and a.ITEMNO = t.ITEMNO
-                        <if test="sword != null">-->
+                        <if test="nowUser != null">
+                            and id=#{nowUser}
+                        </if>
+                        <if test="sword != null">
                             and i.addr like '%'||#{sword}||'%'
                         </if>
                     )
                 <![CDATA[ where rn <= 1) s
             )
         where newRn >= #{startNo} and newRn <= #{endNo} ]]>
+<!--        select * from (-->
+<!--        select s.*, rownum as newRn from (-->
+<!--        select * from-->
+<!--        (select i.*, a.FILENAME, t.PARKING, t.ELEVATOR, t.BUILDINGTYPE,-->
+<!--        ROW_NUMBER() over(PARTITION by i.itemNo order by a.fileName) as rn-->
+<!--        from item i, ITEMATTACH a, ITEMTAGS t-->
+<!--        where i.ITEMNO = a.ITEMNO and a.ITEMNO = t.ITEMNO-->
+<!--        <if test="sword != null">-->
+<!--            and i.addr like '%'||#{sword}||'%'-->
+<!--        </if>-->
+<!--        )-->
+<!--        <![CDATA[ where rn <= 1) s-->
+<!--            )-->
+<!--        where newRn >= #{startNo} and newRn <= #{endNo} ]]>-->
     </select>
     <select id="select" parameterType="int" resultType="com.human.VO.ItemVO">
         select i.*, t.PARKING, t.ELEVATOR, t.BUILDINGTYPE from item i, itemTags t
         where i.itemNo = #{ino} and i.itemNo = t.itemNo
     </select>
-    <select id="selectCnt" parameterType="String" resultType="int">
-        select count(*) from item where addr like '%'||#{sword}||'%'
+    <select id="selectCnt" parameterType="HashMap" resultType="int">
+        select count(*) from item where
+        <if test="sword != null">
+            addr like '%'||#{sword}||'%'
+        </if>
+        <if test="id != null">
+            id = #{id}
+        </if>
+
     </select>
     <insert id="insert" parameterType="com.human.VO.ItemVO">
         insert into item values (#{itemNo}, #{id}, #{addr}, #{deposit}, #{rent},

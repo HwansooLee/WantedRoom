@@ -25,7 +25,6 @@ public class ItemController {
     @RequestMapping(value = "/addItemForm", method = RequestMethod.GET)
     public String showAddItemForm(Locale locale, Model model, HttpSession session) {
         String id = (String)session.getAttribute("id");
-        System.out.println(id);
         model.addAttribute("id", id);
         return "addItemForm";
     }
@@ -42,7 +41,7 @@ public class ItemController {
             throws Exception{
         if( pvo.getPage() == null )
             pvo.setPage(1);
-        pvo.setTotalCount( realtorsrv.getCnt(pvo.getSword()) );
+        pvo.setTotalCount( realtorsrv.getCnt(pvo.getSword(), null) );
         pvo.calPage();
         model.addAttribute("itemList", realtorsrv.getItemList(pvo));
         model.addAttribute("pageVO", pvo);
@@ -59,23 +58,22 @@ public class ItemController {
         model.addAttribute("fileNames", fileNames);
         return "itemDetail";
     }
-    @RequestMapping(value = "/deleteItem", method = RequestMethod.GET)
-    public String deleteItem(Locale locale, Model model,
-                             @RequestParam("itemNo") int itemNo)
+    @RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
+    @ResponseBody
+    public void deleteItem(Locale locale, Model model,
+                             @ModelAttribute("itemNo") int itemNo)
             throws Exception{
         for(String s:realtorsrv.getAttachFileNames(itemNo))
             fileDataUtil.deleteFile(s);
         realtorsrv.deleteItem(itemNo);
-        return "itemList";
     }
-    @RequestMapping(value = "/modifyItemForm", method = RequestMethod.GET)
+    @RequestMapping(value = "/modifyItemForm", method = RequestMethod.POST)
     public String getModifyItemFrom(Locale locale, Model model,
-                                    @RequestParam("itemNo") int itemNo)
+                                    @ModelAttribute("itemNo") int itemNo)
             throws Exception{
+        System.out.println(itemNo);
         model.addAttribute("item", realtorsrv.getItemDetail(itemNo));
         model.addAttribute("attachs", realtorsrv.getAttachFileNames(itemNo));
-        for(String s:realtorsrv.getAttachFileNames(itemNo))
-            System.out.println(s);
         return "modifyItemForm";
     }
     @RequestMapping(value = "/modifyItem", method = RequestMethod.POST)
@@ -84,7 +82,16 @@ public class ItemController {
             throws Exception{
         ArrayList<String> fileNames = fileDataUtil.fileUpload(file);
         realtorsrv.modifyItem(ivo, fileNames);
-        return "itemList";
+        String id = (String) session.getAttribute("id");
+        PageVO pvo = new PageVO();
+        pvo.setNowUser(id);
+        if( pvo.getPage() == null )
+            pvo.setPage(1);
+        pvo.setTotalCount( realtorsrv.getCnt(null, id) );
+        pvo.calPage();
+        model.addAttribute("itemList", realtorsrv.getItemList(pvo));
+        model.addAttribute("pageVO", pvo);
+        return "myItemList";
     }
     @RequestMapping(value = "/setItemSold", method = RequestMethod.POST)
     @ResponseBody

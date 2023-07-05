@@ -9,8 +9,9 @@
 <style>
 	.itemDiv{
 		background-color: white;
-		height: 300px;
-		width: 300px;
+		height: 400px;
+		width: 50%;
+		float: left;
 	}
 	a.fillDiv{
 		display: block;
@@ -76,10 +77,4 @@
 		<!-- 개발자 정보 -->
 	</footer>
 </body>
-	<script>
-		// var itemList = ${itemList};
-		// console.log(itemList[0].fileName);
-		console.log( $('#img').val() );
-		console.log( $('#itemNo').val() );
-	</script>
 </html>

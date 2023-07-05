@@ -6,8 +6,12 @@
 	<title>Home</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- script for kakao postcode service -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-
+	input[name="addr"]{
+		width: 300px;
+	}
 </style>
 <body>
     <!-- 홈페이지 로고 -->
@@ -33,7 +37,8 @@
 	<!-- add item -->
 	<form action="addItem" method="post" enctype="multipart/form-data" id="form">
 		<input type="text" name="id" value="${id}" readonly hidden><br>
-		주소<input type="text" name="addr"><br>
+		주소<input type="text" name="addr" placeholder="주소검색 버튼을 눌러 주소를 입력하세요." readonly>
+		<input type="button" value="주소검색" id="inputAddr"><br>
 		보증금<input type="text" name="deposit"><br>
 		월세<input type="text" name="rent"><br>
 		상세설명<br><textarea name="detail" rows="2" cols="50" maxlength="50"
@@ -80,6 +85,14 @@
 	</footer>
 </body>
 	<script>
+		// 주소 입력
+		$('#inputAddr').on('click', ()=>{
+			new daum.Postcode({
+				oncomplete: function(data) {
+					$('[name="addr"]').val(data.address);
+				}
+			}).open();
+		});
 		// 상세설명
 		let detail = $("[name='detail']");
 		let isDetailEmpty = true;
@@ -162,13 +175,8 @@
 				rent[0].value = '';
 			}
 		});
-
 		// 저장
 		$('#addBtn').on('click', ()=>{
-			console.log( fileList.length );
-			for(f of fileList)
-				console.log(f.name);
-
 			if( $("[name='addr']").value == '' ){
 				alert('매물의 주소를 입력하세요.');
 				return;

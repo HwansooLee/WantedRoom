@@ -46,7 +46,7 @@
 	$('#certiNumber').keyup(function(){
 		const mailFlag = $(mailChk);
 		if(code == $('#certiNumber').val()){
-			mailFlag.attr(color,"green");
+			mailFlag.attr("color","green");
 			mailFlag.html('일치합니다.');
 			codeFlag = true;
 		}else{

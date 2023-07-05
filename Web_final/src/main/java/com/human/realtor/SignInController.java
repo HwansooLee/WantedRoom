@@ -40,7 +40,6 @@ public class SignInController {
 	@RequestMapping(value = "/signUp_save", method = RequestMethod.POST)
 	public String signUpSave(Locale locale, Model model,
 			@ModelAttribute("") MemberVO mvo) throws Exception{
-		if(mvo.getRealtorNo().isEmpty()) mvo.setRealtorNo(null);
 		realtorsrv.insertMember(mvo);
 		return "home";
 	}

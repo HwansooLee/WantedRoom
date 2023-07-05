@@ -7,13 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select nickname from member where nickname = #{value}
 	</select>
 	<insert id = "insert" parameterType = "com.human.VO.MemberVO">
-		insert into member values(#{id},#{nickname},#{pwd},
-		<if test = "realtorNo == null">
-			null)
-		</if>
-		<if test = "realtorNo != null">
-			#{realtorNo})
-		</if>
+		insert into member values(#{id},#{nickname},#{pwd},null,#{name})
 	</insert>
 	<select id = "selectOne" parameterType = "String"
 	resultType = "com.human.VO.MemberVO">

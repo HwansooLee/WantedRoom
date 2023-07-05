@@ -58,5 +58,14 @@
 		order by inDate desc) sub) 
 		where rn between #{startNo} and #{endNo}
 	</select>
-
+	
+	<update id="modify" parameterType = "com.human.VO.BoardVO">
+		update board set title = #{title}, addr = #{addr}, content = #{content}
+		where boardNo = #{boardNo}
+	</update>
+	
+	<delete id="delete" parameterType = "int">
+		delete from board where boardNo = #{value}
+	</delete>
+	
 </mapper>

@@ -11,9 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.human.VO.BoardVO;
+import com.human.VO.MemberVO;
 import com.human.VO.PageVO;
+import com.human.VO.ReplyVO;
 import com.human.service.IF_RealtorService;
 
 @Controller
@@ -25,6 +28,7 @@ public class MyPageController {
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(Locale locale, Model model,
 			HttpSession session) {
+		model.addAttribute("realtorNo",(String) session.getAttribute("realtorNo"));
 		return "myPage";
 	}
 	
@@ -42,5 +46,69 @@ public class MyPageController {
 		model.addAttribute("blist",blist);
 		model.addAttribute("pagevo",pvo);
 		return "myBoardList";
+	}
+	
+	@RequestMapping(value = "/myBoardModify", method = RequestMethod.GET)
+	public String myBoardMod(Locale locale, Model model,
+			HttpSession session,
+			@RequestParam("boardNo") Integer boardNo) throws Exception{
+		model.addAttribute("boardvo",realtorsrv.getBoardOne(boardNo));
+		return "modifyBoard";
+	}
+	
+	@RequestMapping(value = "/modifyBoardSave", method = RequestMethod.POST)
+	public String myBoardModSave(Locale locale, Model model,
+			HttpSession session,
+			@ModelAttribute("") BoardVO bvo) throws Exception{
+		realtorsrv.modBoard(bvo);
+		return "redirect:/myBoardList";
+	}
+	
+	@RequestMapping(value = "/myboardDel", method = RequestMethod.GET)
+	public String myBoardDel(Locale locale, Model model,
+			HttpSession session,
+			@RequestParam("boardNo") Integer boardNo) throws Exception{
+		realtorsrv.delBoard(boardNo);
+		return "redirect:/myBoardList";
+	}
+	
+	@RequestMapping(value = "/myReplyList", method = RequestMethod.GET)
+	public String myReplyList(Locale locale, Model model,
+			HttpSession session,
+			@ModelAttribute("") PageVO pvo) throws Exception{
+		String id = (String) session.getAttribute("id");
+		if(pvo.getPage() == null) pvo.setPage(1);
+		pvo.setTotalCount(realtorsrv.myReplyCnt(id)); // id를 통해 totalCnt를 가져와야 한다.
+		pvo.calPage(); // page 계산
+		// 리스트를 만들어 보내주어야 한다
+		pvo.setNowUser(id);
+		List<ReplyVO> rlist = realtorsrv.getMyReplyList(pvo);
+		model.addAttribute("rlist",rlist);
+		model.addAttribute("pagevo",pvo);
+		return "myReplyList";
+	}
+	
+	@RequestMapping(value = "/myReplyDel", method = RequestMethod.GET)
+	public String myReplyDel(Locale locale, Model model,
+			HttpSession session,
+			@RequestParam("replyNo") Integer replyNo) throws Exception{
+		realtorsrv.delReply(replyNo);
+		return "redirect:/myReplyList";
+	}
+	
+	@RequestMapping(value = "/registerRealtorNo", method = RequestMethod.GET)
+	public String regRealtorNo(Locale locale, Model model,
+			HttpSession session) {	
+		return "regRealtorNo";
+	}
+	
+	@RequestMapping(value = "/regRealtorSave", method = RequestMethod.POST)
+	public String regRealtorSave(Locale locale, Model model,
+			HttpSession session,
+			@ModelAttribute("") MemberVO mvo) throws Exception{
+		session.setAttribute("realtorNo", mvo.getRealtorNo()); // 현재 로그인된 상태이므로 바로 세션에 등록
+		mvo.setId((String) session.getAttribute("id"));
+		realtorsrv.regRealtorNo(mvo);
+		return "redirect:/myPage";
 	}
 }

@@ -31,7 +31,8 @@
 			<td>${boardvo.addr}</td>
 			<td>${boardvo.views}</td>
 			<td>${boardvo.inDate}</td>
-			<td><a href = "">mod</a>/<a href = "">del</a></td>
+			<td><a href = "myBoardModify?boardNo=${boardvo.boardNo}">mod</a>/
+			<a href = "myboardDel?boardNo=${boardvo.boardNo}">del</a></td>
 		</tr>
 	</c:forEach>
 </table>

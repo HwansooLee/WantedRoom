@@ -34,4 +34,11 @@ public interface IF_RealtorService {
 	public int getCnt(String sword);
 	public int myBoardCnt(String id) throws Exception;
 	public List<BoardVO> myList(PageVO pvo) throws Exception;
+	public BoardVO getBoardOne(int boardNo) throws Exception;
+	public void modBoard(BoardVO bvo) throws Exception;
+	public void delBoard(int boardNo) throws Exception;
+	public List<ReplyVO> getMyReplyList(PageVO pvo) throws Exception;
+	public int myReplyCnt(String id) throws Exception;
+	public void delReply(int replyNo) throws Exception;
+	public void regRealtorNo(MemberVO mvo) throws Exception;
 }

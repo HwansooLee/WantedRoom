@@ -44,4 +44,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 </if>
 		where replyNo = #{replyNo}
 	</update>
+	
+	<select id="mylist" parameterType = "com.human.VO.PageVO"
+	resultType = "com.human.VO.ReplyVO">
+		select *
+		from (select rownum rn, r.*
+		from (select sub.* 
+		from reply sub
+		where id = #{nowUser}
+		order by inDate desc) r)
+		where rn between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="myReplyCnt" parameterType = "String" resultType = "int">
+		select count(*) from reply where id = #{value}
+	</select>
+	
+	<delete id="delete" parameterType = "int">
+		delete from reply where replyNo = #{value}
+	</delete>
 </mapper>

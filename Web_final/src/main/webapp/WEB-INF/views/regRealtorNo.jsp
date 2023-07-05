@@ -11,12 +11,12 @@
 <body>
 <div>공인중개사 등록번호를 입력해주세요.</div>
 <form action="regRealtorSave" method = "post" id = "frm">
-	<input type = "text" id = "realtorNo" name = "realtorNo" oninput = "hypenRealtorNo(this)" maxlength="16">
+	<input type = "text" id = "realtorNo" name = "realtorNo" maxlength="16">
 	<input type = "button" id = "regBtn" value = "등록">
 </form>
 </body>
 <script type="text/javascript">
-	const hypenRealtorNo = (target) => { // 정규식으로 공인중개사 등록번호 입력제한
+/* 	const hypenRealtorNo = (target) => { // 정규식으로 공인중개사 등록번호 입력제한
 		target.value = target.value
 	  	.replace(/[^0-9]/g, '');
 		if(target.value.length == 12){
@@ -27,7 +27,8 @@
 			target.value = target.value
 	      	.replace(/^(\d{5})(\d{4})(\d{5})$/, `$1-$2-$3`);
 		}
-	}
+	} 
+	*/
 	
 	// 유효성 체크 : api 사용
 	var rno = $('#realtorNo');

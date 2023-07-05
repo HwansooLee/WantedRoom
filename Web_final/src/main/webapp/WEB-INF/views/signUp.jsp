@@ -14,6 +14,7 @@
 <form id = "frm" action = "signUp_save" method = "POST">
 	<div>아이디*</div>
 	<input type = "email" id = "id" name = "id" placeholder="Email" maxlength="30">
+	<input type = "button" value = "인증" id = "certification">
 	<div><font id = "idchk"></font></div>
 	<div>닉네임*</div> <!-- 중복체크 해야 한다 -->
 	<input type = "text"  id = "nickname" name = "nickname" placeholder="닉네임 입력" maxlength="12">
@@ -22,7 +23,7 @@
 	<input type = "password" id = "pwd" name = "pwd" placeholder="특문,영문대소문자 포함 8자리이상" maxlength="20">
 	<div><font id = passChk></font></div>
 	<div>공인중개사 등록번호</div>
-	<input type = "text" id = "realtorNo" name = "realtorNo" oninput = "hypenRealtorNo(this)" maxlength="16">
+	<input type = "text" id = "realtorNo" name = "realtorNo" maxlength="16">
 	<div>*은 필수 입력 사항 입니다.</div>
 	<input type = "button" id = "submitBtn" value = "회원가입">
 </form>
@@ -33,7 +34,7 @@
 	var nicknameFlag = false;
 	var pwdFlag = false;
 	
-	const hypenRealtorNo = (target) => { // 정규식으로 공인중개사 등록번호 입력제한
+/* 	const hypenRealtorNo = (target) => { // 정규식으로 공인중개사 등록번호 입력제한
 		target.value = target.value
       	.replace(/[^0-9]/g, '');
 		if(target.value.length == 12){
@@ -45,7 +46,7 @@
 	      	.replace(/^(\d{5})(\d{4})(\d{5})$/, `$1-$2-$3`);
 		}
 	}
-	
+	 */
 	$('#submitBtn').on('click', (e) => { // 회원가입 버튼 눌렀을 경우
 		if(idFlag && nicknameFlag && pwdFlag){
 			$('#frm').submit(); // 전송

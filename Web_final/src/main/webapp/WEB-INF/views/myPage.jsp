@@ -33,7 +33,7 @@
 <a href = "myReplyList">[댓글관리]</a>
 <!-- 등록번호인증된 회원만 세션으로 걸러서 나오게 한다 -->
 <c:if test = "${realtorNo ne null}">
-	<a href = "">[매물 게시글 관리]</a>
+	<a href = "myItemList">[매물 게시글 관리]</a>
 </c:if>
 </body>
 </html>

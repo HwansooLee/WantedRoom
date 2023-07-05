@@ -47,8 +47,11 @@ alter table itemTags modify elevator not null;
 alter table itemTags modify buildingType not null;
 
 create table store(
-addr varchar2(100) primary key,
-name varchar2(45) not null);
+    addr varchar2(100) primary key,
+    name varchar2(45) not null,
+    coordX number not null,
+    coordY number not null
+);
 
 create table board(
 boardNo number primary key,

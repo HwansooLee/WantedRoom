@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,12 +15,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.human.VO.MemberVO;
 import com.human.service.IF_RealtorService;
+import com.human.service.MailSendService;
 
 @Controller
 public class SignInController {
 	
 	@Inject
 	IF_RealtorService realtorsrv;
+	
+	@Inject
+	MailSendService mailsrv;
 	
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
 	public String signUp(Locale locale, Model model) { // 회원가입 폼으로 이동
@@ -69,5 +72,13 @@ public class SignInController {
 			HttpSession session){
 		session.invalidate();
 		return "home";
+	}
+	
+	@RequestMapping(value = "/mailChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String mailChk(@RequestBody MemberVO mvo) throws Exception{
+		// 여기서는 메일을확인하고 인증번호를 생성, 인증번호를 메일로 전송후 인증번호를 응답해준다.
+		System.out.println(mvo.getId());
+		return mailsrv.joinEmail(mvo.getId());
 	}
 }

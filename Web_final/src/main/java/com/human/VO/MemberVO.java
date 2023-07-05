@@ -5,8 +5,17 @@ public class MemberVO {
     private String nickname;
     private String pwd;
     private String realtorNo;
+    private String name;
 
-    public String getId() {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getId() {
         return id;
     }
 

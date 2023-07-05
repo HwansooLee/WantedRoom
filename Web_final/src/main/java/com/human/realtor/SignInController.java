@@ -21,10 +21,10 @@ import com.human.service.MailSendService;
 public class SignInController {
 	
 	@Inject
-	IF_RealtorService realtorsrv;
+	private IF_RealtorService realtorsrv;
 	
 	@Inject
-	MailSendService mailsrv;
+	private MailSendService mailsrv;
 	
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
 	public String signUp(Locale locale, Model model) { // 회원가입 폼으로 이동

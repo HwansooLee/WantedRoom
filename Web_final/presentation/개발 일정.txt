@@ -86,3 +86,8 @@ http://www.nsdi.go.kr/lxportal/index.html?menuno=2787
 회원가입시 이름도 같이받고
 해당 이름과 입력받은 중개번호를 api를 통해 조회한뒤
 처리하면될듯
+
+이메일인증 기능 완료
+
+부동산중개업자정보조회 api 
+key : f8abae3d8b09d06f647fe2

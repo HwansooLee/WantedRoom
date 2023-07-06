@@ -69,6 +69,16 @@
 			navigator.geolocation.getCurrentPosition(success);
 		}
 	}
+	
+	const res = () => {
+		fetch('http://geolocation-db.com/json/')
+		.then((res) => res.json())
+		.then(res =>{
+			console.log(res);
+		});
+	};
+	
+	res();
 
 </script>
 </html>

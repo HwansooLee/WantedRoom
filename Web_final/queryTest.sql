@@ -122,3 +122,5 @@ select * from item where id='bbb@bbb.com';
 
 select count(*) from store;
 commit;
+
+insert into member values ('aaa@aaa.com', '김승조', '1234', null, '김승조');

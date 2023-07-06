@@ -193,6 +193,12 @@
 		    <version>5.3.9</version>
 		</dependency>
 		<!-- email인증 라이브러리 설정 끝 -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>5.0.7.RELEASE</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>

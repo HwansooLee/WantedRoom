@@ -45,32 +45,30 @@
 		getLocation();
 	});
 	
-		$('#addItem').on('click', () => {
-			var authenticated = '${authenticated}';
-			console.log(authenticated);
-            if(authenticated == 'false'){
-            	alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
-            }else{
-            	$('#addItem').attr('href','addItemForm');
-            }
-		});
-	    
-	    function success({ coords, timestamps}){
-	    	console.log(3);
-	    	const latitude = coords.latitude;
-	    	const longitude = coords.longitude;
-	    	console.log('위도 : ' + latitude + ' 경도 : ' + longitude);
-	    }
-	    
-	    function getLocation(){
-	    	console.log(2);
-	    	if(navigator.geolocation){
-	    		console.log(4);
-	    		navigator.geolocation.getCurrentPosition(success);
-	    	}
-	    }
-	    
-	    
+	$('#addItem').on('click', () => {
+		var authenticated = '${authenticated}';
+		console.log(authenticated);
+		if(authenticated == 'false'){
+			alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
+		}else{
+			$('#addItem').attr('href','addItemForm');
+		}
+	});
+	
+	function success({ coords, timestamps}){
+		console.log(3);
+		const latitude = coords.latitude;
+		const longitude = coords.longitude;
+		console.log('위도 : ' + latitude + ' 경도 : ' + longitude);
+	}
+	
+	function getLocation(){
+		console.log(2);
+		if(navigator.geolocation){
+			console.log(4);
+			navigator.geolocation.getCurrentPosition(success);
+		}
+	}
 
 </script>
 </html>

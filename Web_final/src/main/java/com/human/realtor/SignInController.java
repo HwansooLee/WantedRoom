@@ -64,7 +64,7 @@ public class SignInController {
 		session.setAttribute("nickname", mvo.getNickname());
 		session.setAttribute("realtorNo", mvo.getRealtorNo());
 		session.setAttribute("name", mvo.getName());
-		return "home";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/signOut", method = RequestMethod.GET)

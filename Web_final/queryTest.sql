@@ -119,3 +119,6 @@ select count(*) from item where addr like '';
 
 select * from item where id='dde@naver.com';
 select * from item where id='bbb@bbb.com';
+
+select count(*) from store;
+commit;

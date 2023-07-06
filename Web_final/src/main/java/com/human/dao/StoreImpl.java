@@ -11,16 +11,13 @@ import com.human.VO.StoreVO;
 
 @Repository
 public class StoreImpl implements IF_StoreDAO{
-	
-	private static String mapperQuery = "com.human.dao.IF_StoreDAO";
-	
+	private static final String mapperQuery = "com.human.dao.IF_StoreDAO";
 	@Inject
 	private SqlSession sqlSession;
 
 	@Override
 	public void insertStore(StoreVO svo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert(mapperQuery+".insert", svo);
 	}
 
 	@Override

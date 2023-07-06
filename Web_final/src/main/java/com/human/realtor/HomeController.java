@@ -1,13 +1,11 @@
 package com.human.realtor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import com.human.util.CSVToOracle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -31,7 +29,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model) throws Exception{
 		return "home";
 	}
 }

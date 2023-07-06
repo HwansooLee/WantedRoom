@@ -50,7 +50,7 @@
 			mailFlag.html('일치합니다.');
 			codeFlag = true;
 		}else{
-			mailFlag.attr(color,"red");
+			mailFlag.attr("color","red");
 			mailFlag.html('불일치합니다.');
 			codeFlag = false;
 		}

@@ -23,7 +23,7 @@ import com.human.service.IF_RealtorService;
 public class MyPageController {
 	
 	@Inject
-	IF_RealtorService realtorsrv;
+	private IF_RealtorService realtorsrv;
 	
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(Locale locale, Model model,
@@ -111,7 +111,8 @@ public class MyPageController {
 	
 	@RequestMapping(value = "/registerRealtorNo", method = RequestMethod.GET)
 	public String regRealtorNo(Locale locale, Model model,
-			HttpSession session) {	
+			HttpSession session) {
+		model.addAttribute("userName",(String)session.getAttribute("name"));
 		return "regRealtorNo";
 	}
 	

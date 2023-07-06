@@ -63,6 +63,7 @@ public class SignInController {
 		session.setAttribute("id", mvo.getId());
 		session.setAttribute("nickname", mvo.getNickname());
 		session.setAttribute("realtorNo", mvo.getRealtorNo());
+		session.setAttribute("name", mvo.getName());
 		return "home";
 	}
 	

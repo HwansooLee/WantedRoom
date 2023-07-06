@@ -11,7 +11,7 @@
 <body>
 <div>공인중개사 등록번호를 입력해주세요.</div>
 <form action="regRealtorSave" method = "post" id = "frm">
-	<input type = "text" id = "realtorNo" name = "realtorNo" maxlength="16">
+	<input type = "text" id = "realtorNo" name = "realtorNo" placeholder="-도 같이 입력해주세요" maxlength="16">
 	<input type = "button" id = "regBtn" value = "등록">
 </form>
 </body>
@@ -31,16 +31,34 @@
 	*/
 	
 	// 유효성 체크 : api 사용
+	
+	const userName = '${userName}';
+	var xhr = new XMLHttpRequest();
+	var HttpUrl = "http://openapi.nsdi.go.kr/nsdi/EstateBrkpgService/attr/getEBBrokerInfo"; /*URL*/
+	var parameter = '?' + encodeURIComponent("authkey") +"="+encodeURIComponent("f8abae3d8b09d06f647fe2"); /*authkey Key*/
+	var data = '';
 	var rno = $('#realtorNo');
 	$('#regBtn').on('click', () => {
 		// 이곳에서 유효성체크를 한다.
-		// 현재는 api를 사용하지 않으므로 길이체크만한다 12 또는 16
-		if(rno.val().length == 13 || rno.val().length == 16){
-			$('#frm').submit();
-		}else{
-			alert('등록번호를 확인해주세요.');
-		}
+		parameter += "&" + encodeURIComponent("brkrNm") + "=" + encodeURIComponent(userName); /* 중개업자명 */  
+    	parameter += "&" + encodeURIComponent("jurirno") + "=" + encodeURIComponent(rno.val()); /* 법인등록번호 */  
+    	parameter += "&" + encodeURIComponent("format") + "=" + encodeURIComponent("json"); /* 응답결과 형식(xml 또는 json) */
+    	xhr.open('GET', HttpUrl + parameter);
+    	xhr.send('');
+    	xhr.onreadystatechange = function () {     
+            if (this.readyState == 4) {
+            	//console.log(' Body: '+this.responseText); 받아오는 데이터 확인
+            	//console.log(typeof(this.response)) 타입 확인
+            	data = this.response;
+            	data = JSON.parse(data); // json으로 형변환
+                //console.log(data.EBBrokers.totalCount);
+                if(data.EBBrokers.totalCount == '1'){ // 존재하는 데이터라면 전송
+                	$('#frm').submit(); 
+                }else{ // 존재하는 데이터가 아닌경우
+                	alert('유효한 등록번호가 아닙니다');
+                }
+            }  
+        };
 	});
-	
 </script>
 </html>

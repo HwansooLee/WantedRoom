@@ -29,7 +29,13 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) throws Exception{
+	public String home(Locale locale, Model model,
+			HttpSession session) {
+		if( (String)session.getAttribute("realtorNo") == null ){
+            model.addAttribute("authenticated", false);
+        }else {
+        	model.addAttribute("authenticated", true);
+        }
 		return "home";
 	}
 }

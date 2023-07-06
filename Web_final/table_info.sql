@@ -148,3 +148,6 @@ delete from member;
 delete from board;
 delete from reply;
 delete from likes;
+
+-- 테스트용 계정 1
+insert into member values ('kkk@kkkk','kkk','Kkk1234!',null,'kkk');

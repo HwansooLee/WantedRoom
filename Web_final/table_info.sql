@@ -2,10 +2,13 @@ create user final identified  by 1111;
 grant dba to final;
 
 create table member(
-id varchar2(30)  primary key on delete cascade,
-nickname varchar2(12) not null unique,
-pwd varchar2(20) not null,
-realtorNo varchar2(16) unique);
+    id varchar2(30) primary key,
+    nickname varchar2(12) not null unique,
+    pwd varchar2(20) not null,
+    realtorNo varchar2(16) unique
+);
+
+insert into member values ('cc@ccc.com', 'ccc', 'hH1234!!', null, '김대업');
 
 insert into member values ('testUser1', 'testUser1', '1234', '12345-1234-12345');
 

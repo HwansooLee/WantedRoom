@@ -132,3 +132,16 @@ select * from(
             where rr.id = m.id ) rrr left join likes l on rrr.replyNo=l.replyNo
         order by rrr.replyNo desc)
     where rn<=1;
+
+
+-- 이메일 인증과 공인중개사 등록번호의 변별력을 위해
+-- member table에 이름항목 추가
+
+alter table member add name varchar2(20);
+alter table member modify name not null;
+
+-- 항목 추가하려면 기존 테이블 정보 전부 지워주어야 한다.
+delete from member;
+delete from board;
+delete from reply;
+delete from likes;

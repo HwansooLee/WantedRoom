@@ -40,11 +40,6 @@
 </body>
 <script>
 	
-	$(document).ready(() => {
-		console.log(1);
-		getLocation();
-	});
-	
 	$('#addItem').on('click', () => {
 		var authenticated = '${authenticated}';
 		console.log(authenticated);
@@ -55,30 +50,38 @@
 		}
 	});
 	
-	function success({ coords, timestamps}){
-		console.log(3);
-		const latitude = coords.latitude;
-		const longitude = coords.longitude;
-		console.log('위도 : ' + latitude + ' 경도 : ' + longitude);
-	}
-	
-	function getLocation(){
-		console.log(2);
-		if(navigator.geolocation){
-			console.log(4);
-			navigator.geolocation.getCurrentPosition(success);
-		}
-	}
-	
-	const res = () => {
-		fetch('http://geolocation-db.com/json/')
+	const res = () => { // IP받아오는 함수
+		return fetch('http://geolocation-db.com/json/')
 		.then((res) => res.json())
-		.then(res =>{
-			console.log(res);
-		});
+		.then(res => res["IPv4"]);
 	};
 	
-	res();
+	const userGeoLocation = () => {
+		return getLocation();
+	}
+	
+	const getLocation = async () => { // 좌표 받아오는 함수
+		const nowIp = await res();
+		console.log(nowIp);
+		const geoData = await fetch('http://api.ipstack.com/' + nowIp
+				+ '?access_key=1d043620c06ab6fd6949c2058e955df4&output=json')
+			.then((r) => r.json())
+			.then((r) => {
+				console.log(r);
+				return r;
+			});
+		const latitude = geoData.latitude;
+		const longitude = geoData.longitude;
+		console.log(latitude);
+		console.log(longitude);
+		return {
+			lat : latitude,
+			lon : longitude
+		};
+	}
+	// 위치정보 동의를 사용자가 선택한 경우 함수 실행
+	// 유료라 무료버젼키는 한달에 100번 밖에 사용 못함 아껴써야 함..
+	// const temp = userGeoLocation();
 
 </script>
 </html>

@@ -124,3 +124,15 @@ select count(*) from store;
 commit;
 
 insert into member values ('aaa@aaa.com', '김승조', '1234', null, '김승조');
+
+select * from STORE where COORDX >= 36.5 and COORDX <= 37.0;
+select * from Store;
+
+select * from store where lat=null or lon=null;
+update store set lat=null, lon=null where addr='대구광역시 동구 봉무동 1545번지';
+
+select * from store where lat>=37.6 and lat<=37.7 and lon>=127.0 and lon<=127.1;
+select * from store where lat=37.39705795292739 and lon=127.1131606157361;
+
+select * from store where lat>=37.39345913981367 and lat<=37.39705795292739
+    and lon>=127.10750873998325 and lon<=127.1131606157361;

@@ -55,6 +55,8 @@ create table store(
     coordX number not null,
     coordY number not null
 );
+alter table store add lat number;
+alter table store add lon number;
 
 create table board(
 boardNo number primary key,

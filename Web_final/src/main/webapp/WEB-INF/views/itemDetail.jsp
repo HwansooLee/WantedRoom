@@ -66,15 +66,19 @@
 		var map = new kakao.maps.Map(container, options);
         var geocoder = new kakao.maps.services.Geocoder();
         let addr = $('[name="addr"]')[0].value;
+        let currentCoord;
         geocoder.addressSearch(addr, function(result, status) {
         // 정상적으로 검색이 완료됐으면 
         if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
             // 결과값으로 받은 위치를 마커로 표시합니다
+            currentCoord = coords;
             var marker = new kakao.maps.Marker({
                 map: map,
-                position: coords
+                position:
+                    coords, coords
             });
+            console.log(coords);
             // 인포윈도우로 장소에 대한 설명을 표시합니다
             var infowindow = new kakao.maps.InfoWindow({
                 content: '<div style="width:150px;text-align:center;padding:6px 0;">매물위치</div>'
@@ -82,8 +86,62 @@
             infowindow.open(map, marker);
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
             map.setCenter(coords);
+            getMartInfo(coords);
         } 
-        });  
+        });
+        $("#map").on('mousewheel scroll', ()=>{ 
+            console.log('center');
+            getMartInfo(map.getCenter());
+        });
+
+        // 근처 대형마트 정보 가져오기
+        // const RADIUS_FROM_HOME = 2; // km
+        // const LAT_TO_DIST = 110.574; // km
+        // let latitude = 0.0;
+        // let longitude = 111.320 * Math.cos( latitude / 180.0 * Math.PI );
+        function getMartInfo(coords){
+            console.log('현재좌표' ,coords);
+            let bounds = map.getBounds();
+            console.log('경계좌표들', bounds);
+            console.log('경계좌표들', bounds.toString());
+            let data = {
+                upperLat : bounds.qa,
+                upperLon : bounds.ha,
+                lowerLat : bounds.pa,
+                lowerLon : bounds.oa
+		    };
+            console.log( data );
+            $.ajax({
+                url: 'getMartInfo',
+                type: 'POST',
+                data: data,
+                success: (martInfo)=>{
+                    displayMartInfo(martInfo);
+                }
+            });            
+        }
+        // class Marker{
+        //     constructor(title, latlng){
+        //         this.title = title;
+        //         this.latlng = latlng;
+        //     }
+        // };
+        const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png';
+        const imageSize = new kakao.maps.Size(24, 35);
+        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+        function displayMartInfo(martInfo){
+            for(mart of martInfo){
+                console.log( mart.name );
+                console.log( mart.addr );
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: new kakao.maps.LatLng(mart.lat, mart.lon), // 마커를 표시할 위치
+                    title : mart.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    image : markerImage // 마커 이미지 
+                });
+            }
+        }
+
         $('#modifyItemBtn').on('click', (e)=>{
             let itemNoVal = $(e.target).next().val();
             $.ajax({

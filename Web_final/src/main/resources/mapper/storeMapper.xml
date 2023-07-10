@@ -6,4 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insert" parameterType="com.human.VO.StoreVO">
         insert into store values (#{addr}, #{name}, #{coordX}, #{coordY} )
     </insert>
+    <select id="selectNearbyStore" parameterType="com.human.util.BoundCoords" resultType="com.human.VO.StoreVO">
+        select * from store where
+        <![CDATA[ lat>=#{lowerLat} and lat<=#{upperLat} and lon>=#{lowerLon} and lon<=#{upperLon} ]]>
+    </select>
 </mapper>

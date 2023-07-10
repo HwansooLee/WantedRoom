@@ -58,6 +58,11 @@
 	</footer>
 </body>
 	<script>
+        $(document).ready(()=>{
+            
+        });
+
+        
         var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -128,11 +133,17 @@
         // };
         const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png';
         const imageSize = new kakao.maps.Size(24, 35);
-        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+        let imageOption = {
+            spriteSize : new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
+            spriteOrigin : new kakao.maps.Point(46, (order*36)), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+            offset: new kakao.maps.Point(11, 28) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        }
+        let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
         function displayMartInfo(martInfo){
             for(mart of martInfo){
                 console.log( mart.name );
                 console.log( mart.addr );
+                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
                 var marker = new kakao.maps.Marker({
                     map: map, // 마커를 표시할 지도
                     position: new kakao.maps.LatLng(mart.lat, mart.lon), // 마커를 표시할 위치

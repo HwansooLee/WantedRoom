@@ -8,22 +8,33 @@
 <title>로그인 폼</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href = "resources/css/signIn.css">
 <body>
-	<form action="signInChk" method = "post" id = "frm">
-		<div><font>아이디</font></div>
-		<input type = "email" name = "id" id = "id">
-		<div><font id = "idchk"></font></div>
-		<div><font>비밀번호</font></div>
-		<input type = "password" name = "pwd">
-		<div style = "color:red">${wrongInfo}</div>
-		<br>
-		<div>
-		<input type = "checkbox" id = "keepSignIn">
-		<font color = 'blue' size="1">로그인 상태 유지</font>
-		</div>
-		<input type = "button" value = "Login" id = "submitBtn">
-	</form>
-	<a href = "signUp">[회원가입]</a>
+	<div id="login-button">
+        <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png">
+    </div>
+    <div id="container">
+        <h1>Log In</h1>
+        <span class="close-btn">
+            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+        </span>
+
+        <form action="signInChk" method="post" id="frm">
+            <input type="email" name="id" id="id" placeholder="e-mail">
+            <div style="margin: 30px">
+                <font id="idchk"></font>
+            </div>
+            <input type="password" name="pwd" placeholder="password">
+            <div style="margin: 30px; color : red">${wrongInfo}</div>
+            <a id="submitBtn">Login</a>
+            <div id="remember-container">
+                <input type="checkbox" id="keepSignIn" class="checkbox" checked="checked">
+                <span id="remember">Remember me</span>
+                <span id="forgotten">회원가입</span>
+            </div>
+
+        </form>
+    </div>
 </body>
 <script type="text/javascript">
 	var idFlag = false;
@@ -42,11 +53,31 @@
 	});
 	
 	$('#submitBtn').on('click', () => { // 전송
+		console.log(1);
 		if(idFlag){
 			$('#frm').submit();
 		}else{
 			alert('아이디를 확인해주세요');
 		}
 	});
+	
+	
+	$('#login-button').click(function () {
+        $('#login-button').fadeOut("slow", function () {
+            $("#container").fadeIn();
+        });
+    });
+
+    /* signUp */
+    const url = '/realtor/signUp';
+    $('#forgotten').click(function () {
+        location.href = url;
+    });
+    
+    // back to home
+    $('.close-btn').click(() => {
+        console.log(1);
+        location.href = '/realtor';
+    });
 </script>
 </html>

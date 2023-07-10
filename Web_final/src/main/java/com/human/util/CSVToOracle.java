@@ -63,8 +63,8 @@ public class CSVToOracle {
                 psmt = conn.prepareStatement(sql);
                 psmt.setString(1, svo.getAddr());
                 psmt.setString(2, svo.getName());
-                psmt.setFloat(3, svo.getCoordX());
-                psmt.setFloat(4, svo.getCoordY());
+                psmt.setDouble(3, svo.getCoordX());
+                psmt.setDouble(4, svo.getCoordY());
                 psmt.execute();
             }catch (Exception e){
                 e.printStackTrace();
@@ -130,5 +130,29 @@ public class CSVToOracle {
                 insert(svo);
             }
         }
+    }
+    public void parseAndConvert(){
+        parsedResult = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+            String line;
+            while( (line = br.readLine()) != null ){
+                String[] values = line.split("\t");
+                parsedResult.add(Arrays.asList(values));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+//        for(List<String> store : parsedResult.subList(1, parsedResult.size()) ){
+//            List<String> storeInfo = new ArrayList<>();
+//            for(int idx:indices)
+//                if( store.size() > idx )
+//                    storeInfo.add( store.get(idx) );
+//            if( !storeInfo.get(0).equals("") && !storeInfo.get(1).equals("") ){
+//                storeInfo.set(0, storeInfo.get(0).replace("\"", ""));
+//                storeInfo.set(1, storeInfo.get(1).replace("\"", ""));
+//                StoreVO svo = new StoreVO( storeInfo.get(0), storeInfo.get(1),
+//                        storeInfo.get(2), storeInfo.get(3));
+//            }
+//        }
     }
 }

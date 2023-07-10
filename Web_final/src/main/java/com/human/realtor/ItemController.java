@@ -2,7 +2,10 @@ package com.human.realtor;
 
 import com.human.VO.ItemVO;
 import com.human.VO.PageVO;
+import com.human.VO.StoreVO;
+import com.human.dao.IF_StoreDAO;
 import com.human.service.IF_RealtorService;
+import com.human.util.BoundCoords;
 import com.human.util.FileDataUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +21,11 @@ import java.util.Locale;
 @Controller
 public class ItemController {
     @Inject
-    IF_RealtorService realtorsrv;
+    private IF_RealtorService realtorsrv;
     @Inject
     private FileDataUtil fileDataUtil;
+    @Inject
+    private IF_StoreDAO storeDao;
 
     @RequestMapping(value = "/addItemForm", method = RequestMethod.GET)
     public String showAddItemForm(Locale locale, Model model, HttpSession session) {
@@ -112,5 +117,39 @@ public class ItemController {
             throws Exception{
         fileDataUtil.deleteFile(attachName);
         realtorsrv.deleteAttach(attachName);
+    }
+    @RequestMapping(value = "/getMartInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public List<StoreVO> getMartInfo(Locale locale, Model model, HttpSession session,
+                                     BoundCoords bounds)
+            throws Exception{
+        System.out.println("getMartInfo");
+        if( bounds != null ){
+            System.out.println("----- border --------");
+            bounds.setUpperLat(bounds.getUpperLat() + 0.005);
+            bounds.setLowerLat(bounds.getLowerLat() - 0.005);
+            bounds.setUpperLon(bounds.getUpperLon() + 0.005);
+            bounds.setLowerLon(bounds.getLowerLon() - 0.005);
+            System.out.println(bounds.getUpperLat());
+            System.out.println(bounds.getUpperLon());
+            System.out.println(bounds.getLowerLat());
+            System.out.println(bounds.getLowerLon());
+            if( bounds.getUpperLat() >= bounds.getLowerLat() ||
+                bounds.getUpperLon() >= bounds.getLowerLon() )
+                System.out.println("!");
+
+
+        }
+        System.out.println("before select All");
+
+
+        List<StoreVO> storeList = storeDao.selectStoreAll(bounds);
+        System.out.println("-----store lists ----------");
+        for(StoreVO s:storeList){
+            System.out.println(s.getName());
+            System.out.println(s.getAddr());
+        }
+
+        return storeDao.selectStoreAll(bounds);
     }
 }

@@ -3,8 +3,10 @@ package com.human.VO;
 public class StoreVO {
     private String addr;
     private String name;
-    private float coordX;
-    private float coordY;
+    private double coordX;
+    private double coordY;
+    private double lat;
+    private double lon;
 
     public StoreVO(){
 
@@ -33,7 +35,7 @@ public class StoreVO {
         this.name = name;
     }
 
-    public float getCoordX() {
+    public double getCoordX() {
         return coordX;
     }
 
@@ -41,11 +43,27 @@ public class StoreVO {
         this.coordX = coordX;
     }
 
-    public float getCoordY() {
+    public double getCoordY() {
         return coordY;
     }
 
     public void setCoordY(float coordY) {
         this.coordY = coordY;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
 }

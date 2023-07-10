@@ -5,34 +5,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 폼</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href = "resources/css/signUp.css">
 <body>
-<h3>회원가입</h3>
-<hr>
-<form id = "frm" action = "signUp_save" method = "POST">
-	<div>아이디*</div>
-	<div>
-		<input type = "email" id = "id" name = "id" placeholder="Email" maxlength="30">
-		<input type = "button" value = "본인인증" id = "certification">
-		<div><font id = "idchk"></font></div>
-		<div>
-			<input type = "text" id = "certiNumber" placeholder = "인증번호 6자리를 입력해주세요." disabled = "disabled" maxlength = "6">
-			<font id = "mailChk"></font>
-		</div>
-	</div>
-	<div>이름*</div> <!-- 중복체크 해야 한다 -->
-	<input type = "text"  id = "name" name = "name" placeholder="이름입력" maxlength="20">
-	<div>닉네임*</div> <!-- 중복체크 해야 한다 -->
-	<input type = "text"  id = "nickname" name = "nickname" placeholder="닉네임 입력" maxlength="12">
-	<div><font id = "nicknameChk"></font></div>
-	<div>비밀번호*</div>
-	<input type = "password" id = "pwd" name = "pwd" placeholder="특문,영문대소문자 포함 8자리이상" maxlength="20">
-	<div><font id = passChk></font></div>
-	<div>*은 필수 입력 사항 입니다.</div>
-	<input type = "button" id = "submitBtn" value = "회원가입">
-</form>
+	<div id="container">
+        <h1>회원가입</h1>
+        <span class="close-btn">
+            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+        </span>
+
+        <form id = "frm" action = "signUp_save" method = "POST">
+            <div class="textFix">아이디*</div>
+            <div>
+                <input type = "email" id = "id" name = "id" placeholder="Email" maxlength="30">
+                <input type = "button" value = "본인인증" id = "certification">
+                <div><font id = "idchk" style="margin: 10px; margin-left: 30px;"></font></div>
+                <div>
+                    <input type = "text" id = "certiNumber" placeholder = "인증번호 6자리를 입력해주세요." disabled = "disabled" maxlength = "6">
+                    <font id = "mailChk" style="margin: 10px; margin-left: 30px;"></font>
+                </div>
+            </div>
+            <div class="textFix">이름*</div> <!-- 중복체크 해야 한다 -->
+            <input type = "text"  id = "name" name = "name" placeholder="이름입력" maxlength="20">
+            <div class="textFix">닉네임*</div> <!-- 중복체크 해야 한다 -->
+            <input type = "text"  id = "nickname" name = "nickname" placeholder="닉네임 입력" maxlength="12">
+            <div><font id = "nicknameChk" style="margin: 10px; margin-left: 30px;"></font></div>
+            <div class="textFix">비밀번호*</div>
+            <input type = "password" id = "pwd" name = "pwd" placeholder="특문,영문대소문자 포함 8자리이상" maxlength="20">
+            <div><font id = passChk style="margin: 10px; margin-left: 30px;"></font></div>
+            <div class="textFix">*은 필수 입력 사항 입니다.</div>
+            <input type = "button" id = "submitBtn" value = "회원가입">
+        </form>
+    </div>
 </body>
 <script type="text/javascript">
 	
@@ -162,6 +168,11 @@
 			pwdFlag = false;
 		}
 	});
+	
+	 // back to home
+    $('.close-btn').click(() => {
+        location.href = '/realtor';
+    });
 
 </script>
 </html>

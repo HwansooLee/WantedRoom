@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.human.util.BoundCoords;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -21,9 +22,9 @@ public class StoreImpl implements IF_StoreDAO{
 	}
 
 	@Override
-	public List<StoreVO> selectStoreAll(String searchAddr) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<StoreVO> selectStoreAll(BoundCoords bound) throws Exception {
+		System.out.println("doing select");
+		return sqlSession.selectList(mapperQuery+".selectNearbyStore", bound);
 	}
 
 }

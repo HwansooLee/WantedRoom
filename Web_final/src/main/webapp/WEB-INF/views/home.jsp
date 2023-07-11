@@ -96,8 +96,10 @@
         </div>
     </div>
 	<br>
-	<!-- 매물 리스트 -->
-	<div class = "myMap" id="map" style="width:500px;height:400px;"></div>
+	<!-- 지도 -->
+	<section>
+		<div class = "myMap" id="map" style="width:500px;height:400px;margin: 0 auto;"></div>
+	</section>
 
 	<footer>
 		<!-- 개발자 정보 -->

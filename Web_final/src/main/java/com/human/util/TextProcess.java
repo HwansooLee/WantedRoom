@@ -1,6 +1,5 @@
 package com.human.util;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.http.*;
@@ -12,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class GetEmotionFromText {
+public class TextProcess {
     private final RestTemplate rest = new RestTemplate();
     private final HttpHeaders headers = new HttpHeaders();
     private final String id = "u3z9ta6u8w";
@@ -27,7 +26,7 @@ public class GetEmotionFromText {
     // variable for query
     private PreparedStatement psmt = null;
 
-    public GetEmotionFromText(){
+    public TextProcess(){
         init();
     }
 

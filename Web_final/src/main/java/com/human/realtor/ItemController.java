@@ -121,35 +121,7 @@ public class ItemController {
     @RequestMapping(value = "/getMartInfo", method = RequestMethod.POST)
     @ResponseBody
     public List<StoreVO> getMartInfo(Locale locale, Model model, HttpSession session,
-                                     BoundCoords bounds)
-            throws Exception{
-        System.out.println("getMartInfo");
-        if( bounds != null ){
-            System.out.println("----- border --------");
-            bounds.setUpperLat(bounds.getUpperLat() + 0.005);
-            bounds.setLowerLat(bounds.getLowerLat() - 0.005);
-            bounds.setUpperLon(bounds.getUpperLon() + 0.005);
-            bounds.setLowerLon(bounds.getLowerLon() - 0.005);
-            System.out.println(bounds.getUpperLat());
-            System.out.println(bounds.getUpperLon());
-            System.out.println(bounds.getLowerLat());
-            System.out.println(bounds.getLowerLon());
-            if( bounds.getUpperLat() >= bounds.getLowerLat() ||
-                bounds.getUpperLon() >= bounds.getLowerLon() )
-                System.out.println("!");
-
-
-        }
-        System.out.println("before select All");
-
-
-        List<StoreVO> storeList = storeDao.selectStoreAll(bounds);
-        System.out.println("-----store lists ----------");
-        for(StoreVO s:storeList){
-            System.out.println(s.getName());
-            System.out.println(s.getAddr());
-        }
-
+                                     BoundCoords bounds) throws Exception{
         return storeDao.selectStoreAll(bounds);
     }
 }

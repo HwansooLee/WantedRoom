@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import com.human.VO.*;
 import com.human.dao.*;
 import com.human.util.FileDataUtil;
+import com.human.util.TextProcess;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,6 +44,8 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	private IF_ItemAttachDAO itemAttachDao;
 	@Inject
 	private IF_ItemTagsDAO itemTagsDao;
+	@Inject
+	private TextProcess textProcess;
 
     @Override
     public void addItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception{
@@ -56,6 +59,7 @@ public class RealtorServiceImpl implements IF_RealtorService{
 
 	@Override
 	public void addBoard(BoardVO bvo) throws Exception {
+		bvo.setSentiment( textProcess.getEmotion(bvo.getContent()) );
 		boarddao.insert(bvo);
 	}
 
@@ -186,6 +190,7 @@ public class RealtorServiceImpl implements IF_RealtorService{
 
 	@Override
 	public void modBoard(BoardVO bvo) throws Exception {
+		bvo.setSentiment( textProcess.getEmotion( bvo.getContent() ) );
 		boarddao.modify(bvo);
 	}
 

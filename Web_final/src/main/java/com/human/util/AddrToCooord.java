@@ -63,32 +63,6 @@ public class AddrToCooord {
     }
 
     public double[] convert(double x, double y, String inputCoord, String outputCoord) throws Exception{
-        // get with address
-//        String lat = "";
-//        String lon = "";
-//        String addr = "대구광역시 북구 칠성동1가 276-108";
-//        RestTemplate rest = new RestTemplate();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        String appkey = "KakaoAK 794cf8d819dc6b10375238d6419e6a6b";
-//        headers.set("Authorization", appkey);
-//        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-//        String encode = URLEncoder.encode(addr, "UTF-8");
-//        String rawURI = "https://dapi.kakao.com/v2/local/search/address.json?query=" + encode;
-//        URI uri = new URI(rawURI);
-//        ResponseEntity<String> res = rest.exchange(uri, HttpMethod.GET, entity, String.class);
-//        JSONParser jsonParser = new JSONParser();
-//        JSONObject body = (JSONObject) jsonParser.parse(res.getBody());
-//        JSONArray docu = (JSONArray) body.get("documents");
-//        if( docu.size() != 0 ){
-//            JSONObject retAddr = (JSONObject) docu.get(0);
-//            if( retAddr.size() != 0 ){
-//                JSONObject retAddr1 = (JSONObject) retAddr.get("address");
-//                System.out.println(retAddr1.get("x"));
-//                System.out.println(retAddr1.get("y"));
-//            }
-//        }
-        // convert TM coord to WGS84(lan, lon)
         String query = "x=" + x + "&y=" + y + "&input_coord=" + inputCoord + "&output_coord=" + outputCoord;
         URI uri = new URI(rawURI + query);
         ResponseEntity<String> res = rest.exchange(uri, HttpMethod.GET, entity, String.class);

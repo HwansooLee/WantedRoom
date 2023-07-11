@@ -1,0 +1,8 @@
+
+lat:37.2637,
+lon:127.0505,
+z:14,
+cortarNo:4111710100,
+cortarNm:매탄동,
+rletTpCds:*,
+tradTpCds:A1:B1:B2

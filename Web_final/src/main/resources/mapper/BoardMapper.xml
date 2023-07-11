@@ -5,7 +5,7 @@
 <mapper namespace="com.human.dao.IF_BoardDAO">
     <insert id="insert" parameterType="com.human.VO.BoardVO">
         insert into board values (boardNoSeq.nextval, #{id}, #{addr}, #{title},
-                                #{content}, default , default )
+                                #{content}, default , default, #{sentiment} )
     </insert>
     <select id="selectOne" parameterType="int" resultType="com.human.VO.BoardVO">
         select b.*,m.nickname
@@ -60,7 +60,7 @@
 	</select>
 	
 	<update id="modify" parameterType = "com.human.VO.BoardVO">
-		update board set title = #{title}, addr = #{addr}, content = #{content}
+		update board set title = #{title}, addr = #{addr}, content = #{content}, sentiment=#{sentiment}
 		where boardNo = #{boardNo}
 	</update>
 	

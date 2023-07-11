@@ -13,8 +13,8 @@
 		margin: 0 auto;
 		height: 400px;
  		width: 25%;
- 		float: left;
-		
+ 		height: 30%;
+ 		diplay: flex;	
 	}
  	a.fillDiv{
 		display: block;
@@ -98,7 +98,7 @@
 	</form>
 
 	<!-- 매물 리스트 -->
-<div class = "listDiv">
+<div class = "card-group">
 	<c:forEach var="item" items="${itemList}" varStatus = "idx">
 		<div class="itemDiv">
 			<div class="card" style="width: 18rem;">
@@ -119,9 +119,9 @@
 				</div>
 			</div>
 		</div>
-		<c:if test = "${idx.index%2 == 1}">
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>asdsa
-		</c:if>
+<%-- 		<c:if test = "${idx.index%2 == 1}">
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</c:if> --%>
 		<%-- <div class="itemDiv">
 			<a href="itemDetail?itemNo=${item.itemNo}" class="fillDiv">
 				<input type="button" value="${item.status}"><br>
@@ -159,4 +159,14 @@
 		<!-- 개발자 정보 -->
 	</footer>
 </body>
+<script type="text/javascript">
+$('#addItem').on('click', () => {
+	var authenticated = '${authenticated}';
+	if(authenticated == 'false'){
+		alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
+	}else{
+		$('#addItem').attr('href','addItemForm');
+	}
+});
+</script>
 </html>

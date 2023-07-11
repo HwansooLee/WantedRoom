@@ -139,3 +139,5 @@ select * from store where lat>=37.39345913981367 and lat<=37.39705795292739
 
 select * from store where lat>=37.370510696026436 and lat<=37.41810165481947
     and lon>=127.05714271916423 and lon<=127.13756168591655;
+
+select * from board;

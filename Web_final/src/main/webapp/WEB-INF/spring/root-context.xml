@@ -57,6 +57,10 @@
 		</property>
 	</bean>
 
+	<bean id="textProcess" class="com.human.util.TextProcess">
+
+	</bean>
+
 	<context:component-scan
 		base-package="com.human.dao" />
 	<context:component-scan

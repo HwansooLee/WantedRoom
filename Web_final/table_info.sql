@@ -67,6 +67,7 @@ title varchar2(40) not null,
 content varchar2(300) not null,
 inDate date default sysdate,
 views number default 0);
+alter table board add sentiment varchar2(8) not null;
 
 create sequence boardNoSeq;
 

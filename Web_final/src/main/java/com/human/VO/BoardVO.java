@@ -9,8 +9,9 @@ public class BoardVO {
     private String inDate;
     private String views;
     private String nickname;
+    private String sentiment;
 
-	public String getNickname() {
+    public String getNickname() {
 		return nickname;
 	}
 
@@ -72,5 +73,13 @@ public class BoardVO {
 
     public void setViews(String views) {
         this.views = views;
+    }
+
+    public String getSentiment() {
+        return sentiment;
+    }
+
+    public void setSentiment(String sentiment) {
+        this.sentiment = sentiment;
     }
 }

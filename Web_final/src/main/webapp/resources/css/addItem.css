@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.card{
+	text-align: center;
+	margin: 0 auto;
+	background-color: rgb(228, 248, 226);
+}
+#itemTable{
+	width: 90%;
+	
+}

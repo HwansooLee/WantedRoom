@@ -32,14 +32,14 @@
 			<!-- 검색창 -->
 	</form>
 	<!-- add item -->
-	<div class="card border border-success" style="width: 70%;height: 100%">
+	<div class="card border border-success" style="width: 70%;height: 70%">
 		<div class="card-body">
 			<h3> 신규 매물 등록 </h3>
 			<form action="addItem" method="post" enctype="multipart/form-data" id="form">
 				<input type="text" name="id" value="${id}" readonly hidden><br>
 				<table id="itemTable" class="table">
 					<tr>
-						<td>주소</td>
+						<td style="width: 30%">주소</td>
 						<td>
 							<input type="text" name="addr" placeholder="주소검색 버튼을 눌러 주소를 입력하세요." readonly>
 							<input type="button" value="주소검색" id="inputAddr">
@@ -89,14 +89,13 @@
 					<tr>
 						<td colspan="2">매물사진등록(최대 10개)</td>
 					</tr>
-
 				</table>
 				<table id="fileList" class="table">
 					<thead>
 						<tr><th colspan="2"><input type="file" name="file" value="파일 추가" multiple="multiple"/></tr>
 						<tr>
-							<th>파일명</th>
-							<th>삭제하기</th>
+							<th class="fileNameRow">파일명</th>
+							<th class="delAttachRow" style="width: 20%">첨부취소하기</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -156,11 +155,29 @@
 			}
 			fileInput[0].files = dt.files;
 		}
+		const HEIGHT_PER_LINE = 5;
+		let currentHeight = parseFloat($('.card')[0].style.height.replace('%', ''));
+		const Type = {
+			INCREASE: "increase",
+			DECREASE: "decrease"
+		};
+		function setHeight(type){
+			if(type == Type.INCREASE){
+				currentHeight += HEIGHT_PER_LINE;
+				console.log(currentHeight);
+				$('.card')[0].style.height = String(currentHeight) + '%';
+			}else if(type == Type.DECREASE){
+				currentHeight -= HEIGHT_PER_LINE;
+				console.log(currentHeight);
+				$('.card')[0].style.height = String(currentHeight) + '%';
+			}
+		}
 		function remove(elem){
 			let rowNum = elem.parentNode.parentNode.rowIndex;
 			removeFile(rowNum - 1);
 			fileList.splice(rowNum - 1, 1);
 			document.getElementById('fileList').deleteRow(rowNum);
+			setHeight(Type.DECREASE);
 		}
 		fileInput.on('change', (e)=>{
 			for (let i = 0; i < fileInput[0].files.length; i++){
@@ -177,7 +194,8 @@
 					let cell1 = row.insertCell(0);
 					let cell2 = row.insertCell(1);
 					cell1.innerHTML = fileName;
-					cell2.innerHTML = '<input type="button" value="삭제" name="deleteBtn" onclick=remove(this)>';
+					cell2.innerHTML = '<input type="button" value="취소" name="deleteBtn" onclick=remove(this)>';
+					setHeight(Type.INCREASE);
 				}else{
 					alert('파일 첨부는 최대 10개까지 가능합니다.');
 					break;
@@ -216,6 +234,7 @@
 				return;
 			}
 			$('#form').submit();
+			alert('등록을 완료하였습니다.');
 		});
 	</script>
 </html>

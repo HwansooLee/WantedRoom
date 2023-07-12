@@ -113,8 +113,7 @@ public class ItemController {
     @RequestMapping(value = "/deleteAttach", method = RequestMethod.POST)
     @ResponseBody
     public void deleteAttach(Locale locale, Model model, HttpSession session,
-                             @ModelAttribute("attachName") String attachName)
-            throws Exception{
+                             @ModelAttribute("attachName") String attachName) throws Exception{
         fileDataUtil.deleteFile(attachName);
         realtorsrv.deleteAttach(attachName);
     }

@@ -30,12 +30,14 @@
 		 border-color: #ccc;
 	 
 	}
-	
 	.page-link {
 		 color: green; 
 		 background-color: #fff;
 		 font-weight:bold;
 		 border: 1px solid #ccc; 
+	}
+	.soldBtn{
+		background-color: chocolate;
 	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -106,7 +108,13 @@
 					<p class="card-text">
 						<a href="itemDetail?itemNo=${item.itemNo}" class="fillDiv">	
 							<img src="download?fileName=${item.fileName}" class="card-img-top" style="height: 10rem;">
-							<input type="button" value="${item.status}"><br>
+							<c:if test="${item.status == '계약가능'}">
+								<input type="button" value="${item.status}"><br>
+							</c:if>
+							<c:if test="${item.status == '계약완료'}">
+								<input type="button" value="${item.status}" class="soldBtn"><br>
+							</c:if>
+							
 							<span id="itemNo">매물번호 : ${item.itemNo}</span><br>
 							<span>매물주소 : ${item.addr}</span><br>
 							<span>보증금 : ${item.deposit}</span><br>

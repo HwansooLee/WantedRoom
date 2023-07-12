@@ -1,10 +1,20 @@
 @charset "UTF-8";
 .card{
-	text-align: center;
+	/* text-align: center;
 	margin: 0 auto;
-	background-color: rgb(228, 248, 226);
+	background-color: rgb(228, 248, 226); */
 }
-#itemTable{
+/* #itemTable{
 	width: 90%;
 	
 }
+#fileList{
+	width: 90%;
+}
+.fileNameRow{
+	width: 70%;
+}
+.delAttachRow{
+	width: 20%;
+
+} */

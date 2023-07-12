@@ -6,9 +6,27 @@
 <head>
 	<title>Home</title>
 </head>
+<link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- include kakao map API with clusterer, services, drawing libraries -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0a14867b453fb95c4b9fd54e4b68e47&libraries=services,clusterer,drawing"></script>
+<script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    .soldBtn{
+		background-color: chocolate;
+	}
+    #slider{
+        height: 300px;
+        width: 300px;
+    }
+    input[type="text"]{
+        border: none;
+    }
+    .card{
+        text-align: center;
+        margin: 0 auto;
+    }
+</style>
 <body>
     <!-- 홈페이지 로고 -->
     <a href = "<%=request.getContextPath()%>/">
@@ -27,27 +45,101 @@
 		<input type="submit" value="검색">
 	</form>
 
-	<!-- 상세 보기 -->
-    <input type="button" value="${item.status}"><br>
-    <img src="download?fileName=${item.fileName}"><br>
-    <span>매물번호 : ${item.itemNo}</span><br>
-    매물주소<input type="text" name="addr" value="${item.addr}" readonly><br>
-    <div id="map" style="width:500px;height:400px;"></div>
-
-    <span>보증금 : ${item.deposit}</span><br>
-    <span>월세 : ${item.rent}</span><br>
-    <span>상세설명</span><br>
-    <span>${item.detail}</span><br>
+    <div class="card border border-success" style="width: 70%;height: 70%">
+		<div class="card-body">
+            <table id="itemTable" class="table">
+                <tr>
+                    <td style="width: 33%">
+                        <c:if test="${item.status == '계약가능'}">
+                            <input type="button" value="${item.status}"><br>
+                        </c:if>
+                        <c:if test="${item.status == '계약완료'}">
+                            <input type="button" value="${item.status}" class="soldBtn"><br>
+                        </c:if>
+                    </td>
+                    <td style="width: 34%"><h3>매물 상세 정보</h3></td>
+                    <td style="width: 33%"></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%">매물번호</td>
+                    <td>
+                        <span>${item.itemNo}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>매물주소</td>
+                    <td>
+                        <span name="addr">${item.addr}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="map" style="width:500px;height:400px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>보증금</span></td>
+                    <td>
+                        <span>${item.deposit} 원</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>월세</span></td>
+                    <td>
+                        <span>${item.rent} 원</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>상세설명</span></td>
+                    <td>
+                        <span>${item.detail}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+   
+    
     <span>옵션</span><br>
     <input type="button" value="주차${item.parking}">
     <input type="button" value="엘리베이터${item.elevator}">
     <input type="button" value="${item.buildingType}"><br>
+
     <span>매물사진</span><br>
-    <c:forEach var="imgName" items="${fileNames}">
-        <img src="download?fileName=${imgName}" height="300"><br>
-    </c:forEach><br>
+    <div id="slider" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" >
+            <c:forEach var="imgName" items="${fileNames}" varStatus="status">
+                <c:if test="${status.index == 0}">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="download?fileName=${imgName}" width="300 px">
+                    </div>
+                </c:if>
+                <c:if test="${status.index > 0}">
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="download?fileName=${imgName}" width="300 px">
+                    </div>
+                </c:if>
+            </c:forEach>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#slider" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#slider" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div><br>
     <span>매물등록일 : ${item.inDate}</span><br>
-    <a href="modifyItemForm?itemNo=${item.itemNo}">수정</a>
+    <form action="modifyItemForm" method="post">
+        <input type="submit" value="수정" class="modifyItemBtn">
+        <input type="text" name="itemNo" value="${item.itemNo}" hidden>
+    </form>
     <form action="myItemList?sword=" id="frm">
         <input type="button" value="삭제" id="modifyItemBtn">
         <input type="hidden" value="${item.itemNo}">
@@ -65,7 +157,7 @@
 		};
 		var map = new kakao.maps.Map(container, options);
         var geocoder = new kakao.maps.services.Geocoder();
-        let addr = $('[name="addr"]')[0].value;
+        let addr = $('[name="addr"]').text();
         geocoder.addressSearch(addr, function(result, status) {
             if (status === kakao.maps.services.Status.OK) {
                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);

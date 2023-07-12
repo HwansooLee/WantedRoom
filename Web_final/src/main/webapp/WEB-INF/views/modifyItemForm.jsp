@@ -7,6 +7,8 @@
 	<title>Home</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href = "resources/css/input_board.css">
 <style>
 	#setSoldBtn{
 		background-color: aquamarine;
@@ -27,70 +29,116 @@
 			<!-- 검색창 -->
 	</form>
 	<!-- add item -->
-	<form action="modifyItem" method="post" enctype="multipart/form-data" id="form">
-		아이디<input type="text" name="id" value="${item.id}" readonly><br>
-		매물번호<input type="text" name="itemNo" value="${item.itemNo}" readonly><br>
-		주소<input type="text" name="addr" value="${item.addr}"><br>
-		보증금<input type="text" name="deposit" value="${item.deposit}"><br>
-		월세<input type="text" name="rent" value="${item.rent}"><br>
-		상세설명<br><textarea name="detail" rows="2" cols="50" maxlength="50"
-		placeholder="매물에 대한 상세 설명을 입력하세요.">${item.detail}</textarea><br>
-		
-
-		주차가능여부<br>
-		<input type="radio" id="canNotPark" name="parking" value="불가능"
-			${item.parking == '불가능' ? 'checked' : ''}>
-		<label for="canNotPark">불가능</label>
-		<input type="radio" id="canPark" name="parking" value="가능" 
-			${item.parking == '가능' ? 'checked' : ''}>
-		<label for="canPark">가능</label><br>
-		엘리베이터여부<br>
-		<input type="radio" id="noElevator" name="elevator" value="없음"
-			${item.elevator == '없음' ? 'checked' : ''}>
-		<label for="noElevator">없음</label>
-		<input type="radio" id="haveElevator" name="elevator" value="있음"
-			${item.elevator == '있음' ? 'checked' : ''}>
-		<label for="haveElevator">있음</label><br>
-		건물 종류<br>
-		<input type="radio" id="apartment" name="buildingType" value="아파트"
-			${item.buildingType == '아파트' ? 'checked' : ''}>
-		<label for="apartment">아파트</label>
-		<input type="radio" id="villa" name="buildingType" value="빌라"
-			${item.buildingType == '빌라' ? 'checked' : ''}>
-		<label for="villa">빌라</label>
-		<input type="radio" id="oneroom" name="buildingType" value="원룸"
-			${item.buildingType == '원룸' ? 'checked' : ''}>
-		<label for="oneroom">원룸</label><br>
-
-		<!-- upload multiple files -->
-		매물사진등록(최대 10개)<br>
-
-		<!-- <input type="file" name="file" value="파일 추가" style="display: none;" multiple="multiple"/><br> -->
-		<input type="file" name="file" value="파일 추가" multiple="multiple"/><br>
-		첨부 파일 리스트<br>
-		<table border="1" id="fileList">
-			<thead>
-				<th width="500">파일명</th>
-				<th>삭제하기</th>
-			</thead>
-			<tbody>
-				<c:forEach var="attach" items="${attachs}">
+	<div class="card border border-success" style="width: 70%;height: 70%">
+		<div class="card-body">
+			<h3> 매물 정보 수정 </h3>
+			<form action="modifyItem" method="post" enctype="multipart/form-data" id="form">
+				<table id="itemTable" class="table">
 					<tr>
-						<td><img src="download?fileName=${attach}" height="100"><br>${attach}</td>
+						<td style="width: 30%">매물번호</td>
 						<td>
-							<input type="button" value="첨부파일삭제" 
-								name="removeAttachBtn" onclick=removeAttach(this)>
+							<input type="text" name="itemNo" value="${item.itemNo}" readonly>
 						</td>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+					<tr>
+						<td>주소</td>
+						<td>
+							<input type="text" name="addr" value="${item.addr}" readonly>
+						</td>
+					</tr>
+					<tr>
+						<td>보증금</td>
+						<td>
+							<input type="text" name="deposit" value="${item.deposit}">
+						</td>
+					</tr>
+					<tr>
+						<td>월세</td>
+						<td>
+							<input type="text" name="rent" value="${item.rent}">
+						</td>
+					</tr>
+					<tr>
+						<td>상세설명</td>
+						<td>
+							<textarea name="detail" rows="2" cols="50" maxlength="50"
+							placeholder="매물에 대한 상세 설명을 입력하세요.">${item.detail}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>주차가능여부</td>
+						<td>
+							<input type="radio" id="canNotPark" name="parking" value="불가능"
+								${item.parking == '불가능' ? 'checked' : ''}>
+							<label for="canNotPark">불가능</label>
+							<input type="radio" id="canPark" name="parking" value="가능" 
+								${item.parking == '가능' ? 'checked' : ''}>
+							<label for="canPark">가능</label>
+						</td>
+					</tr>
+					<tr>
+						<td>엘리베이터여부</td>
+						<td>
+							<input type="radio" id="noElevator" name="elevator" value="없음"
+								${item.elevator == '없음' ? 'checked' : ''}>
+							<label for="noElevator">없음</label>
+							<input type="radio" id="haveElevator" name="elevator" value="있음"
+								${item.elevator == '있음' ? 'checked' : ''}>
+							<label for="haveElevator">있음</label>
+						</td>
+					</tr>
+					<tr>
+						<td>건물 종류</td>
+						<td>
+							<input type="radio" id="apartment" name="buildingType" value="아파트"
+								${item.buildingType == '아파트' ? 'checked' : ''}>
+							<label for="apartment">아파트</label>
+							<input type="radio" id="villa" name="buildingType" value="빌라"
+								${item.buildingType == '빌라' ? 'checked' : ''}>
+							<label for="villa">빌라</label>
+							<input type="radio" id="oneroom" name="buildingType" value="원룸"
+								${item.buildingType == '원룸' ? 'checked' : ''}>
+							<label for="oneroom">원룸</label>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">매물사진등록(최대 10개)</td>
+					</tr>
+				</table>	
+				<!-- <input type="file" name="file" value="파일 추가" style="display: none;" multiple="multiple"/><br> -->
+				<table id="fileList" class="table">
+					<thead>
+						<tr><th colspan="2"><input type="file" name="file" value="파일 추가" multiple="multiple"/></tr>
+						<tr>
+							<th>파일명 / 기존 첨부 이미지</th>
+							<th style="width: 20%;">취소 / 삭제</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="attach" items="${attachs}">
+							<tr>
+								<td><img src="download?fileName=${attach}" height="100"></td>
+								<td>
+									<input type="button" value="첨부파일삭제" 
+										name="removeAttachBtn" onclick=addRemoveList(this)>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+		
+				<c:if test="${item.status == '계약가능'}">
+					<input type="button" value="계약완료" id="setSoldBtn">
+				</c:if>
+				<input type="button" value="저장" id="addBtn">
+			</form>
 
-		<c:if test="${item.status == '계약가능'}">
-			<input type="button" value="계약완료" id="setSoldBtn">
-		</c:if>
-		<input type="button" value="저장" id="addBtn">
-	</form>
+
+		</div>
+	</div>
+
+
+	
 
 	<footer>
 		<!-- 개발자 정보 -->
@@ -134,27 +182,52 @@
 			}
 			fileInput[0].files = dt.files;
 		}
+		const HEIGHT_PER_LINE = 5;
+		const HEIGHT_PER_IMG = 15;
+		let currentHeight = parseFloat($('.card')[0].style.height.replace('%', ''));
+		const FILE_TABLE_HEADER_ROWS = 2;
+		const INIT_ROW_CNT = $('#fileList tr').length;
+		if( INIT_ROW_CNT > FILE_TABLE_HEADER_ROWS ){
+			currentHeight += ( (INIT_ROW_CNT - FILE_TABLE_HEADER_ROWS) 
+								* HEIGHT_PER_IMG );
+			$('.card')[0].style.height = String(currentHeight) + '%';
+		}
+		const Type = {
+			INCREASE: "increase",
+			DECREASE: "decrease",
+			REMOVE_IMG: "removeImg"
+		};
+		function setHeight(type){
+			if(type == Type.INCREASE){
+				currentHeight += HEIGHT_PER_LINE;
+				$('.card')[0].style.height = String(currentHeight) + '%';
+			}else if(type == Type.DECREASE){
+				currentHeight -= HEIGHT_PER_LINE;
+				$('.card')[0].style.height = String(currentHeight) + '%';
+			}else if(type == Type.REMOVE_IMG){
+				currentHeight -= HEIGHT_PER_IMG;
+				$('.card')[0].style.height = String(currentHeight) + '%';
+			}
+		}
 		function remove(elem){
 			let rowNum = elem.parentNode.parentNode.rowIndex;
 			removeFile(rowNum - 1);
 			fileList.splice(rowNum - 1, 1);
 			document.getElementById('fileList').deleteRow(rowNum);
+			setHeight(Type.DECREASE);
 		}
-		function removeAttach(elem){
+		let removeList = new Set();
+		function addRemoveList(elem){
 			let rowNum = elem.parentNode.parentNode.rowIndex;
+			document.getElementById('fileList').deleteRow(rowNum);
+			setHeight(Type.REMOVE_IMG);
 			let attachNameVal = elem.parentNode.parentNode.childNodes[1].children[0].getAttribute('src');
 			attachNameVal = attachNameVal.split('fileName=')[1];
-			console.log(attachNameVal);
-			$.ajax({
-				url: 'deleteAttach',
-				type: 'POST',
-				data:{
-					attachName : attachNameVal
-				},
-				success: ()=>{
-					document.getElementById('fileList').deleteRow(rowNum);
-				}
-			});			
+			removeList.add(attachNameVal);
+		}
+		function removeAttach(removeList){
+			for( fileName of removeList )
+				$.post('deleteAttach', {attachName : fileName});
 		}
 		fileInput.on('change', (e)=>{
 			for (let i = 0; i < fileInput[0].files.length; i++){
@@ -167,11 +240,12 @@
 						continue;
 					}
 					fileList.push(fileInput[0].files[i]);
-					let row = document.querySelector('tbody').insertRow();
+					let row = document.querySelectorAll('tbody')[1].insertRow();
 					let cell1 = row.insertCell(0);
 					let cell2 = row.insertCell(1);
 					cell1.innerHTML = fileName;
-					cell2.innerHTML = '<input type="button" value="삭제" name="deleteBtn" onclick=remove(this)>';
+					cell2.innerHTML = '<input type="button" value="취소" name="deleteBtn" onclick=remove(this)>';
+					setHeight(Type.INCREASE);
 				}else{
 					alert('파일 첨부는 최대 10개까지 가능합니다.');
 					break;
@@ -230,6 +304,7 @@
 				alert('매물 사진을 1 장 이상 첨부하세요');
 				return;
 			}
+			removeAttach(removeList);
 			$('#form').submit();
 			alert('수정되었습니다');
 		});

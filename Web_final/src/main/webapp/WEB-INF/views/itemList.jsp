@@ -8,38 +8,7 @@
 </head>
 <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-<style>
-	.itemDiv{
-		margin: 0 auto;
-		height: 400px;
- 		width: 25%;
- 		height: 30%;
- 		diplay: flex;	
-	}
- 	a.fillDiv{
-		display: block;
-		height: 100%;
-		width: 100%;
-		text-decoration: none;
-	}
-	.page-item.active .page-link {
-		 z-index: 1;
-		 color : green;
-		 font-weight:bold;
-		 background-color: rgb(177, 245, 171);
-		 border-color: #ccc;
-	 
-	}
-	.page-link {
-		 color: green; 
-		 background-color: #fff;
-		 font-weight:bold;
-		 border: 1px solid #ccc; 
-	}
-	.soldBtn{
-		background-color: chocolate;
-	}
-</style>
+<link rel="stylesheet" href = "resources/css/itemList.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
 <!--nav-->
@@ -94,10 +63,12 @@
     </nav>
     <br><br><br><br><br><br><br>
 	<!-- 검색창 -->
-	<form action="searchItem" method="get">
-		<input type="text" name="sword" placeholder="검색할 주소 입력">
-		<input type="submit" value="검색">
-	</form>
+	<div class = "searchDiv">
+		<form action="searchItem" method="get">
+			<input type="text" name="sword" placeholder="검색할 주소 입력" class = "inputSword">
+			<input type="submit" value="검색" class = "submitBtn">
+		</form>
+	</div>
 
 	<!-- 매물 리스트 -->
 <div class = "card-group">

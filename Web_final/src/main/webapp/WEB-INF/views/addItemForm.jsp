@@ -36,6 +36,7 @@
 		<div class="card-body">
 			<h3> 신규 매물 등록 </h3>
 			<form action="addItem" method="post" enctype="multipart/form-data" id="form">
+				<input type="hidden" name="bcode">
 				<input type="text" name="id" value="${id}" readonly hidden><br>
 				<table id="itemTable" class="table">
 					<tr>

@@ -71,27 +71,6 @@ views number default 0);
 alter table board add sentiment varchar2(8) not null;
 alter table board add bcode varchar2(15) not null;
 
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
-
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
-
-insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '중립내용', default, default, 'neutral', '4146510700');
-
 create sequence boardNoSeq;
 
 create table reply(

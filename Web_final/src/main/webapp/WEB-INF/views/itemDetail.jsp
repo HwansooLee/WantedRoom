@@ -21,15 +21,20 @@
         height: 300px;
         width: 300px;
     }
-    input[type="text"]{
-        border: none;
-    }
     .card{
         text-align: center;
         margin: 0 auto;
     }
+    .positiveTag{
+        background-color: aquamarine;
+    }
+    .negativeTag{
+        background-color: indianred;
+    }
+    form{
+        display: inline-block;
+    }
 </style>
-
 <body>
     <!-- 홈페이지 로고 -->
     <a href = "<%=request.getContextPath()%>/">
@@ -48,7 +53,7 @@
 		<input type="submit" value="검색">
 	</form>
 
-    <div class="card border border-success" style="width: 70%;height: 70%">
+    <div class="card border border-success" style="width: 70%;height: 185%">
 		<div class="card-body">
             <table id="itemTable" class="table">
                 <tr>
@@ -65,15 +70,11 @@
                 </tr>
                 <tr>
                     <td style="width: 30%">매물번호</td>
-                    <td>
-                        <span>${item.itemNo}</span>
-                    </td>
+                    <td><span>${item.itemNo}</span></td>
                 </tr>
                 <tr>
                     <td>매물주소</td>
-                    <td>
-                        <span name="addr">${item.addr}</span>
-                    </td>
+                    <td><span name="addr">${item.addr}</span></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -82,78 +83,92 @@
                 </tr>
                 <tr>
                     <td><span>보증금</span></td>
-                    <td>
-                        <span>${item.deposit} 원</span>
-                    </td>
+                    <td><span>${item.deposit} 원</span></td>
                 </tr>
                 <tr>
                     <td><span>월세</span></td>
-                    <td>
-                        <span>${item.rent} 원</span>
-                    </td>
+                    <td><span>${item.rent} 원</span></td>
                 </tr>
                 <tr>
                     <td><span>상세설명</span></td>
+                    <td><span>${item.detail}</span></td>
+                </tr>
+                <tr>
+                    <td><span>옵션</span></td>
                     <td>
-                        <span>${item.detail}</span>
+                        <input type="button" value="주차${item.parking}" id="parking">
+                        <input type="button" value="엘리베이터${item.elevator}" id="elevator">
+                        <input type="button" value="${item.buildingType}" id="buildingType">
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td colspan="2"><span>매물사진</span></td>
+                </tr>
+                <tr>
                     <td>
+                        <div id="slider" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner" >
+                                <c:forEach var="imgName" items="${fileNames}" varStatus="status">
+                                    <c:if test="${status.index == 0}">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="download?fileName=${imgName}" width="300 px">
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${status.index > 0}">
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="download?fileName=${imgName}" width="300 px">
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#slider" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#slider" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
                     </td>
                 </tr>
+                <tr>
+                    <td>매물등록일</span></td>
+                    <td><span>${item.inDate}</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><div id="chart_div"></div></td>
+                </tr>
+                <c:if test="${id eq item.id}">
+                    <tr>
+                        <td>
+                            <form action="modifyItemForm" method="post">
+                                <input type="submit" value="수정" class="modifyItemBtn">
+                                <input type="text" name="itemNo" value="${item.itemNo}" hidden>
+                            </form>
+                            <form action="myItemList?sword=" id="frm">
+                                <input type="button" value="삭제" class="deleteItemBtn">
+                                <input type="hidden" value="${item.itemNo}">
+                            </form>
+                        </td>
+                    </tr>
+                </c:if>
             </table>
         </div>
     </div>
-   
-    
-    <span>옵션</span><br>
-    <input type="button" value="주차${item.parking}">
-    <input type="button" value="엘리베이터${item.elevator}">
-    <input type="button" value="${item.buildingType}"><br>
 
-    <span>매물사진</span><br>
-    <div id="slider" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner" >
-            <c:forEach var="imgName" items="${fileNames}" varStatus="status">
-                <c:if test="${status.index == 0}">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="download?fileName=${imgName}" width="300 px">
-                    </div>
-                </c:if>
-                <c:if test="${status.index > 0}">
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="download?fileName=${imgName}" width="300 px">
-                    </div>
-                </c:if>
-            </c:forEach>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#slider" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#slider" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div><br>
-    <span>매물등록일 : ${item.inDate}</span><br>
-    <form action="modifyItemForm" method="post">
-        <input type="submit" value="수정" class="modifyItemBtn">
-        <input type="text" name="itemNo" value="${item.itemNo}" hidden>
-    </form>
-    <form action="myItemList?sword=" id="frm">
-        <input type="button" value="삭제" id="modifyItemBtn">
-        <input type="hidden" value="${item.itemNo}">
-    </form>
-    <!-- 차트가 그려지는 영역 -->
-    <div id="chart_div"></div>
+
+
 	<footer>
 		<!-- 개발자 정보 -->
 	</footer>
 </body>
-	<script>      
+	<script>
+        let parkTag = $('#parking').val() == '주차가능' ? 'positiveTag' : 'negativeTag';
+        $('#parking').addClass(parkTag);
+        let elevatorTag = $('#elevator').val() == '엘리베이터있음' ? 'positiveTag' : 'negativeTag';
+        $('#elevator').addClass(elevatorTag);
+
         var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -220,20 +235,26 @@
             }
         }
 
-        $('#modifyItemBtn').on('click', (e)=>{
-            let itemNoVal = $(e.target).next().val();
-            $.ajax({
-					url: 'deleteItem',
-					type: 'POST',
-					data:{
-						itemNo : itemNoVal
-					},
-					success: ()=>{
-						alert('삭제완료하였습니다.');
-                        $('#frm').submit();
-					}
-				});	
-        })
+		const DELETE_CONFIRM_WORD = '삭제';
+		$('.deleteItemBtn').on('click',(e)=>{
+			let checkResult = prompt('정말 해당 매물을 삭제하시겠습니까? 삭제하려면 삭제를 입력하세요.');
+			if( checkResult == DELETE_CONFIRM_WORD ){
+				let itemNoVal = $(e.target).next().val();
+				$.ajax({
+						url: 'deleteItem',
+						type: 'POST',
+						data:{
+							itemNo : itemNoVal
+						},
+						success: ()=>{
+							alert('삭제 완료하였습니다.');
+							$(e.target).parent().submit();
+						}
+					});	
+			}				
+			else
+				alert('삭제 취소하였습니다.');
+		});
         
         var itemNo = '${item.itemNo}';
         
@@ -244,7 +265,6 @@
         
         // 라이브러리 로딩이 완료되면 drawChart 함수를 호출한다.
         google.setOnLoadCallback(drawChart);
-        
         function drawChart(){
         	let itemdata = {
         		"itemNo" : itemNo
@@ -257,28 +277,17 @@
         		contentType : "application/json",
         		async : false
         	}).responseText;
-        	
-        	console.log(jsonData); // 받은 데이터 확인
-        	
         	// 데이터 테이블 생성
         	// json 형식의 데이터를 구글의 테이블 형식으로 변환한다.
         	var data = new google.visualization.DataTable(jsonData);
-        	
         	var chart = new google.visualization.PieChart(document.getElementById('chart_div')); // 원형 그래프로 생성
-        	
         	var option = {
         		title : "동네 평가",
             	width : 600,
             	height : 400,
-            	
             	colors : ['#1c53ca','coral','gray']
-        	}
-        	
+        	}        	
         	chart.draw(data, option);
-        }
-        
-        
-        
-        
+        }            
 	</script>
 </html>

@@ -1,9 +1,11 @@
 package com.human.realtor;
 
+import com.human.util.ChartProcess;
 import com.human.util.TextProcess;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class GetEmotionTest {
     @Test

@@ -26,6 +26,7 @@ status varchar2(8) not null check(status in ('계약가능','계약완료')));
 alter table item modify deposit not null;
 alter table item modify rent not null;
 alter table item modify status default '계약가능';
+alter table item add bcode varchar2(15) not null;
 
 create sequence itemNoSeq;
 
@@ -68,6 +69,7 @@ content varchar2(300) not null,
 inDate date default sysdate,
 views number default 0);
 alter table board add sentiment varchar2(8) not null;
+alter table board add bcode varchar2(15) not null;
 
 create sequence boardNoSeq;
 

@@ -11,6 +11,8 @@
 <!-- include kakao map API with clusterer, services, drawing libraries -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0a14867b453fb95c4b9fd54e4b68e47&libraries=services,clusterer,drawing"></script>
 <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 구글 차트 호출을 위한 js 파일 -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <style>
     .soldBtn{
 		background-color: chocolate;
@@ -27,6 +29,7 @@
         margin: 0 auto;
     }
 </style>
+
 <body>
     <!-- 홈페이지 로고 -->
     <a href = "<%=request.getContextPath()%>/">
@@ -144,7 +147,8 @@
         <input type="button" value="삭제" id="modifyItemBtn">
         <input type="hidden" value="${item.itemNo}">
     </form>
-
+    <!-- 차트가 그려지는 영역 -->
+    <div id="chart_div"></div>
 	<footer>
 		<!-- 개발자 정보 -->
 	</footer>
@@ -230,5 +234,51 @@
 					}
 				});	
         })
+        
+        var itemNo = '${item.itemNo}';
+        
+        //구글 차트 라이브러리 로딩
+		google.load('visualization','1',{
+		    'packages' : ['corechart']
+		});
+        
+        // 라이브러리 로딩이 완료되면 drawChart 함수를 호출한다.
+        google.setOnLoadCallback(drawChart);
+        
+        function drawChart(){
+        	let itemdata = {
+        		"itemNo" : itemNo
+        	};
+        	var jsonData = $.ajax({
+        		url : "getChartData",
+        		dataType : "JSON",
+        		type: "POST",
+        		data : JSON.stringify(itemdata),
+        		contentType : "application/json",
+        		async : false
+        	}).responseText;
+        	
+        	console.log(jsonData); // 받은 데이터 확인
+        	
+        	// 데이터 테이블 생성
+        	// json 형식의 데이터를 구글의 테이블 형식으로 변환한다.
+        	var data = new google.visualization.DataTable(jsonData);
+        	
+        	var chart = new google.visualization.PieChart(document.getElementById('chart_div')); // 원형 그래프로 생성
+        	
+        	var option = {
+        		title : "동네 평가",
+            	width : 600,
+            	height : 400,
+            	
+            	colors : ['#1c53ca','coral','gray']
+        	}
+        	
+        	chart.draw(data, option);
+        }
+        
+        
+        
+        
 	</script>
 </html>

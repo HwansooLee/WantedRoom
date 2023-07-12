@@ -62,6 +62,7 @@
 			<mvc:exclude-mapping path="/download**"/>
 			<mvc:exclude-mapping path="/resources/**"/>
 			<mvc:exclude-mapping path="/mailChk**"/>
+			<mvc:exclude-mapping path="/getChartData**"/>
 			<beans:ref bean="authenInterceptor" /> <!-- instances which defines pre, post of included url -->
 		</mvc:interceptor>
 	</mvc:interceptors>

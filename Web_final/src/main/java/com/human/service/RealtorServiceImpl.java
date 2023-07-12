@@ -5,23 +5,26 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.human.VO.*;
-import com.human.dao.*;
-import com.human.util.FileDataUtil;
-import com.human.util.TextProcess;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.human.VO.BoardVO;
+import com.human.VO.ItemAttachVO;
+import com.human.VO.ItemTagsVO;
 import com.human.VO.ItemVO;
 import com.human.VO.LikesVO;
 import com.human.VO.MemberVO;
 import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
 import com.human.dao.IF_BoardDAO;
+import com.human.dao.IF_ItemAttachDAO;
+import com.human.dao.IF_ItemDAO;
+import com.human.dao.IF_ItemTagsDAO;
 import com.human.dao.IF_LikesDAO;
 import com.human.dao.IF_MemberDAO;
 import com.human.dao.IF_ReplyDAO;
+import com.human.util.ChartProcess;
+import com.human.util.TextProcess;
 
 @Service
 public class RealtorServiceImpl implements IF_RealtorService{
@@ -46,6 +49,8 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	private IF_ItemTagsDAO itemTagsDao;
 	@Inject
 	private TextProcess textProcess;
+	@Inject
+	private ChartProcess chartProcess;
 
     @Override
     public void addItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception{
@@ -217,5 +222,21 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	@Override
 	public void regRealtorNo(MemberVO mvo) throws Exception {
 		memberdao.updateId(mvo);
+	}
+
+	@Override
+	public JSONObject getChartData(int itemNo) throws Exception {
+		/* query)
+		 * select b.sentiment, count(b.sentiment) cnt 
+		 * from board b , item i 
+		 * where b.bcode = i.bcode 
+		 * and itemNo = 14 
+		 * GROUP by b.sentiment
+		 * 
+		 * dao로 위 쿼리를 실행을 시킨 결과를 받아와서
+		 * 그 결과를 JSONObject로 변환후 리턴
+		 */
+		List<BoardVO> cntList = boarddao.getItemSentimentCnt(itemNo); // 실행시킨 결과 리스트	
+		return chartProcess.getChartData(cntList);
 	}
 }

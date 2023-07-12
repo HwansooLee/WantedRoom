@@ -5,7 +5,7 @@
 <mapper namespace="com.human.dao.IF_BoardDAO">
     <insert id="insert" parameterType="com.human.VO.BoardVO">
         insert into board values (boardNoSeq.nextval, #{id}, #{addr}, #{title},
-                                #{content}, default , default, #{sentiment} )
+                                #{content}, default , default, #{sentiment} , #{bcode})
     </insert>
     <select id="selectOne" parameterType="int" resultType="com.human.VO.BoardVO">
         select b.*,m.nickname
@@ -67,5 +67,13 @@
 	<delete id="delete" parameterType = "int">
 		delete from board where boardNo = #{value}
 	</delete>
+	
+	<select id = "getSemtimentCnt" parameterType = "int" resultType = "com.human.VO.BoardVO">
+    	select b.sentiment, count(b.sentiment) sentimentCnt
+		from board b , item i
+		where b.bcode = i.bcode
+		and itemNo = #{value}
+		GROUP by b.sentiment
+    </select>
 	
 </mapper>

@@ -11,6 +11,8 @@
 <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href = "resources/css/input_board.css">
+<!-- script for kakao postcode service -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
 <a href = "<%=request.getContextPath()%>/">
 	<img src = "resources/image/logo.png" width = "300">
@@ -23,6 +25,7 @@
 	    <h6 class="card-subtitle mb-2 text-muted">당신의 동네 이야기를 들려주세요 :)</h6>
 	    <br>
 	    <form action="inputBoardSave" method = "post" id = "frm">
+	    	<input type = hidden name = "bcode">
 	    	<table class = "table">
 	    		<tr>
 	    			<td>아이디</td>
@@ -33,8 +36,8 @@
 	    			<td><input type = "text" name = "title" class = "boardInput" size = "40"></td>
 	    		</tr>
 	    		<tr>
-	    			<td>주소</td>
-	    			<td><input type = "text" name = "addr" class = "boardInput" size = "40"></td>
+	    			<td><input type="button" value="주소검색" id="inputAddr"></td>
+	    			<td><input type = "text" name = "addr" class = "boardInput" size = "40" placeholder="주소검색 버튼을 눌러 주소를 입력하세요." readonly></td>
 	    		</tr>
 	    	</table>
 	    	내용<br>
@@ -61,6 +64,17 @@
 			}
 		}
 		return frm.submit();
+	});
+	
+	// 주소 입력
+	$('#inputAddr').on('click', ()=>{
+		new daum.Postcode({
+			oncomplete: function(data) {
+				$('[name="addr"]').val(data.address);
+				$('[name="bcode"]').val(data.bcode);
+				console.log(data.bcode);
+			}
+		}).open();
 	});
 </script>
 </html>

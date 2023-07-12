@@ -115,6 +115,7 @@
 			new daum.Postcode({
 				oncomplete: function(data) {
 					$('[name="addr"]').val(data.address);
+					$('[name="bcode"]').val(data.bcode);
 				}
 			}).open();
 		});

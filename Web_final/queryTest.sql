@@ -141,3 +141,4 @@ select * from store where lat>=37.370510696026436 and lat<=37.41810165481947
     and lon>=127.05714271916423 and lon<=127.13756168591655;
 
 select * from board;
+select * from item, itemAttach a where item.ITEMNO = a.ITEMNO;

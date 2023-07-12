@@ -8,8 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 public class TextProcess {
     private final RestTemplate rest = new RestTemplate();
@@ -17,14 +15,6 @@ public class TextProcess {
     private final String id = "u3z9ta6u8w";
     private final String secret = "Bn6qEnTgvUSGWKUwVRxgAneV40SgGIntgIJXlVOY";
     private final String rawURI = "https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze";
-
-    private Connection conn=null;
-    // connection resource variable
-    private final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private final String USERNAME = "final";
-    private final String PWD = "1111";
-    // variable for query
-    private PreparedStatement psmt = null;
 
     public TextProcess(){
         init();

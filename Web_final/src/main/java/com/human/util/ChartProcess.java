@@ -9,7 +9,6 @@ import org.json.simple.JSONObject;
 import com.human.VO.BoardVO;
 
 public class ChartProcess {
-	
 	@SuppressWarnings("all")
 	public JSONObject getChartData(List<BoardVO> cntList) {
 		JSONObject data = new JSONObject(); // 리턴할 jsonObject
@@ -38,12 +37,12 @@ public class ChartProcess {
 	@SuppressWarnings("all")
 	private JSONArray getRowsArr(List<BoardVO> cntList) {
 		JSONArray rowsArr = new JSONArray();
-		
+
 		HashSet<String> sentimentType = new HashSet<>();
 		sentimentType.add("positive");
 		sentimentType.add("negative");
-		sentimentType.add("netural");
-		
+		sentimentType.add("neutral");
+
 		for(int i = 0; i < cntList.size(); i++) { // 많아야 세번 돈다
 			JSONObject nowdata = new JSONObject();
 			JSONArray cArr = new JSONArray();

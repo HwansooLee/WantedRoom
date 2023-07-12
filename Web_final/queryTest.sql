@@ -142,3 +142,9 @@ select * from store where lat>=37.370510696026436 and lat<=37.41810165481947
 
 select * from board;
 select * from item, itemAttach a where item.ITEMNO = a.ITEMNO;
+
+select b.sentiment, count(b.sentiment) sentimentCnt
+		from board b , item i
+		where b.bcode = i.bcode
+		and itemNo = 383
+		GROUP by b.sentiment;

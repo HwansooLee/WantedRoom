@@ -15,7 +15,7 @@ insert into member values ('testUser1', 'testUser1', '1234', '12345-1234-12345')
 create table item(
 itemNo number primary key,
 id varchar2(30) not null,
-foreign key(id) references member (id),
+foreign key(id) references member (id) on delete cascade,
 addr varchar2(100) not null,
 deposit number default 0,
 rent number default 0,
@@ -34,12 +34,12 @@ select itemNoSeq.nextval from dual;
 
 create table itemAttach(
 itemNo number not null,
-foreign key(itemNo) references item(itemNo),
+foreign key(itemNo) references item(itemNo) on delete cascade,
 fileName varchar2(45) not null);
 
 create table itemTags(
 itemNo number not null,
-foreign key(itemNo) references item(itemNo),
+foreign key(itemNo) references item(itemNo) on delete cascade,
 parking varchar2(6) check(parking in ('가능','불가능')),
 elevator varchar2(4) check(elevator in ('있음','없음')),
 buildingType varchar2(6) check(buildingType in ('아파트','빌라','원룸')));
@@ -62,7 +62,7 @@ alter table store add lon number;
 create table board(
 boardNo number primary key,
 id varchar2(30) not null,
-foreign key (id) references member(id),
+foreign key (id) references member(id) on delete cascade,
 addr varchar2(100) not null,
 title varchar2(40) not null,
 content varchar2(300) not null,
@@ -71,12 +71,33 @@ views number default 0);
 alter table board add sentiment varchar2(8) not null;
 alter table board add bcode varchar2(15) not null;
 
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '좋은내용', default, default, 'positive', '4146510700');
+
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '나쁜내용', default, default, 'negative', '4146510700');
+
+insert into board values (BOARDNOSEQ.NEXTVAL, 'aaa@aaa.com', '상현동', '제목', '중립내용', default, default, 'neutral', '4146510700');
+
 create sequence boardNoSeq;
 
 create table reply(
 replyNo number primary key,
 id varchar2(30) not null,
-foreign key(id) references member(id),
+foreign key(id) references member(id) on delete cascade,
 boardNo number not null,
 foreign key(boardNo) references board(boardNo) on delete cascade, -- 테이블 수정
 content varchar2(300) not null,
@@ -87,9 +108,10 @@ create sequence replyNoSeq;
 
 create table favorite(
 id varchar2(30) not null,
-foreign key(id) references member(id),
+foreign key(id) references member(id) on delete cascade,
 itemNo number not null,
-foreign key (itemNo) references item(itemNo));
+foreign key (itemNo) references item(itemNo) on delete cascade
+);
 
 commit;
 
@@ -104,7 +126,7 @@ create table likes(
     replyNo number,
     foreign key(replyNo) references reply(replyNo) on delete cascade, -- 테이블 수정
     id varchar2(30),
-    foreign key(id) references member(id)
+    foreign key(id) references member(id) on delete cascade
 );
 
 -- 테이블 수정을 위한 드랖

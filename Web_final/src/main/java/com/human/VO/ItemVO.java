@@ -1,8 +1,5 @@
 package com.human.VO;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class ItemVO {
     private int itemNo;
     private String id;
@@ -18,8 +15,17 @@ public class ItemVO {
     private String parking;
     private String elevator;
     private String buildingType;
+    private String bcode;
 
-    public int getItemNo() {
+	public String getBcode() {
+		return bcode;
+	}
+
+	public void setBcode(String bcode) {
+		this.bcode = bcode;
+	}
+
+	public int getItemNo() {
         return itemNo;
     }
 

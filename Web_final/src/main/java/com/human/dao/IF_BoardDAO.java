@@ -3,6 +3,7 @@ package com.human.dao;
 import java.util.List;
 
 import com.human.VO.BoardVO;
+import com.human.VO.ItemVO;
 import com.human.VO.PageVO;
 
 public interface IF_BoardDAO {
@@ -16,4 +17,5 @@ public interface IF_BoardDAO {
     public List<BoardVO> myBoardList(PageVO pvo) throws Exception;
     public void modify(BoardVO bvo) throws Exception;
     public void delete(int boardNo) throws Exception;
+    public List<BoardVO> getItemSentimentCnt(int itemNo) throws Exception;
 }

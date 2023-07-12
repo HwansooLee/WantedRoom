@@ -10,8 +10,26 @@ public class BoardVO {
     private String views;
     private String nickname;
     private String sentiment;
+    private String bcode;
+    private Integer sentimentCnt;
 
-    public String getNickname() {
+    public Integer getSentimentCnt() {
+		return sentimentCnt;
+	}
+
+	public void setSentimentCnt(Integer sentimentCnt) {
+		this.sentimentCnt = sentimentCnt;
+	}
+
+	public String getBcode() {
+		return bcode;
+	}
+
+	public void setBcode(String bcode) {
+		this.bcode = bcode;
+	}
+
+	public String getNickname() {
 		return nickname;
 	}
 

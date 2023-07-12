@@ -66,6 +66,7 @@ public class ItemController {
         ivo.setFileName(fileNames.get(0));
         model.addAttribute("item", ivo);
         model.addAttribute("fileNames", fileNames);
+        
         return "itemDetail";
     }
     @RequestMapping(value = "/deleteItem", method = RequestMethod.POST)

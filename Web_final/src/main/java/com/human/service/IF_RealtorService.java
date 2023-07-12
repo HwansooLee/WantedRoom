@@ -3,13 +3,14 @@ package com.human.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import com.human.VO.BoardVO;
 import com.human.VO.ItemVO;
 import com.human.VO.LikesVO;
 import com.human.VO.MemberVO;
 import com.human.VO.PageVO;
 import com.human.VO.ReplyVO;
-import org.springframework.web.multipart.MultipartFile;
 
 public interface IF_RealtorService {
     public void addItem(ItemVO ivo, ArrayList<String> fileNames) throws Exception;
@@ -41,4 +42,5 @@ public interface IF_RealtorService {
 	public int myReplyCnt(String id) throws Exception;
 	public void delReply(int replyNo) throws Exception;
 	public void regRealtorNo(MemberVO mvo) throws Exception;
+	public JSONObject getChartData(int itemNo) throws Exception;
 }

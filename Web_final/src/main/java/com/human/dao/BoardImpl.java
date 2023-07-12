@@ -60,4 +60,9 @@ public class BoardImpl implements IF_BoardDAO{
 	public void delete(int boardNo) throws Exception {
 		sqlSession.delete(mapperQuery+".delete",boardNo);
 	}
+
+	@Override
+	public List<BoardVO> getItemSentimentCnt(int itemNo) throws Exception {
+		return sqlSession.selectList(mapperQuery+".getSemtimentCnt",itemNo);
+	}
 }

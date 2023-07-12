@@ -36,6 +36,7 @@
 	</form>
 	<!-- add item -->
 	<form action="addItem" method="post" enctype="multipart/form-data" id="form">
+		<input type = hidden name = "bcode">
 		<input type="text" name="id" value="${id}" readonly hidden><br>
 		주소<input type="text" name="addr" placeholder="주소검색 버튼을 눌러 주소를 입력하세요." readonly>
 		<input type="button" value="주소검색" id="inputAddr"><br>
@@ -90,6 +91,7 @@
 			new daum.Postcode({
 				oncomplete: function(data) {
 					$('[name="addr"]').val(data.address);
+					$('[name="bcode"]').val(data.bcode);
 				}
 			}).open();
 		});

@@ -60,6 +60,11 @@
 	<bean id="textProcess" class="com.human.util.TextProcess">
 
 	</bean>
+	
+	<!-- chartProcess bean 설정 -->
+	<bean id="chartProcess" class="com.human.util.ChartProcess">
+
+	</bean>
 
 	<context:component-scan
 		base-package="com.human.dao" />

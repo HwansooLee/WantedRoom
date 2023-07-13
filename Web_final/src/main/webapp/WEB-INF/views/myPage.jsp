@@ -13,12 +13,13 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href = "resources/css/myPage.css">
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">
 			<!-- 홈페이지 로고 -->
 			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
-				src="resources/image/logo.png" width="300">
+				src="resources/image/logo.png" width="200">
 			</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -33,6 +34,12 @@
 					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
 					</li>
 				</ul>
+				<div class = "searchDiv">
+					<form action="searchItem" method="get">
+						<input type="text" name="sword" placeholder="검색할 주소 입력" class = "inputSword">
+						<input type="submit" value="검색" class = "submitBtn">
+					</form>
+				</div>
 				<span class = "navbar-text">
 					<button type="button" class="btn btn-outline-secondary" id = "logOutBtn">로그아웃</button>
 				</span>

@@ -13,12 +13,40 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+	.logoImg{
+		width: 200px;
+		display: block;
+		margin: -15px 0 -15px 0;
+	}
+	.card-img-top{
+		display: block;
+		margin: 10px auto;
+		width: 30%;
+	}
+	a{
+		text-decoration: none;
+		color: black;
+	}
+	.card-title{
+		text-align: center;
+	}
+	.card-text{
+		text-align: center;
+		margin: auto;
+	}
+	.myPageMenu{
+		width: 30%;
+		height: 100%;
+		margin: 0 15px 0 15px;
+	}
+</style>
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">
 			<!-- 홈페이지 로고 -->
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
-				src="resources/image/logo.png" width="300">
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/">
+				<img class="logoImg" src="resources/image/logo.png">
 			</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -42,53 +70,49 @@
 	<!-- 등록번호인증된 회원만 세션으로 걸러서 나오게 한다 -->
 
 	<div class="card border border-success"
-		style="width: 70%; height: 100%; margin: 0 auto; margin-top: 100px">
+		style="width: 83%; height: 100%; margin: 0 auto; margin-top: 100px">
 		<div class="card-body">
 			<div class="card-group">
 				<c:if test="${realtorNo eq null}">
-					<div class="card">
-						<img src="resources/image/certification.png" class="card-img-top"
-							height="50%">
-						<div class="card-body">
-							<h5 class="card-title">
-								<a href="registerRealtorNo">공인중개사 등록번호 등록하기</a>
-							</h5>
-							<p class="card-text">매물등록을 하고싶다면 공인중개사 등록번호를 인증해주세요</p>
+					<a href="registerRealtorNo" class="myPageMenu">
+						<div class="card">
+							<img src="resources/image/certification.png" class="card-img-top">
+							<div class="card-body">
+								<h5 class="card-title">공인중개사 등록번호 등록하기</h5>
+								<p class="card-text">매물등록을 하고싶다면<br>공인중개사 등록번호를<br> 인증해주세요</p>
+							</div>
 						</div>
-					</div>
+					</a>
 				</c:if>
 				<c:if test="${realtorNo ne null}">
+					<a href="myItemList" class="myPageMenu">
+						<div class="card">
+							<img src="resources/image/itemAd.png" class="card-img-top">
+							<div class="card-body">
+								<h5 class="card-title">매물 게시글 관리</h5>
+								<p class="card-text">내가 올린 매물을 관리 할 수 있어요<br><br><br></p>
+							</div>
+						</div>
+					</a>
+				</c:if>
+				<a href="myBoardList" class="myPageMenu">
 					<div class="card">
-						<img src="resources/image/itemAd.png" class="card-img-top"
-							height="50%">
+						<img src="resources/image/boardAd.png" class="card-img-top">
 						<div class="card-body">
-							<h5 class="card-title">
-								<a href="myItemList">매물 게시글 관리</a>
-							</h5>
-							<p class="card-text">자신이 올린 매물을 관리 할수 있습니다</p>
+							<h5 class="card-title">리뷰 게시글 관리</h5>
+							<p class="card-text">내 리뷰를 수정 및 삭제 <br> 할 수 있어요<br><br></p>
+						</div>	
+					</div>
+				</a>
+				<a href="myReplyList" class="myPageMenu">
+					<div class="card">
+						<img src="resources/image/replyAd.png" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">댓글관리</h5>
+							<p class="card-text">내 댓글을 삭제할 수 있어요<br><br><br></p>
 						</div>
 					</div>
-				</c:if>
-				<div class="card">
-					<img src="resources/image/boardAd.png" class="card-img-top"
-						height="50%">
-					<div class="card-body">
-						<h5 class="card-title">
-							<a href="myBoardList">리뷰 게시글 관리</a>
-						</h5>
-						<p class="card-text">자신의 리뷰를 수정 및 삭제 할수 있습니다</p>
-					</div>
-				</div>
-				<div class="card">
-					<img src="resources/image/replyAd.png" class="card-img-top"
-						height="50%">
-					<div class="card-body">
-						<h5 class="card-title">
-							<a href="myReplyList">댓글관리</a>
-						</h5>
-						<p class="card-text">자신의 댓글을 삭제할수 있습니다</p>
-					</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>

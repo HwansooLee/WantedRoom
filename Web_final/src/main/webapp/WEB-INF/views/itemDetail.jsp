@@ -19,7 +19,7 @@
 	}
     #slider{
         height: 300px;
-        width: 300px;
+        width: 400px;
     }
     .card{
         text-align: center;
@@ -47,7 +47,7 @@
         text-align: center;
         padding: 6px 0;
     }
-    .statusBtn{
+    .statusBtn, #rentType{
         display: block;
         margin: auto;
     }
@@ -58,6 +58,18 @@
     }
     .titleText{
         margin-left: 30%;
+    }
+    #map{
+        width: 400px;
+        height: 320px;
+    }
+    .carousel-inner{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .carousel-item img{
+        position: relative;
     }
 </style>
 <body>
@@ -106,13 +118,16 @@
                     <td><span>${item.itemNo}</span></td>
                 </tr>
                 <tr>
-                    <td colspan="2" rowspan="4">
-                        <div id="map" style="width:400px;height:320px;"></div>
+                    <td colspan="2" rowspan="5">
+                        <div id="map"></div>
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2"><input type="button" value="전세" id="rentType"></td>
+                </tr>
+                <tr>
                     <td><span>보증금</span></td>
-                    <td><span>${item.deposit} 원</span></td>
+                    <td><span id="depositText">${item.deposit} 원</span></td>
                 </tr>
                 <tr>
                     <td><span>월세</span></td>
@@ -134,12 +149,12 @@
                                 <c:forEach var="imgName" items="${fileNames}" varStatus="status">
                                     <c:if test="${status.index == 0}">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="download?fileName=${imgName}" width="400 px">
+                                            <img class="d-block w-100" src="download?fileName=${imgName}">
                                         </div>
                                     </c:if>
                                     <c:if test="${status.index > 0}">
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="download?fileName=${imgName}" width="400 px">
+                                            <img class="d-block w-100" src="download?fileName=${imgName}">
                                         </div>
                                     </c:if>
                                 </c:forEach>
@@ -191,6 +206,10 @@
 	</footer>
 </body>
 	<script>
+        let depositTextVal = $('#depositText').text().replace(' 원', '');
+        if( $('#depositText').val == '0' )
+            $('#rentType').val('월세');        
+
         let parkTag = $('#parking').val() == '주차가능' ? 'positiveTag' : 'negativeTag';
         $('#parking').addClass(parkTag);
         let elevatorTag = $('#elevator').val() == '엘리베이터있음' ? 'positiveTag' : 'negativeTag';

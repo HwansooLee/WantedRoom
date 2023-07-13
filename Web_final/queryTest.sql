@@ -150,3 +150,4 @@ select b.sentiment, count(b.sentiment) sentimentCnt
 		GROUP by b.sentiment;
 
 select * from member;
+insert into member values ('bbb@bbb.com', 'testUser1', '1234', null, '나일반');

@@ -148,3 +148,5 @@ select b.sentiment, count(b.sentiment) sentimentCnt
 		where b.bcode = i.bcode
 		and itemNo = 383
 		GROUP by b.sentiment;
+
+select * from member;

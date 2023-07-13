@@ -15,7 +15,7 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <style>
     .soldBtn{
-		background-color: chocolate;
+		background-color:lightcoral;
 	}
     #slider{
         height: 300px;
@@ -29,10 +29,35 @@
         background-color: aquamarine;
     }
     .negativeTag{
-        background-color: indianred;
+        background-color: lightcoral;
     }
     form{
         display: inline-block;
+    }
+    input[type="button"]{
+        border-radius: 4px;
+        border: 1px solid black;
+    }
+    input[type="submit"]{
+        border-radius: 4px;
+        border: 1px solid black;
+    }
+    .itemLocDiv{
+        width: 150px;
+        text-align: center;
+        padding: 6px 0;
+    }
+    .statusBtn{
+        display: block;
+        margin: auto;
+    }
+    .itemDetailText{
+        width: 100%;
+        border: none;
+        resize: none;
+    }
+    .titleText{
+        margin-left: 30%;
     }
 </style>
 <body>
@@ -52,33 +77,37 @@
 		<input type="text" name="searchWord" placeholder="검색할 주소 입력">
 		<input type="submit" value="검색">
 	</form>
-
-    <div class="card border border-success" style="width: 70%;height: 185%">
-		<div class="card-body">
-            <table id="itemTable" class="table">
+    <div class="card border border-success" style="width: 76%;height: 140%">
+		<div class="card-body" style="width: 100%;height: 100%">
+            <table id="itemTable" class="table" style="width: 100%;height: 100%">
+                <thead hidden>
+                    <th style="width: 18%;"></th>
+                    <th style="width: 35%;"></th>
+                    <th style="width: 18%;"></th>
+                    <th style="width: 35%;"></th>
+                </thead>
                 <tr>
-                    <td style="width: 33%">
+                    <td>
                         <c:if test="${item.status == '계약가능'}">
-                            <input type="button" value="${item.status}"><br>
+                            <input type="button" value="${item.status}" class="statusBtn">
                         </c:if>
                         <c:if test="${item.status == '계약완료'}">
-                            <input type="button" value="${item.status}" class="soldBtn"><br>
+                            <input type="button" value="${item.status}" class="statusBtn soldBtn">
                         </c:if>
                     </td>
-                    <td style="width: 34%"><h3>매물 상세 정보</h3></td>
-                    <td style="width: 33%"></td>
-                </tr>
-                <tr>
-                    <td style="width: 30%">매물번호</td>
-                    <td><span>${item.itemNo}</span></td>
+                    <td colspan="3" class="titleTd">
+                        <h3 class="titleText">매물 상세 정보</h3>
+                    </td>
                 </tr>
                 <tr>
                     <td>매물주소</td>
                     <td><span name="addr">${item.addr}</span></td>
+                    <td>매물번호</td>
+                    <td><span>${item.itemNo}</span></td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <div id="map" style="width:500px;height:400px;"></div>
+                    <td colspan="2" rowspan="4">
+                        <div id="map" style="width:400px;height:320px;"></div>
                     </td>
                 </tr>
                 <tr>
@@ -90,33 +119,27 @@
                     <td><span>${item.rent} 원</span></td>
                 </tr>
                 <tr>
-                    <td><span>상세설명</span></td>
-                    <td><span>${item.detail}</span></td>
-                </tr>
-                <tr>
                     <td><span>옵션</span></td>
                     <td>
-                        <input type="button" value="주차${item.parking}" id="parking">
-                        <input type="button" value="엘리베이터${item.elevator}" id="elevator">
-                        <input type="button" value="${item.buildingType}" id="buildingType">
+                        <input type="button" value="주차${item.parking}" id="parking"><br>
+                        <input type="button" value="엘리베이터${item.elevator}" id="elevator"><br>
+                        <input type="button" value="${item.buildingType}" id="buildingType"><br>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><span>매물사진</span></td>
-                </tr>
-                <tr>
-                    <td>
+                    <td colspan="2" rowspan="2">
+                        <span>매물사진</span><br><br>
                         <div id="slider" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner" >
                                 <c:forEach var="imgName" items="${fileNames}" varStatus="status">
                                     <c:if test="${status.index == 0}">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="download?fileName=${imgName}" width="300 px">
+                                            <img class="d-block w-100" src="download?fileName=${imgName}" width="400 px">
                                         </div>
                                     </c:if>
                                     <c:if test="${status.index > 0}">
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="download?fileName=${imgName}" width="300 px">
+                                            <img class="d-block w-100" src="download?fileName=${imgName}" width="400 px">
                                         </div>
                                     </c:if>
                                 </c:forEach>
@@ -133,15 +156,22 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>매물등록일</span></td>
-                    <td><span>${item.inDate}</span></td>
+                    <td colspan="2">
+                        <span>상세설명</span><br><br>
+                        <textarea class="itemDetailText" readonly>${item.detail}</textarea>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><div id="chart_div"></div></td>
+                    <td colspan="2">
+                        <span>동네 평가</span><br>
+                        <div id="chart_div"></div>
+                    </td>
+                    <td>등록일</span></td>
+                    <td><span>${item.inDate}</span></td>
                 </tr>
                 <c:if test="${id eq item.id}">
                     <tr>
-                        <td>
+                        <td colspan="4">
                             <form action="modifyItemForm" method="post">
                                 <input type="submit" value="수정" class="modifyItemBtn">
                                 <input type="text" name="itemNo" value="${item.itemNo}" hidden>
@@ -156,9 +186,6 @@
             </table>
         </div>
     </div>
-
-
-
 	<footer>
 		<!-- 개발자 정보 -->
 	</footer>
@@ -185,7 +212,7 @@
                     position: coords
                 });
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">매물위치</div>'
+                    content: '<div class="itemLocDiv"><span class="itemLocText">매물위치</span></div>'
                 });
                 infowindow.open(map, marker);
                 map.setCenter(coords);
@@ -282,9 +309,8 @@
         	var data = new google.visualization.DataTable(jsonData);
         	var chart = new google.visualization.PieChart(document.getElementById('chart_div')); // 원형 그래프로 생성
         	var option = {
-        		title : "동네 평가",
-            	width : 600,
-            	height : 400,
+            	width : 400,
+            	height : 300,
             	colors : ['#1c53ca','coral','gray']
         	}        	
         	chart.draw(data, option);

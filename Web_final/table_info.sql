@@ -43,11 +43,8 @@ foreign key(itemNo) references item(itemNo) on delete cascade,
 parking varchar2(6) check(parking in ('가능','불가능')),
 elevator varchar2(4) check(elevator in ('있음','없음')),
 buildingType varchar2(6) check(buildingType in ('아파트','빌라','원룸')));
-
 alter table itemTags modify parking not null;
-
 alter table itemTags modify elevator not null;
-
 alter table itemTags modify buildingType not null;
 
 create table store(

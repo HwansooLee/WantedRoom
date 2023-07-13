@@ -30,7 +30,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="addItemForm">매물 등록</a></li>
+						aria-current="page" href = "" id = "addItem">매물 등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
 					</li>
 				</ul>
@@ -141,6 +141,15 @@
 <script type="text/javascript">
 	$('#logOutBtn').on('click', () => {
 		location.href = "signOut";
+	});
+	
+	$('#addItem').on('click', () => {
+		var authenticated = '${authenticated}';
+		if(authenticated == 'false'){
+			alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
+		}else{
+			$('#addItem').attr('href','addItemForm');
+		}
 	});
 </script>
 </html>

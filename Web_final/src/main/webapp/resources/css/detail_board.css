@@ -43,3 +43,11 @@
     transform: translate3d(0, -2px, 0) rotate(-5deg);
   }
 }
+body{
+	min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}

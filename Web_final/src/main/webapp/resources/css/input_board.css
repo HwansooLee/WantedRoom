@@ -5,3 +5,11 @@ div.card{
 	background-color: rgb(228, 248, 226);
 	
 }
+body{
+	min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}

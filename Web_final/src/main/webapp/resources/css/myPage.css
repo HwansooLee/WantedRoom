@@ -25,3 +25,29 @@
   	margin: 1px;
   	margin-top: 5px;
 }
+.logoImg{
+	width: 200px;
+	display: block;
+	margin: -15px 0 -15px 0;
+}
+.card-img-top{
+	display: block;
+	margin: 10px auto;
+	width: 30%;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+.card-title{
+	text-align: center;
+}
+.card-text{
+	text-align: center;
+	margin: auto;
+}
+.myPageMenu{
+	width: 30%;
+	height: 100%;
+	margin: 0 15px 0 15px;
+}

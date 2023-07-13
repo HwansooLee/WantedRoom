@@ -1,16 +1,30 @@
 @charset "UTF-8";
-#custom-css-searchbar{
-	margin-top: -200;
-    box-shadow:2px 2px 5px;
-  }
 
-  label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
+.searchDiv{
+	border: 2.5px solid green;
+	width: 260px;
+    height: 45px;
+    border-radius: 15px;
+    margin-left: 50px;
+}
+.inputSword{
+	margin: 5px;
+	border: 0;
+	outline: none;
 }
 
+.submitBtn{
+	font-size: 15px;
+  	border: none;
+  	background-color: #22af12;
+  	width: 50px;
+  	height: 30px;
+  	border-radius: 15px;
+  	color: #fff;
+  	cursor: pointer;
+  	margin: 1px;
+  	margin-top: 5px;
+}
 [type="checkbox"] {
     appearance: none;
     position: relative;
@@ -41,3 +55,5 @@
     background-color: tomato;
     border-color: tomato;
 }
+
+

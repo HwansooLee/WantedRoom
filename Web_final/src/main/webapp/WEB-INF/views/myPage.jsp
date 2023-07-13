@@ -34,10 +34,10 @@
 					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
 					</li>
 				</ul>
-				<div class = "searchDiv">
+				<div class = "searchDiv border-success">
 					<form action="searchItem" method="get">
 						<input type="text" name="sword" placeholder="검색할 주소 입력" class = "inputSword">
-						<input type="submit" value="검색" class = "submitBtn">
+						<input type="submit" value="검색" class = "submitBtn btn-success">
 					</form>
 				</div>
 				<span class = "navbar-text">

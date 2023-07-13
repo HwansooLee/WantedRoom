@@ -41,3 +41,9 @@
     background-color: tomato;
     border-color: tomato;
 }
+.logoImg{
+	width: 200px;
+	display: block;
+	margin: -15px 0 -15px 0;
+
+}

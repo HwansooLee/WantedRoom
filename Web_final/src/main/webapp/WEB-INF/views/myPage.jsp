@@ -13,34 +13,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<style>
-	.logoImg{
-		width: 200px;
-		display: block;
-		margin: -15px 0 -15px 0;
-	}
-	.card-img-top{
-		display: block;
-		margin: 10px auto;
-		width: 30%;
-	}
-	a{
-		text-decoration: none;
-		color: black;
-	}
-	.card-title{
-		text-align: center;
-	}
-	.card-text{
-		text-align: center;
-		margin: auto;
-	}
-	.myPageMenu{
-		width: 30%;
-		height: 100%;
-		margin: 0 15px 0 15px;
-	}
-</style>
+<link rel="stylesheet" href = "resources/css/myPage.css">
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">
@@ -61,6 +34,12 @@
 					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
 					</li>
 				</ul>
+				<div class = "searchDiv">
+					<form action="searchItem" method="get">
+						<input type="text" name="sword" placeholder="검색할 주소 입력" class = "inputSword">
+						<input type="submit" value="검색" class = "submitBtn">
+					</form>
+				</div>
 				<span class = "navbar-text">
 					<button type="button" class="btn btn-outline-secondary" id = "logOutBtn">로그아웃</button>
 				</span>

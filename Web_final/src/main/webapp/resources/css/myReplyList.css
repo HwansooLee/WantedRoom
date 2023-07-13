@@ -1,0 +1,25 @@
+@charset "UTF-8";
+.page-item.active .page-link {
+ z-index: 1;
+ color : green;
+ font-weight:bold;
+ background-color: rgb(177, 245, 171);
+ border-color: #ccc;
+ 
+}
+
+.page-link {
+  color: green; 
+  background-color: #fff;
+  font-weight:bold;
+  border: 1px solid #ccc; 
+}
+
+thead{
+	background-color: #939393;	
+	font-weight:bold;
+}
+
+tbody{
+	background-color: #cacaca;
+}

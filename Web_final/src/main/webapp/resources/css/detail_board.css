@@ -1,22 +1,21 @@
 @charset "UTF-8";
-$heart-red: #cd0928;
-$heart-default-color: #000;
-
 #like-button:hover {
     cursor: pointer;
-    color: $heart-red;
+    color: red;
 }
 
 #like-button.not-liked {
-    color: $heart-default-color;
+    color: white;
 }
 
 #like-button.not-liked:hover {
-    color: $heart-red;
+  background-color: red;
+    color: red;
 }
 
 #like-button.liked {
-    color: $heart-red;
+  background-color: red;
+    color: red;
 }
 
 #like-button.liked-shaked {
@@ -43,4 +42,12 @@ $heart-default-color: #000;
   40%, 60% {
     transform: translate3d(0, -2px, 0) rotate(-5deg);
   }
+}
+body{
+	min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
 }

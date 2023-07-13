@@ -186,7 +186,14 @@ html {
     color: rgba(255,255,255,.6);
   }
 
-  
   .orange-btn{
     background: rgba(87,198,255,.5);
   }
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}

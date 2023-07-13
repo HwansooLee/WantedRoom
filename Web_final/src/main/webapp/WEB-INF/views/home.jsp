@@ -9,14 +9,11 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0a14867b453fb95c4b9fd54e4b68e47&libraries=services,clusterer,drawing"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href = "resources/css/home.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-<link href = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel = "stylesheet">
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
 	<!--nav-->
     <nav class="navbar bg-light fixed-top">
@@ -76,25 +73,15 @@
             </div>
         </div>
     </nav>
+    <br><br><br><br><br><br><br>
     <!--search bar-->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3" style = "margin-top: -150px;">
-                <div id="custom-css-searchbar">
-                    <div class="input-group col-md-12">
-                        <form action="searchItem" method="get" id = "searchItem">
-                            <input type="text" class="form-control input-lg" name="sword" placeholder="검색할 주소 입력" value = "" id = "centerAddr">
-                        </form>
-                        <span class="input-group-btn">
-                            <button class="btn btn-lg" id="custom-button" type="button">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class = "searchDiv" style = "border: 2.5px solid green;width: 500px;height: 45px;border-radius: 15px;margin: auto;">
+		<form action="searchItem" method="get" id = "searchItem">
+			<input type="text" name="sword" placeholder="검색할 주소 입력" class = "inputSword" id = "centerAddr" style = "margin: 5px;border: 0;outline: none;width: 420px">
+			<input type="button" value="검색" class = "submitBtn" id="custom-button" 
+			style = "font-size: 15px;border: none;background-color: #22af12;width: 50px;height: 30px;border-radius: 15px;color: #fff;cursor: pointer;margin: 1px;margin-top: 5px;">
+		</form>
+	</div>
 	<br>
 	<!-- 지도 -->
 	<section>

@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <!--logo-->
             <a class="navbar-brand" href="<%=request.getContextPath()%>/">
-                <img src="resources/image/logo.png" width="300">
+                <img src="resources/image/logo.png" width="200">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar" style="background-color: lightgreen;">

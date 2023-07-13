@@ -29,6 +29,11 @@ public class MyPageController {
 	public String myPage(Locale locale, Model model,
 			HttpSession session) {
 		model.addAttribute("realtorNo",(String) session.getAttribute("realtorNo"));
+		if( (String)session.getAttribute("realtorNo") == null ){
+            model.addAttribute("authenticated", false);
+        }else {
+        	model.addAttribute("authenticated", true);
+        }
 		return "myPage";
 	}
 	

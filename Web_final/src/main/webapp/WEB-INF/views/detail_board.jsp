@@ -14,46 +14,78 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href = "././resources/css/detail_board.css"></link>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+	textarea{
+		display: block;
+		width: 100%;
+		height: 100%;
+		resize: none;
+	}
+	#contentText{
+		border: none;
+		padding: 10px 10px 10px 10px;
+	}
+	#replyCon{
+		padding: 10px 10px 10px 10px;
+	}
+	.text-success{
+		padding: 0;
+		margin: 10px 10px 10px 10px;
+	}
+	#replyBtn{
+		width: 10%;
+		display: block;
+		margin-left: 89%;
+	}
+	#pageArea{
+		margin-bottom: 10px;
+	}
+</style>
 <body>
 <a href = "<%=request.getContextPath()%>/">
 	<img src = "resources/image/logo.png" width = "300">
 </a>
 <div class="card border-success mb-3" style = "margin: 0 auto; width: 80%;margin-top: 50px;">
 	 <div class="card-header">
-	 	<table border = "1" class = "table">
+	 	<table class = "table">
+			<tr>
+				<td>제목</td>
+				<td colspan="5">${boardvo.title}</td>	
+			</tr>
+			<tr>
+				<td width="10%">닉네임</td>
+				<td width="25%">${boardvo.nickname}</td>
+				<td width="10%">주소지</td>
+				<td width="35%">${boardvo.addr}</td>
+				<td width="10%">조회수</td>
+				<td width="10%" style="text-align: right;">${boardvo.views}</td>
+			</tr>
 			<tr>
 				<td>게시글번호</td>
 				<td>${boardvo.boardNo}</td>
-				<td>닉네임</td>
-				<td>${boardvo.nickname}</td>
-				<td>주소지</td>
-				<td>${boardvo.addr}</td>
 				<td>작성일</td>
-				<td>${boardvo.inDate}</td>
-				<td>조회수</td>
-				<td>${boardvo.views}</td>	
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td colspan = "700">${boardvo.title}</td>	
+				<td colspan="3">${boardvo.inDate}</td>
 			</tr>
 		</table>
 	 </div>
 	 <div class="card-body text-success" style = "text-align: center;">
-		<textarea rows = "25" cols = "115" readonly>${boardvo.content}</textarea>
+		<textarea id="contentText" readonly>${boardvo.content}</textarea>
 	</div>
 	<!-- 여기는 댓글 공간 -->
 	<br>
 	<!-- 댓글수는 비동기방식으로 받아오는 객체가 null이 아닌경우 삼항연산자로 업데이트 해줄것 -->
-	<div id = "replyCnt" style = "margin-left: 10px;">댓글</div>
+	<div id = "replyCnt" style = "margin-left: 20px;">댓글</div>
 	<br>
 	<!-- 댓글 작성 공간 먼저 댓글은 비동기 방식으로 전송 -->
-	<textarea rows="5" cols="115" id = "replyCon" placeholder="댓글을 입력하세요 :)"></textarea>
+	<div class="card-body text-success" style = "text-align: center;">
+		<textarea rows="3" cols="115" id = "replyCon" placeholder="댓글을 입력하세요 :)"></textarea>
+	</div>
+	
 	<input type = "button" value = "작성" id = "replyBtn">
 	<!-- 달린 댓글들의 공간  좋아요 버튼 누르면 비동기 방식으로 업데이트 -->
 	<input type = "hidden" value = "" id = "page">
 	<div>
-		<table border = "1" class = "table">
+		<table class = "table">
 			<thead>
 				<tr>
 					<td><strong>닉네임</strong></td>

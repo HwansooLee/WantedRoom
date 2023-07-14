@@ -68,8 +68,16 @@
         top: 50%;
         transform: translateY(-50%);
     }
+    .carousel-item{
+        height: 100%;
+    }
     .carousel-item img{
-        position: relative;
+        position: absolute; 
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
     }
 </style>
 <body>
@@ -123,15 +131,15 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="button" value="전세" id="rentType"></td>
+                    <td colspan="2"><input type="button" value="월세" id="rentType"></td>
                 </tr>
                 <tr>
                     <td><span>보증금</span></td>
-                    <td><span id="depositText">${item.deposit} 원</span></td>
+                    <td><span>${item.deposit} 원</span></td>
                 </tr>
                 <tr>
                     <td><span>월세</span></td>
-                    <td><span>${item.rent} 원</span></td>
+                    <td><span id="rentText">${item.rent} 원</span></td>
                 </tr>
                 <tr>
                     <td><span>옵션</span></td>
@@ -245,9 +253,9 @@
 	</footer>
 </body>
 	<script>
-        let depositTextVal = $('#depositText').text().replace(' 원', '');
-        if( $('#depositText').val == '0' )
-            $('#rentType').val('월세');        
+        let rentTextVal = $('#rentText').text().replace(' 원', '');
+        if( rentTextVal == '0' )
+            $('#rentType').val('전세');
 
         let parkTag = $('#parking').val() == '주차가능' ? 'positiveTag' : 'negativeTag';
         $('#parking').addClass(parkTag);

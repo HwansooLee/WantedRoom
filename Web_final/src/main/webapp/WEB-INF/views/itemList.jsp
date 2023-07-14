@@ -10,66 +10,95 @@
 <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href = "resources/css/itemList.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+.submitBtn {
+	font-size: 15px;
+	border: none;
+	background-color: #198754;
+	width: 50px;
+	height: 30px;
+	border-radius: 15px;
+	color: #fff;
+	cursor: pointer;
+	margin: 1px;
+	margin-top: 5px;
+	margin-left: 9px;
+}
+
+.searchDiv {
+	margin: 20px;
+	border: 1.5px solid;
+	width: 260px;
+	height: 45px;
+	border-radius: 15px;
+	margin-left: 50px;
+	background-color: none;
+}
+
+.inputSword {
+	margin: -3;
+	margin-left: 5px;
+	border: 0;
+	outline: none;
+	height: 100%;
+	background-color: transparent;
+}
+.logoImg{
+	width: 200px;
+	display: block;
+	margin: -15px 0 -15px 0;
+}
+</style>
 <body>
 <!--nav-->
-    <nav class="navbar bg-light fixed-top">
-        <div class="container-fluid">
-            <!--logo-->
-            <a class="navbar-brand" href="<%=request.getContextPath()%>/">
-                <img src="resources/image/logo.png" width="200">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" style="background-color: lightgreen;">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">menu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a href="" id="addItem">매물 등록</a>
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<!-- 홈페이지 로고 -->
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
+				class="logoImg" src="resources/image/logo.png">
+			</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="" id="addItem">매물 등록</a></li>
+					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
+					</li>
+					<c:if test="${id eq null}">
+						<li class="nav-item">
+							<a class="nav-link" href="signIn">로그인</a>
                         </li>
-                        <br>
                         <li class="nav-item">
-                            <a href="boardList">리뷰</a>
-                        </li>
-                        <br>
-                        <c:if test="${id eq null}">
-                            <li class="nav-item">
-                                <a href="signIn">로그인</a>
-                            </li>
-                            <br>
-                            <li class="nav-item">
-                                <a href="signUp">회원가입</a>
-                            </li> 
-                        </c:if>
-                        <c:if test="${id ne null}">
-                            <li class="nav-item">
-                                <a href="myPage">${nickname}</a>
-                            </li>
-                            <br>
-                            <li class="nav-item">
-                                <a href="signOut">로그아웃</a>
-                            </li>
-                        </c:if>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <br><br><br><br><br><br><br>
-	<!-- 검색창 -->
-	<div class = "searchDiv">
-		<form action="searchItem" method="get">
-			<input type="text" name="sword" placeholder="검색할 주소 입력" class = "inputSword">
-			<input type="submit" value="검색" class = "submitBtn">
-		</form>
-	</div>
-
+                           	<a class="nav-link" href="signUp">회원가입</a>
+                        </li> 
+                    </c:if>
+                    <c:if test="${id ne null}">
+                       	<li class="nav-item">
+                           	<a class="nav-link" href="myPage">${nickname}</a>
+                       	</li>
+                    </c:if>
+				</ul>
+				<div class="searchDiv border-success">
+					<form action="searchItem" method="get">
+						<input type="text" name="sword" placeholder="검색할 주소 입력"
+							class="inputSword"> <input type="submit" value="검색"
+							class="submitBtn btn-success">
+					</form>
+				</div>
+				<c:if test="${id ne null}">
+					<span class="navbar-text">
+						<button type="button" class="btn btn-outline-secondary"
+							id="logOutBtn">로그아웃</button>
+					</span>
+				</c:if>
+			</div>
+		</div>
+	</nav>
 	<!-- 매물 리스트 -->
 <div class = "card-group">
 	<c:forEach var="item" items="${itemList}" varStatus = "idx">
@@ -98,23 +127,6 @@
 				</div>
 			</div>
 		</div>
-<%-- 		<c:if test = "${idx.index%2 == 1}">
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		</c:if> --%>
-		<%-- <div class="itemDiv">
-			<a href="itemDetail?itemNo=${item.itemNo}" class="fillDiv">
-				<input type="button" value="${item.status}"><br>
-				<img src="download?fileName=${item.fileName}"><br>
-				<span id="img">이미지 : ${item.fileName}</span><br>
-				<span id="itemNo">매물번호 : ${item.itemNo}</span><br>
-				<span>매물주소 : ${item.addr}</span><br>
-				<span>보증금 : ${item.deposit}</span><br>
-				<span>월세 : ${item.rent}</span><br>
-				<input type="button" value="#주차${item.parking}">
-				<input type="button" value="#엘리베이터${item.elevator}">
-				<input type="button" value="#${item.buildingType}">
-			</a>
-		</div> --%>
 	</c:forEach>
 </div>
 	<br>

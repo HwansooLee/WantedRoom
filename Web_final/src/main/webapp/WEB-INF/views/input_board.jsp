@@ -18,7 +18,7 @@
 	<img src = "resources/image/logo.png" width = "300">
 </a>
 <section>
-	<div class="card border border-success" style="width: 70%;height: 100%">
+	<div class="card border border-success" style="width: 70%;height: 100%;text-align: center;">
 	  <div class="card-body">
 	    <h5 class="card-title">게시글 작성 폼</h5>
 	    <br>

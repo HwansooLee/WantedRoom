@@ -7,11 +7,10 @@
 <meta charset="UTF-8">
 <title>공인중개사 등록번호 등록폼</title>
 </head>
+<script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href = "resources/css/myPage.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <style>
 	body{
 		min-height: 100vh;
@@ -21,13 +20,72 @@
 	footer{
 		margin-top: auto;
 	}
+	section{
+		width: 100%; 
+        height: 60vh; 
+        display: -webkit-box; 
+        display: -moz-box;
+        display: -ms-flexbox; 
+        display: flex; 
+ 
+        -webkit-box-align: center; 
+        -moz-box-align: center;
+        -ms-flex-align: center;
+        align-items: center; /* 수직 정렬 */
+ 
+        -webkit-box-pack: center;
+        -moz-box-pack: center; 
+        ms-flex-pack: center; 
+        justify-content: center; /* 수평 정렬 */
+	}	
+	#regBtn{
+		background-color:skyblue;
+		border:none;
+	}
 </style>
 <body>
-<div>공인중개사 등록번호를 입력해주세요.</div>
-<form action="regRealtorSave" method = "post" id = "frm">
-	<input type = "text" id = "realtorNo" name = "realtorNo" placeholder="-도 같이 입력해주세요" maxlength="16">
-	<input type = "button" id = "regBtn" value = "등록">
-</form>
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<!-- 홈페이지 로고 -->
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/">
+				<img class="logoImg" src="resources/image/logo.png">
+			</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
+					</li>
+				</ul>
+				<div class = "searchDiv border-success">
+					<form action="searchItem" method="get">
+						<input type="text" name="sword" placeholder="검색할 주소 입력" class = "inputSword">
+						<input type="submit" value="검색" class = "submitBtn btn-success">
+					</form>
+				</div>
+				<span class = "navbar-text">
+					<button type="button" class="btn btn-outline-secondary" id = "logOutBtn">로그아웃</button>
+				</span>
+			</div>
+		</div>
+	</nav>
+	<!-- 공인중개사번호 입력 공간 -->
+	<section>
+		<div class="card border border-success" style = "width: 30%;height:20%;">
+			<div class="card-body">
+			<div class="card-title">공인중개사 등록번호를 입력해주세요.</div>
+				<form class="card-text" action="regRealtorSave" method = "post" id = "frm">
+					<input type = "text" id = "realtorNo" name = "realtorNo" placeholder="-도 같이 입력해주세요" maxlength="16">
+					<input type = "button" id = "regBtn" value = "등록">
+				</form>
+			</div>
+		</div>
+	</section>
+
 	<footer class="text-center text-lg-start bg-light text-muted">
 		<hr>
 		<!-- Section: Links  -->
@@ -115,6 +173,10 @@
                 }
             }  
         };
+	});
+	
+	$('#logOutBtn').on('click', () => {
+		location.href = "signOut";
 	});
 </script>
 </html>

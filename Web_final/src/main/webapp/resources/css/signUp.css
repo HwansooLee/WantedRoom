@@ -15,20 +15,7 @@ html {
     height: auto;
   }
   
-  /* Login container */
-  #container{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    width: 400px;
-    height: 700px; /* 높이 조정 */
-    border-radius: 5px;
-    background: rgba(3,3,3,0.25);
-    box-shadow: 1px 1px 50px #000;
-  }
+
   
   .close-btn{
     position: absolute;
@@ -51,66 +38,7 @@ html {
   .close-btn:hover{
     opacity: .5;
   }
-  
-  /* Heading */
-  h1{
-    font-family: 'Open Sans Condensed', sans-serif;
-    position: relative;
-    margin-top: 0px;
-    text-align: center;
-    font-size: 40px;
-    color: #ddd;
-    text-shadow: 3px 3px 10px #000;
-  }
-
-  div.textFix{
-    font-family: 'Open Sans Condensed', sans-serif;
-    position: relative;
-    margin-top: 0px;
-    text-align: left;
-    font-size: 20px;
-    color: #1f1616;
-    text-shadow: 3px 3px 10px #4d4c4c;
-    margin-left: 30px;
-  }
-  
-  /* Inputs */
-  a,
-  input{
-    font-family: 'Open Sans Condensed', sans-serif;
-    text-decoration: none;
-    position: relative;
-    width: 80%;
-    display: block;
-    margin: 9px auto;
-    font-size: 17px;
-    color: #fff;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-    background: rgba(3,3,3,.1);
-    -webkit-transition: all 2s ease-in-out;
-    -moz-transition: all 2s ease-in-out;
-    -o-transition: all 2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  input:focus{
-    outline: none;
-    box-shadow: 3px 3px 10px #333;
-    background: rgba(3,3,3,.18);
-  }
-  
-  /* Placeholders */
-  ::-webkit-input-placeholder {
-     color: #ddd;  }
-  :-moz-placeholder { /* Firefox 18- */
-     color: red;  }
-  ::-moz-placeholder {  /* Firefox 19+ */
-     color: red;  }
-  :-ms-input-placeholder {  
-     color: #333;  }
-  
+    
   /* Link */
   input[type = button]{
     font-family: 'Open Sans Condensed', sans-serif;
@@ -168,7 +96,7 @@ html {
     left: 20px;
   }
   
-  #forgotten{
+  #signUp{
     position: absolute;
     font-size: 12px;
     font-family: 'Hind', sans-serif;
@@ -182,18 +110,10 @@ html {
     transition: all 0.2s ease-in-out;
   }
   
-  #forgotten:hover{
+  #signUp:hover{
     color: rgba(255,255,255,.6);
   }
 
   .orange-btn{
     background: rgba(87,198,255,.5);
   }
-body{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-footer{
-    margin-top: auto;
-}

@@ -8,20 +8,123 @@
 <title>회원가입 폼</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href = "resources/css/signUp.css">
-<body>
-	<div id="container">
-        <h1>회원가입</h1>
-        <span class="close-btn">
-            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
-        </span>
+<style>
+  	/* Login container */
+	#container{
+		margin: auto;
+		width: 25%;
+		height: 75%;
+		border: 1px solid #14A44D;
+		border-radius: 5px;
+		background: white;
+		box-shadow: none;
+	}
+	a{
+		font-family: 'Open Sans Condensed', sans-serif;
+		text-decoration: none;
+		position: relative;
+		width: 80%;
+		display: block;
+		margin: 9px auto;
+		font-size: 17px;
+		color: black;
+		padding: 8px;
+		border-radius: 6px;
+		background: white;
+		border: 1px solid #14A44D;
+		-webkit-transition: all 2s ease-in-out;
+		-moz-transition: all 2s ease-in-out;
+		-o-transition: all 2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+	/* Inputs */
+	input{
+		font-family: 'Open Sans Condensed', sans-serif;
+		text-decoration: none;
+		position: relative;
+		width: 80%;
+		display: block;
+		margin: 9px auto;
+		font-size: 17px;
+		color: black;
+		padding: 8px;
+		border-radius: 6px;
+		background: white;
+		border: 1px solid gray;
+		-webkit-transition: all 2s ease-in-out;
+		-moz-transition: all 2s ease-in-out;
+		-o-transition: all 2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+	input:focus{
+		outline: none;
+		box-shadow: 3px 3px 10px #333;
+		background: white;
+		border: 1px solid #14A44D;
+	}
+	div.textFix{
+		font-family: 'Open Sans Condensed', sans-serif;
+		position: relative;
+		margin-top: 0px;
+		text-align: left;
+		font-size: 18px;
+		color: black;
+		margin-left: 30px;
+	}
+	/* Placeholders */
+	::-webkit-input-placeholder {
+		color: gray;  }
+	:-moz-placeholder { /* Firefox 18- */
+		color: red;  }
+	::-moz-placeholder {  /* Firefox 19+ */
+		color: red;  }
+	:-ms-input-placeholder {  
+		color: #333;  }
 
+	#logoArea{
+		border: none;
+		align-content: center;
+	}
+	#submitBtn{
+		background-color: #14A44D;
+	}
+	#certification{
+		background-color: #14A44D;
+	}
+	#submitBtn:hover, #certification:hover{
+		box-shadow: 3px 3px 10px #333;
+		opacity: 1;
+	}
+	#logoArea{
+		display: block;
+		width: 27%;
+	}
+	/* body{
+		min-height: 100%;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: -200px;
+	} */
+	/* footer{
+		margin-top: auto;
+	} */
+</style>
+<body>
+	<a id="logoArea" href = "<%=request.getContextPath()%>/">
+		<img src = "resources/image/logo.png">
+	</a>
+	<div id="container"><br>
         <form id = "frm" action = "signUp_save" method = "POST">
             <div class="textFix">아이디*</div>
             <div>
                 <input type = "email" id = "id" name = "id" placeholder="Email" maxlength="30">
                 <input type = "button" value = "본인인증" id = "certification">
-                <div><font id = "idchk" style="margin: 10px; margin-left: 30px;"></font></div>
+                <div><font id = "idchk"></font></div>
                 <div>
                     <input type = "text" id = "certiNumber" placeholder = "인증번호 6자리를 입력해주세요." disabled = "disabled" maxlength = "6">
                     <font id = "mailChk" style="margin: 10px; margin-left: 30px;"></font>
@@ -35,7 +138,7 @@
             <div class="textFix">비밀번호*</div>
             <input type = "password" id = "pwd" name = "pwd" placeholder="특문,영문대소문자 포함 8자리이상" maxlength="20">
             <div><font id = passChk style="margin: 10px; margin-left: 30px;"></font></div>
-            <div class="textFix">*은 필수 입력 사항 입니다.</div>
+            <div class="textFix">*은 필수 입력 사항 입니다.</div><br>
             <input type = "button" id = "submitBtn" value = "회원가입">
         </form>
     </div>

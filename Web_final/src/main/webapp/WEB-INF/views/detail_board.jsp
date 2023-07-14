@@ -15,6 +15,26 @@
 <link rel="stylesheet" href = "././resources/css/detail_board.css"></link>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <style>
+	#like-button:hover {
+		cursor: pointer;
+		color: red;
+	}
+	#like-button.not-liked {
+		color: red;
+	}
+	#like-button.not-liked:hover {
+		color: red;
+	}
+	#like-button.liked {
+		color: red;
+	}
+	#like-button.liked-shaked {
+		animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+		transform: translate3d(0, 0, 0) rotate(0deg);
+		transform: rotate(0deg);
+		backface-visibility: hidden;
+		perspective: 1000px;
+	}
 	textarea{
 		display: block;
 		width: 100%;

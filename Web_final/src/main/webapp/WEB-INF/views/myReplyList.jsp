@@ -12,11 +12,31 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href = "resources/css/myReplyList.css">
+<style>
+	thead{
+		background-color: #D1E7DD;
+		font-weight: bold;
+		border-color: black;
+		border-bottom-width: 2px;
+	}
+	tbody{
+		background-color: #D1E7DD;
+		border-color: #ccc;
+	}
+	section{
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 	<a href = "<%=request.getContextPath()%>/">
 		<img src = "resources/image/logo.png" width = "200">
 	</a>
+	<br><br><br><br><br><br><br>
+	<section>
+		<h3><strong>내 댓글 목록</strong></h3>
+	</section>
+	<br><br>
 <table border = "1" class = "table">
 	<thead>
 		<tr>

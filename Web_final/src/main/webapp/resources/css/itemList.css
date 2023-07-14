@@ -1,48 +1,18 @@
 @charset "UTF-8";
-.searchDiv{
-	margin: 20px;
-	border: 1.5px solid;
-	width: 260px;
-    height: 45px;
-    border-radius: 15px;
-    margin-left: 50px;
-	background-color: none;
-}
-.inputSword{
-	margin: 5px;
-	border: 0;
-	outline: none;
-	height: 100%;
-	background-color: transparent;
-}
-.submitBtn{
-	font-size: 15px;
-  	border: none;
-	background-color: #198754;
-  	width: 50px;
-  	height: 30px;
-  	border-radius: 15px;
-  	color: #fff;
-  	cursor: pointer;
-  	margin: 1px;
-	margin-top: 5px;
-}
-.logoImg{
-	width: 200px;
-	display: block;
-	margin: -15px 0 -15px 0;
-}
-
-.itemDiv{
+/* .card-body{
+	display: grid;
+	height: 430px;
+} */
+.itemDiv {
 	margin: 0 auto;
-	height: 400px;
- 	width: 25%;
- 	height: 30%;
- 	diplay: flex;	
+	height: 430px;
+	width: 25%;
+	float: left;
+	display: flex;
 }
 a.fillDiv{
 	display: block;
-	height: 100%;
+	height: 90%;
 	width: 100%;
 	text-decoration: none;
 }
@@ -63,6 +33,25 @@ a.fillDiv{
 .soldBtn{
 	background-color: chocolate;
 }
+section{
+	text-align: center;
+}
+.itemImg{
+	width: 16rem;
+	height: 12rem;
+}
+button{
+	border: 1px solid rgba(0, 0, 0, 0.733);
+	border-radius: 4px;
+}
+a{
+	color: black;
+	text-decoration: none;
+}
+form{
+	height: 1rem;
+}
+
 body{
 	min-height: 100vh;
     display: flex;

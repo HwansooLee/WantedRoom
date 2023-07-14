@@ -21,7 +21,7 @@
   	/* Login container */
 	#container{
 		margin: auto;
-		width: 25%;
+		width: 28%;
 		height: 75%;
 		border: 1px solid #14A44D;
 		border-radius: 5px;
@@ -108,15 +108,15 @@
 		display: block;
 		width: 27%;
 	}
-	/* body{
+	body{
 		min-height: 100%;
 		display: flex;
 		flex-direction: column;
 		margin-bottom: -200px;
-	} */
-	/* footer{
+	} 
+	footer{
 		margin-top: auto;
-	} */
+	}
 </style>
 <body>
 	<a id="logoArea" href = "<%=request.getContextPath()%>/">
@@ -127,10 +127,10 @@
             <div class="textFix">아이디*</div>
             <div>
                 <input type = "email" id = "id" name = "id" placeholder="Email" maxlength="30">
-                <input type = "button" value = "본인인증" id = "certification">
+                <input type = "button" value = "메일인증" id = "certification">
                 <div><font id = "idchk"></font></div>
                 <div>
-                    <input type = "text" id = "certiNumber" placeholder = "인증번호 6자리를 입력해주세요." disabled = "disabled" maxlength = "6">
+                    <input type = "text" id = "certiNumber" placeholder = "인증번호 6자리 입력" disabled = "disabled" maxlength = "6">
                     <font id = "mailChk" style="margin: 10px; margin-left: 30px;"></font>
                 </div>
             </div>

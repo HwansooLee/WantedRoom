@@ -118,6 +118,14 @@
 		box-shadow: 3px 3px 10px #333;
 		opacity: 1;
 	}
+	body{
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+	footer{
+		margin-top: auto;
+	}
 </style>
 <body>
     <div id="container">

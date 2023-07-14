@@ -6,48 +6,19 @@
 <head>
 	<title>Home</title>
 </head>
-<script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href = "resources/css/itemList.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/menuBar.css">
+<link rel="stylesheet" href="resources/css/itemList.css">
+<link rel="stylesheet" href="resources/css/colorItemTag.css">
 <style>
-.submitBtn {
-	font-size: 15px;
-	border: none;
-	background-color: #198754;
-	width: 50px;
-	height: 30px;
-	border-radius: 15px;
-	color: #fff;
-	cursor: pointer;
-	margin: 1px;
-	margin-top: 5px;
-	margin-left: 9px;
-}
+	button[type="submit"]{
+		width: 100px;
+	}
 
-.searchDiv {
-	margin: 20px;
-	border: 1.5px solid;
-	width: 260px;
-	height: 45px;
-	border-radius: 15px;
-	margin-left: 50px;
-	background-color: none;
-}
-
-.inputSword {
-	margin: -3;
-	margin-left: 5px;
-	border: 0;
-	outline: none;
-	height: 100%;
-	background-color: transparent;
-}
-.logoImg{
-	width: 200px;
-	display: block;
-	margin: -15px 0 -15px 0;
-}
 </style>
 <body>
 <!--nav-->
@@ -65,8 +36,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="" id="addItem">매물 등록</a></li>
+					<li class="nav-item"><a class="nav-link"
+						aria-current="page" href="addItem" id="addItem">매물 등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
 					</li>
 					<c:if test="${id eq null}">
@@ -86,8 +57,8 @@
 				<div class="searchDiv border-success">
 					<form action="searchItem" method="get">
 						<input type="text" name="sword" placeholder="검색할 주소 입력"
-							class="inputSword"> <input type="submit" value="검색"
-							class="submitBtn btn-success">
+							class="inputSword"> 
+						<input type="submit" value="검색" class="submitBtn btn-success">
 					</form>
 				</div>
 				<c:if test="${id ne null}">
@@ -99,53 +70,80 @@
 			</div>
 		</div>
 	</nav>
-	<!-- 매물 리스트 -->
-<div class = "card-group">
-	<c:forEach var="item" items="${itemList}" varStatus = "idx">
-		<div class="itemDiv">
-			<div class="card" style="width: 18rem;">
-				<div class="card-body">
-					<p class="card-text">
-						<a href="itemDetail?itemNo=${item.itemNo}" class="fillDiv">	
-							<img src="download?fileName=${item.fileName}" class="card-img-top" style="height: 10rem;">
-							<c:if test="${item.status == '계약가능'}">
-								<input type="button" value="${item.status}"><br>
-							</c:if>
-							<c:if test="${item.status == '계약완료'}">
-								<input type="button" value="${item.status}" class="soldBtn"><br>
-							</c:if>
-							
-							<span id="itemNo">매물번호 : ${item.itemNo}</span><br>
-							<span>매물주소 : ${item.addr}</span><br>
-							<span>보증금 : ${item.deposit}</span><br>
-							<span>월세 : ${item.rent}</span><br>
-							<input type="button" value="#주차${item.parking}">
-							<input type="button" value="#엘리베이터${item.elevator}">
-							<input type="button" value="#${item.buildingType}">	
-						</a>
-					</p>
+	<div class="card-group">
+		<c:forEach var="item" items="${itemList}">
+			<div class="itemDiv">
+				<div class="card" style="width: 18rem;">
+					<div class="card-body">
+						<p class="card-text">
+							<a href="itemDetail?itemNo=${item.itemNo}" class="fillDiv">
+								<input type="button" value="${item.status}" class="statusBtn">
+								<img src="download?fileName=${item.fileName}" class="itemImg">
+								<table>
+									<thead>
+										<th style="width: 35%;"> </th>
+                    					<th style="width: 65%;"> </th>
+									</thead>
+									<tr>
+										<td><span>매물번호 : </span></td>
+										<td><span id="itemNo">${item.itemNo}</span></td>
+									</tr>
+									<tr>
+										<td><span>주소 : </span></td>
+										<td rowspan="3"><span>${item.addr}</span></td>
+									</tr>
+									<tr></tr>
+									<tr></tr>
+									<tr>
+										<td><span>보증금 :</span></td>
+										<td><span>${item.deposit} 원</span></td>
+									</tr>
+									<tr>
+										<td><span>월세 : </span></td>
+										<td><span>${item.rent} 원</span></td>
+									</tr>
+									<tr>
+										<td></td>
+									</tr>
+									<tr>
+										<td>
+											<input type="button" value="주차${item.parking}" class="parking">
+										</td>
+										<td>
+											<input type="button" value="엘리베이터${item.elevator}" class="elevator">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="button" value="${item.buildingType}" class="buildingType">
+										</td>
+										<td></td>
+									</tr>
+								</table> 
+							</a>
+						</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</c:forEach>
-</div>
+		</c:forEach>
+	</div>
 	<br>
 	<!-- paging -->
-<div class = "pageValue">
-	<ul class="pagination justify-content-center">
-		<li class="page-item ${pageVO.prev ? '' : 'disabled'}">
-			<a class="page-link" href="searchItem?page=${pageVO.startPage -1}&sword=${pageVO.sword}">이전</a>
-		</li>
-		<c:forEach begin="${pageVO.startPage}" end="${pageVO.endPage}" var="idx">
-			<li class="page-item ${idx eq pageVO.page ? 'active' : ''}">
-				<a class="page-link" href="searchItem?page=${idx}&sword=${pageVO.sword}">${idx}</a>
+	<div class = "pageValue">
+		<ul class="pagination justify-content-center">
+			<li class="page-item ${pageVO.prev ? '' : 'disabled'}">
+				<a class="page-link" href="searchItem?page=${pageVO.startPage -1}&sword=${pageVO.sword}">이전</a>
 			</li>
-		</c:forEach>
-		<li class="page-item ${pageVO.next ? '' : 'disabled'}">
-			<a class="page-link" href="searchItem?page=${pageVO.endPage +1}&sword=${pageVO.sword}">다음</a>
-		</li>
-	</ul>
-</div>
+			<c:forEach begin="${pageVO.startPage}" end="${pageVO.endPage}" var="idx">
+				<li class="page-item ${idx eq pageVO.page ? 'active' : ''}">
+					<a class="page-link" href="searchItem?page=${idx}&sword=${pageVO.sword}">${idx}</a>
+				</li>
+			</c:forEach>
+			<li class="page-item ${pageVO.next ? '' : 'disabled'}">
+				<a class="page-link" href="searchItem?page=${pageVO.endPage +1}&sword=${pageVO.sword}">다음</a>
+			</li>
+		</ul>
+	</div>
 	<footer class="text-center text-lg-start bg-light text-muted">
 		<hr>
 		<!-- Section: Links  -->
@@ -190,13 +188,22 @@
 	</footer>
 </body>
 <script type="text/javascript">
-$('#addItem').on('click', () => {
-	var authenticated = '${authenticated}';
-	if(authenticated == 'false'){
-		alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
-	}else{
-		$('#addItem').attr('href','addItemForm');
-	}
-});
+	$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
+	$('head').append('<script src=\'././resources/script/colorItemTag.js\'><\/script>');
+	$('.statusBtn').each((i, obj)=>{
+		if( $(obj).val() == '계약가능' )
+			$(obj).closest('.card').addClass('border-success');
+		else
+			$(obj).closest('.card').addClass('border-dark');
+	})
+
+	$('#addItem').on('click', () => {
+		var authenticated = '${authenticated}';
+		if(authenticated == 'false'){
+			alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
+		}else{
+			$('#addItem').attr('href','addItemForm');
+		}
+	});
 </script>
 </html>

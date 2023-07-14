@@ -11,89 +11,10 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/myPage.css">
-<style>
-	.itemDiv {
-		margin: 0 auto;
-		height: 90%;
-		width: 25%;
-		float: left;
-		/* diplay: flex; */
-	}
-	a.fillDiv{
-		display: block;
-		height: 100%;
-		width: 100%;
-		text-decoration: none;
-	}
-	.itemImg{
-		height: 180px;
-	}
-	.modifyItemBtn{
-		float: left;
-	}
-	.deleteItemBtn {
-		float: left;
-	}
-	body{
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-	}
-	footer{
-		margin-top: auto;
-	}
-	.submitBtn {
-		font-size: 15px;
-		border: none;
-		background-color: #198754;
-		width: 50px;
-		height: 30px;
-		border-radius: 15px;
-		color: #fff;
-		cursor: pointer;
-		margin: 1px;
-		margin-top: 5px;
-		margin-left: 9px;
-	}
-	.searchDiv {
-		margin: 20px;
-		border: 1.5px solid;
-		width: 260px;
-		height: 45px;
-		border-radius: 15px;
-		margin-left: 50px;
-		background-color: none;
-	}
-	.inputSword {
-		margin: -3;
-		margin-left: 5px;
-		border: 0;
-		outline: none;
-		height: 100%;
-		background-color: transparent;
-	}
-	.page-item.active .page-link {
-		z-index: 1;
-		color : #198754;
-		font-weight:bold;
-		background-color: rgb(177, 245, 171);
-		border-color: #ccc;
-	}
-	.page-link {
-		color:#198754; 
-		background-color: #fff;
-		font-weight:bold;
-		border: 1px solid #ccc; 
-	}
-	input[type=button]{
-		border:none;
-		/*border-radius:4px 가능 */
-	}
-	button{
-		border-radius:4px;
-	}
-</style>
+<!-- <link rel="stylesheet" href="resources/css/myPage.css"> -->
+<link rel="stylesheet" href="resources/css/menuBar.css">
+<link rel="stylesheet" href="resources/css/itemList.css">
+<link rel="stylesheet" href="resources/css/colorItemTag.css">
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">
@@ -109,10 +30,15 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="" id="addItem">매물 등록</a></li>
+					<li class="nav-item"><a class="nav-link"
+						aria-current="page" href="addItem" id="addItem">매물 등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
 					</li>
+					<c:if test="${id ne null}">
+						<li class="nav-item">
+							<a class="nav-link" href="myPage">${nickname}</a>
+						</li>
+				 	</c:if>
 				</ul>
 				<div class="searchDiv border-success">
 					<form action="searchItem" method="get">
@@ -127,25 +53,64 @@
 				</span>
 			</div>
 		</div>
-	</nav>
+	</nav><br><br><br>
+	<section>
+		<h3><strong>내 매물 목록</strong></h3>
+	</section><br><br>
 
 	<!-- 매물 리스트 -->
 	<div class="card-group">
 		<c:forEach var="item" items="${itemList}">
 			<div class="itemDiv">
-				<div class="card border-success" style="width: 18rem;">
+				<div class="card" style="width: 18rem;">
 					<div class="card-body">
 						<p class="card-text">
-							<a href="itemDetail?itemNo=${item.itemNo}" class="fillDiv"> <input
-								type="button" value="${item.status}"><br> <img
-								src="download?fileName=${item.fileName}" class="itemImg"><br> 
-								<span id="itemNo">매물번호 : ${item.itemNo}</span><br>
-								<span>매물주소 : ${item.addr}</span><br> <span>보증금 : ${item.deposit}</span><br>
-								<span>월세 : ${item.rent}</span><br>
-								<input type="button" value="주차${item.parking}">
-								<input type="button" value="엘리베이터${item.elevator}">
-								<input type="button" value="${item.buildingType}"><br>
+							<a href="itemDetail?itemNo=${item.itemNo}" class="fillDiv">
+								<input type="button" value="${item.status}" class="statusBtn">
+								<img src="download?fileName=${item.fileName}" class="itemImg">
+								<table>
+									<thead>
+										<th style="width: 35%;"> </th>
+                    					<th style="width: 65%;"> </th>
+									</thead>
+									<tr>
+										<td><span>매물번호 : </span></td>
+										<td><span id="itemNo">${item.itemNo}</span></td>
+									</tr>
+									<tr>
+										<td><span>주소 : </span></td>
+										<td rowspan="3"><span>${item.addr}</span></td>
+									</tr>
+									<tr></tr>
+									<tr></tr>
+									<tr>
+										<td><span>보증금 :</span></td>
+										<td><span>${item.deposit} 원</span></td>
+									</tr>
+									<tr>
+										<td><span>월세 : </span></td>
+										<td><span>${item.rent} 원</span></td>
+									</tr>
+									<tr>
+										<td></td>
+									</tr>
+									<tr>
+										<td>
+											<input type="button" value="주차${item.parking}" class="parking">
+										</td>
+										<td>
+											<input type="button" value="엘리베이터${item.elevator}" class="elevator">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="button" value="${item.buildingType}" class="buildingType">
+										</td>
+										<td></td>
+									</tr>
+								</table> 
 							</a>
+							<br>
 							<table>
 								<tr>
 									<td>
@@ -166,6 +131,7 @@
 									</td>
 								</tr>
 							</table>	
+						</p>
 					</div>	
 				</div>
 			</div>
@@ -232,38 +198,50 @@
 	</footer>
 </body>
 <script>
-		const DELETE_CONFIRM_WORD = '삭제';
-		$('.deleteItemBtn').on('click',(e)=>{
-			let checkResult = prompt('정말 해당 매물을 삭제하시겠습니까? 삭제하려면 삭제를 입력하세요.');
-			if( checkResult == DELETE_CONFIRM_WORD ){
-				let itemNoVal = $(e.target).next().val();
-				$.ajax({
-						url: 'deleteItem',
-						type: 'POST',
-						data:{
-							itemNo : itemNoVal
-						},
-						success: ()=>{
-							alert('삭제 완료하였습니다.');
-							$(e.target).parent().submit();
-						}
-					});	
-			}				
-			else
-				alert('삭제 취소하였습니다.');
-		});
-		
-		$('#logOutBtn').on('click', () => {
-			location.href = "signOut";
-		});
-		
-		$('#addItem').on('click', () => {
-			var authenticated = '${authenticated}';
-			if(authenticated == 'false'){
-				alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
-			}else{
-				$('#addItem').attr('href','addItemForm');
-			}
-		});
-	</script>
+	$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
+	$('head').append('<script src=\'././resources/script/colorItemTag.js\'><\/script>');
+	$('.statusBtn').each((i, obj)=>{
+		if( $(obj).val() == '계약가능' )
+			$(obj).closest('.card').addClass('border-success');
+		else
+			$(obj).closest('.card').addClass('border-dark');
+	})
+	// increase height by 50 px for include modify and delete buttons in border
+	let itemHeight = $('.itemDiv').css('height').replace('px', '');
+	$('.itemDiv').css('height', parseInt(itemHeight) + 50);
+
+	const DELETE_CONFIRM_WORD = '삭제';
+	$('.deleteItemBtn').on('click',(e)=>{
+		let checkResult = prompt('정말 해당 매물을 삭제하시겠습니까? 삭제하려면 삭제를 입력하세요.');
+		if( checkResult == DELETE_CONFIRM_WORD ){
+			let itemNoVal = $(e.target).parent().next().val();
+			$.ajax({
+					url: 'deleteItem',
+					type: 'POST',
+					data:{
+						itemNo : itemNoVal
+					},
+					success: ()=>{
+						alert('삭제 완료하였습니다.');
+						$(e.target).parent().parent().submit();
+					}
+				});	
+		}				
+		else
+			alert('삭제 취소하였습니다.');
+	});
+	
+	$('#logOutBtn').on('click', () => {
+		location.href = "signOut";
+	});
+	
+	$('#addItem').on('click', () => {
+		var authenticated = '${authenticated}';
+		if(authenticated == 'false'){
+			alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
+		}else{
+			$('#addItem').attr('href','addItemForm');
+		}
+	});
+</script>
 </html>

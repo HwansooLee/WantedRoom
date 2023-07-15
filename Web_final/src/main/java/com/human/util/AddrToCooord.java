@@ -94,7 +94,6 @@ public class AddrToCooord {
                 psmt.setDouble(2, latlon[1]);
                 psmt.setString(3, svo.getAddr());
                 psmt.executeUpdate();
-                psmt.close();
             }catch (Exception e){
                 e.printStackTrace();
             }

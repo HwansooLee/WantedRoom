@@ -39,7 +39,6 @@ public class CSVToOracle {
     private boolean getConnection(){
         try {
             conn = DriverManager.getConnection(URL, USERNAME, PWD);
-            System.out.println("Connection established");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +49,6 @@ public class CSVToOracle {
     private void closeConnection(){
         try {
             conn.close();
-            System.out.println("Connection closed");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,18 +56,17 @@ public class CSVToOracle {
 
     private void insert(StoreVO svo){
         String sql = "insert into store values (?, ?, ?, ?)";
-        if( getConnection() ){
-            try{
+        try{
+            if( !conn.isClosed() ) {
                 psmt = conn.prepareStatement(sql);
                 psmt.setString(1, svo.getAddr());
                 psmt.setString(2, svo.getName());
                 psmt.setDouble(3, svo.getCoordX());
                 psmt.setDouble(4, svo.getCoordY());
                 psmt.execute();
-            }catch (Exception e){
-                e.printStackTrace();
             }
-            closeConnection();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
     public CSVToOracle(String csvFilePath){
@@ -103,6 +100,7 @@ public class CSVToOracle {
     }
 
     public void parse() throws Exception{
+        int cnt = 1;
         parsedResult = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
@@ -113,6 +111,8 @@ public class CSVToOracle {
         }catch (Exception e){
             e.printStackTrace();
         }
+        getConnection();
+        System.out.println(parsedResult.size());
         for(List<String> store : parsedResult.subList(1, parsedResult.size()) ){
             List<String> storeInfo = new ArrayList<>();
             for(int idx:indices)
@@ -124,12 +124,12 @@ public class CSVToOracle {
                 storeInfo.set(1, storeInfo.get(1).replace("\"", ""));
                 StoreVO svo = new StoreVO( storeInfo.get(0), storeInfo.get(1),
                                             storeInfo.get(2), storeInfo.get(3));
-                System.out.println( svo.getAddr() + " / " + svo.getName() + " / "
+                System.out.println( cnt++ + " : " + svo.getAddr() + " / " + svo.getName() + " / "
                                     + svo.getCoordX() + " / " + svo.getCoordY() );
-//                storeDao.insertStore(svo);
                 insert(svo);
             }
         }
+        closeConnection();
     }
     public void parseAndConvert(){
         parsedResult = new ArrayList<>();

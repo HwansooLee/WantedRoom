@@ -7,6 +7,11 @@ create table member(
     pwd varchar2(20) not null,
     realtorNo varchar2(16) unique
 );
+-- 이메일 인증과 공인중개사 등록번호의 변별력을 위해
+-- member table에 이름항목 추가
+
+alter table member add name varchar2(20);
+alter table member modify name not null;
 
 insert into member values ('cc@ccc.com', 'ccc', 'hH1234!!', null, '김대업');
 
@@ -53,6 +58,9 @@ create table store(
     coordX number not null,
     coordY number not null
 );
+-- 단 시간에 쿼리를 많이 요청하는 경우 최대 커서가 초과되는 에러가 발생할 수 있으므로 최대 커서 수를 늘려줌
+ALTER SYSTEM SET open_cursors=4000 SCOPE=BOTH;
+-- DB에 주소 입력 후 컬럼 추가해야 에러 안남
 alter table store add lat number;
 alter table store add lon number;
 
@@ -139,12 +147,6 @@ select * from(
         order by rrr.replyNo desc)
     where rn<=1;
 
-
--- 이메일 인증과 공인중개사 등록번호의 변별력을 위해
--- member table에 이름항목 추가
-
-alter table member add name varchar2(20);
-alter table member modify name not null;
 
 -- 항목 추가하려면 기존 테이블 정보 전부 지워주어야 한다.
 delete from member;

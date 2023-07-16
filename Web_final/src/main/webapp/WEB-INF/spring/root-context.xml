@@ -65,6 +65,8 @@
 	<bean id="chartProcess" class="com.human.util.ChartProcess">
 
 	</bean>
+	
+	<!-- <context:property-placeholder location = "classpath:config.properties"/> -->
 
 	<context:component-scan
 		base-package="com.human.dao" />

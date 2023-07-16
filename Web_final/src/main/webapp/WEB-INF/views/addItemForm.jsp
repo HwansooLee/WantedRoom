@@ -9,6 +9,7 @@
 <!-- script for kakao postcode service -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/menuBar.css">
 <style>
 	.card{
         text-align: center;
@@ -28,26 +29,54 @@
 	}
 </style>
 <body>
-    <!-- 홈페이지 로고 -->
-    <a href = "<%=request.getContextPath()%>/">
-        <img src = "resources/image/logo.png" width = "200">
-    </a>
-	<nav>
-		<a href="addItemForm">[매물 등록]</a>
-		<!-- 리뷰게시판은 세션확인을 통해 이용이 가능하게 한다. -->
-		<a href="boardList">[리뷰]</a>
-		<c:if test = "${id eq null}">
-			<a href = "signIn">[로그인]</a>
-			<a href = "signUp">[회원가입]</a>
-		</c:if>
-		<c:if test = "${id ne null}">
-			<a href = "myPage">[${nickname}]</a>
-			<a href = "signOut">[로그아웃]</a>
-		</c:if>
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<!-- 홈페이지 로고 -->
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
+				class="logoImg" src="resources/image/logo.png">
+			</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						aria-current="page" href="addItemForm" id="addItem">매물 등록</a></li>
+					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
+					</li>
+					<c:if test="${id eq null}">
+						<li class="nav-item">
+							<a class="nav-link" href="signIn">로그인</a>
+                        </li>
+                        <li class="nav-item">
+                           	<a class="nav-link" href="signUp">회원가입</a>
+                        </li> 
+                    </c:if>
+                    <c:if test="${id ne null}">
+                       	<li class="nav-item">
+                           	<a class="nav-link" href="myPage">${nickname}</a>
+                       	</li>
+                    </c:if>
+				</ul>
+				<div class="searchDiv border-success">
+					<form action="searchItem" method="get">
+						<input type="text" name="sword" placeholder="검색할 주소 입력"
+							class="inputSword"> <input type="submit" value="검색"
+							class="submitBtn btn-success">
+					</form>
+				</div>
+				<c:if test="${id ne null}">
+					<span class="navbar-text">
+						<button type="button" class="btn btn-outline-secondary"
+							id="logOutBtn">로그아웃</button>
+					</span>
+				</c:if>
+			</div>
+		</div>
 	</nav>
-	<form action="" >
-			<!-- 검색창 -->
-	</form>
 	<!-- add item -->
 	<div class="card border border-success" style="width: 60%;height: 70%">
 		<div class="card-body">
@@ -168,6 +197,7 @@
 	</footer>
 </body>
 	<script>
+		$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
 		// 주소 입력
 		$('#inputAddr').on('click', ()=>{
 			new daum.Postcode({
@@ -279,7 +309,7 @@
 		});
 		// 저장
 		$('#addBtn').on('click', ()=>{
-			if( $("[name='addr']").value == '' ){
+			if( $("[name='addr']").val() == '' ){
 				alert('매물의 주소를 입력하세요.');
 				return;
 			}else if( deposit[0].value == '' ){

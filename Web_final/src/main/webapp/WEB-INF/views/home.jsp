@@ -4,16 +4,31 @@
 <%@ page session="true"%>
 <html>
 <head>
-<title>Home</title>
+<title>Wanted Room</title>
 </head>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0a14867b453fb95c4b9fd54e4b68e47&libraries=services,clusterer,drawing"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src = "resources/script/apiKey.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href = "resources/css/home.css">
+<style>
+	a{
+		color: black;
+		text-decoration: none;
+	}
+	[type="checkbox"]:checked::before {
+		background-color: white;
+		left: 1em;
+	}
+	[type="checkbox"]:checked {
+		background-color: #22af12;
+		border-color: #22af12;
+	}
+</style>
 <body>
 	<!--nav-->
     <nav class="navbar bg-light fixed-top">
@@ -29,7 +44,7 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">menu</h5>
+                    <h4 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -240,7 +255,7 @@
 	const getLocation = async () => { // 좌표 받아오는 함수
 		const nowIp = await res();
 		const geoData = await fetch('http://api.ipstack.com/' + nowIp
-				+ '?access_key=1d043620c06ab6fd6949c2058e955df4&output=json')
+				+ '?access_key='+ locationConfig.apiKey +'&output=json') // 키를 분리해 별도의 js파일로 관리하긴 했으나 숨겨지진 않음.
 			.then((r) => r.json())
 			.then((r) => {
 				return r;

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.submitBtn {
+	font-size: 15px;
+	border: none;
+	background-color: #198754;
+	width: 50px;
+	height: 30px;
+	border-radius: 15px;
+	color: #fff;
+	cursor: pointer;
+	margin: 1px;
+	margin-top: 5px;
+	margin-left: 9px;
+}
+.searchDiv {
+	margin: 20px;
+	border: 1.5px solid;
+	width: 260px;
+	height: 45px;
+	border-radius: 15px;
+	margin-left: 50px;
+	background-color: none;
+}
+.inputSword {
+	margin: -3;
+	margin-left: 5px;
+	border: 0;
+	outline: none;
+	height: 100%;
+	background-color: transparent;
+}
+.logoImg{
+	width: 200px;
+	display: block;
+	margin: -15px 0 -15px 0;
+}

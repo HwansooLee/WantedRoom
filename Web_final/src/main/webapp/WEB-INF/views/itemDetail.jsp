@@ -13,10 +13,9 @@
 <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 구글 차트 호출을 위한 js 파일 -->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<link rel="stylesheet" href="resources/css/menuBar.css">
+<link rel="stylesheet" href="resources/css/colorItemTag.css">
 <style>
-    .soldBtn{
-		background-color:lightcoral;
-	}
     #slider{
         height: 300px;
         width: 400px;
@@ -25,20 +24,15 @@
         text-align: center;
         margin: 0 auto;
     }
-    .positiveTag{
-        background-color: aquamarine;
-    }
-    .negativeTag{
-        background-color: lightcoral;
-    }
     form{
         display: inline-block;
     }
+
     input[type="button"]{
         border-radius: 4px;
         border: 1px solid black;
     }
-    input[type="submit"]{
+    .modifyItemBtn{
         border-radius: 4px;
         border: 1px solid black;
     }
@@ -81,22 +75,54 @@
     }
 </style>
 <body>
-    <!-- 홈페이지 로고 -->
-    <a href = "<%=request.getContextPath()%>/">
-        <img src = "resources/image/logo.png" width = "200">
-    </a>
-	<nav>
-		<a href="addItemForm">[매물 등록]</a>
-		<!-- 리뷰게시판은 세션확인을 통해 이용이 가능하게 한다. -->
-		<a href="" id = "review">[리뷰]</a>
-		[로그인]
-		[회원가입]
+    <nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<!-- 홈페이지 로고 -->
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
+				class="logoImg" src="resources/image/logo.png">
+			</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						aria-current="page" href="addItemForm" id="addItem">매물 등록</a></li>
+					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
+					</li>
+					<c:if test="${id eq null}">
+						<li class="nav-item">
+							<a class="nav-link" href="signIn">로그인</a>
+                        </li>
+                        <li class="nav-item">
+                           	<a class="nav-link" href="signUp">회원가입</a>
+                        </li> 
+                    </c:if>
+                    <c:if test="${id ne null}">
+                       	<li class="nav-item">
+                           	<a class="nav-link" href="myPage">${nickname}</a>
+                       	</li>
+                    </c:if>
+				</ul>
+				<div class="searchDiv border-success">
+					<form action="searchItem" method="get">
+						<input type="text" name="sword" placeholder="검색할 주소 입력"
+							class="inputSword"> <input type="submit" value="검색"
+							class="submitBtn btn-success">
+					</form>
+				</div>
+				<c:if test="${id ne null}">
+					<span class="navbar-text">
+						<button type="button" class="btn btn-outline-secondary"
+							id="logOutBtn">로그아웃</button>
+					</span>
+				</c:if>
+			</div>
+		</div>
 	</nav>
-	<!-- 검색창 -->
-	<form action="searchItem" method="get">
-		<input type="text" name="searchWord" placeholder="검색할 주소 입력">
-		<input type="submit" value="검색">
-	</form>
     <div class="card border border-success" style="width: 76%;height: 140%">
 		<div class="card-body" style="width: 100%;height: 100%">
             <table id="itemTable" class="table" style="width: 100%;height: 100%">
@@ -108,12 +134,7 @@
                 </thead>
                 <tr>
                     <td>
-                        <c:if test="${item.status == '계약가능'}">
-                            <input type="button" value="${item.status}" class="statusBtn">
-                        </c:if>
-                        <c:if test="${item.status == '계약완료'}">
-                            <input type="button" value="${item.status}" class="statusBtn soldBtn">
-                        </c:if>
+                        <input type="button" value="${item.status}" class="statusBtn">
                     </td>
                     <td colspan="3" class="titleTd">
                         <h3 class="titleText">매물 상세 정보</h3>
@@ -144,9 +165,9 @@
                 <tr>
                     <td><span>옵션</span></td>
                     <td>
-                        <input type="button" value="주차${item.parking}" id="parking"><br>
-                        <input type="button" value="엘리베이터${item.elevator}" id="elevator"><br>
-                        <input type="button" value="${item.buildingType}" id="buildingType"><br>
+                        <input type="button" value="주차${item.parking}" class="parking"><br>
+                        <input type="button" value="엘리베이터${item.elevator}" class="elevator"><br>
+                        <input type="button" value="${item.buildingType}" class="buildingType"><br>
                     </td>
                 </tr>
                 <tr>
@@ -253,14 +274,11 @@
 	</footer>
 </body>
 	<script>
+        $('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
+        $('head').append('<script src=\'././resources/script/colorItemTag.js\'><\/script>');
         let rentTextVal = $('#rentText').text().replace(' 원', '');
         if( rentTextVal == '0' )
             $('#rentType').val('전세');
-
-        let parkTag = $('#parking').val() == '주차가능' ? 'positiveTag' : 'negativeTag';
-        $('#parking').addClass(parkTag);
-        let elevatorTag = $('#elevator').val() == '엘리베이터있음' ? 'positiveTag' : 'negativeTag';
-        $('#elevator').addClass(elevatorTag);
 
         var container = document.getElementById('map');
 		var options = {

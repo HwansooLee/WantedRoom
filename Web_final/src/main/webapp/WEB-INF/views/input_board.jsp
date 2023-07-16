@@ -11,42 +11,89 @@
 <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href = "resources/css/input_board.css">
+<link rel="stylesheet" href = "resources/css/home.css">
+<link rel="stylesheet" href = "resources/css/menuBar.css">
 <!-- script for kakao postcode service -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
-<a href = "<%=request.getContextPath()%>/">
-	<img src = "resources/image/logo.png" width = "300">
-</a>
-<section>
-	<div class="card border border-success" style="width: 70%;height: 100%;text-align: center;">
-	  <div class="card-body">
-	    <h5 class="card-title">게시글 작성 폼</h5>
-	    <br>
-	    <h6 class="card-subtitle mb-2 text-muted">당신의 동네 이야기를 들려주세요 :)</h6>
-	    <br>
-	    <form action="inputBoardSave" method = "post" id = "frm">
-	    	<input type = hidden name = "bcode">
-	    	<table class = "table">
-	    		<tr>
-	    			<td>아이디</td>
-	    			<td><input type = "text" name = "id" value = "${id}" readonly size = "40"></td>
-	    		</tr>
-	    		<tr>
-	    			<td>제목</td>
-	    			<td><input type = "text" name = "title" class = "boardInput" size = "40"></td>
-	    		</tr>
-	    		<tr>
-	    			<td><input type="button" value="주소검색" id="inputAddr"></td>
-	    			<td><input type = "text" name = "addr" class = "boardInput" size = "40" placeholder="주소검색 버튼을 눌러 주소를 입력하세요." readonly></td>
-	    		</tr>
-	    	</table>
-	    	내용<br>
-	    	<textarea rows="20" cols="80" name = "content" class = "boardInput"></textarea><br>
-			<button type="button" class="btn btn-outline-success" id = "saveBtn">게시글 저장</button>
-		</form>
-	  </div>
-	</div>
-</section>
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<!-- 홈페이지 로고 -->
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
+				class="logoImg" src="resources/image/logo.png">
+			</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						aria-current="page" href="addItemForm" id="addItem">매물 등록</a></li>
+					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
+					</li>
+					<c:if test="${id eq null}">
+						<li class="nav-item">
+							<a class="nav-link" href="signIn">로그인</a>
+                        </li>
+                        <li class="nav-item">
+                           	<a class="nav-link" href="signUp">회원가입</a>
+                        </li> 
+                    </c:if>
+                    <c:if test="${id ne null}">
+                       	<li class="nav-item">
+                           	<a class="nav-link" href="myPage">${nickname}</a>
+                       	</li>
+                    </c:if>
+				</ul>
+				<div class="searchDiv border-success">
+					<form action="searchItem" method="get">
+						<input type="text" name="sword" placeholder="검색할 주소 입력"
+							class="inputSword"> <input type="submit" value="검색"
+							class="submitBtn btn-success">
+					</form>
+				</div>
+				<c:if test="${id ne null}">
+					<span class="navbar-text">
+						<button type="button" class="btn btn-outline-secondary"
+							id="logOutBtn">로그아웃</button>
+					</span>
+				</c:if>
+			</div>
+		</div>
+	</nav>
+	<section>
+		<div class="card border border-success" style="width: 70%;height: 100%;text-align: center;">
+		<div class="card-body">
+			<h5 class="card-title">게시글 작성 폼</h5>
+			<br>
+			<h6 class="card-subtitle mb-2 text-muted">당신의 동네 이야기를 들려주세요 :)</h6>
+			<br>
+			<form action="inputBoardSave" method = "post" id = "frm">
+				<input type = hidden name = "bcode">
+				<table class = "table">
+					<tr>
+						<td>아이디</td>
+						<td><input type = "text" name = "id" value = "${id}" readonly size = "40"></td>
+					</tr>
+					<tr>
+						<td>제목</td>
+						<td><input type = "text" name = "title" class = "boardInput" size = "40"></td>
+					</tr>
+					<tr>
+						<td><input type="button" value="주소검색" id="inputAddr"></td>
+						<td><input type = "text" name = "addr" class = "boardInput" size = "40" placeholder="주소검색 버튼을 눌러 주소를 입력하세요." readonly></td>
+					</tr>
+				</table>
+				내용<br>
+				<textarea rows="20" cols="80" name = "content" class = "boardInput"></textarea><br>
+				<button type="button" class="btn btn-outline-success" id = "saveBtn">게시글 저장</button>
+			</form>
+		</div>
+		</div>
+	</section>
 	<footer class="text-center text-lg-start bg-light text-muted">
 		<hr>
 		<!-- Section: Links  -->
@@ -91,6 +138,7 @@
 	</footer>
 </body>
 <script type="text/javascript">
+	$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
 	var btn = $('#saveBtn');
 	var input = $('.boardInput');
 	var frm = $('#frm');

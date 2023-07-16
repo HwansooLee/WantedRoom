@@ -12,15 +12,8 @@
 <link rel="stylesheet" href = "resources/css/myPage.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
-	body{
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-	}
-	footer{
-		margin-top: auto;
-	}
-	section{
+	/* apply for all section exclude footerSec */
+	section:not(.footerSec){ 
 		width: 100%; 
         height: 60vh; 
         display: -webkit-box; 
@@ -35,20 +28,30 @@
  
         -webkit-box-pack: center;
         -moz-box-pack: center; 
-        ms-flex-pack: center; 
+        -ms-flex-pack: center; 
         justify-content: center; /* 수평 정렬 */
 	}	
 	#regBtn{
-		background-color:skyblue;
-		border:none;
+		color: white;
+		background-color: #198754;
+		border: 1px solid black;
+		border-radius: 4px;
+	}
+	body{
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+	footer{
+		margin-top: auto;
 	}
 </style>
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">
 			<!-- 홈페이지 로고 -->
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/">
-				<img class="logoImg" src="resources/image/logo.png">
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
+				class="logoImg" src="resources/image/logo.png">
 			</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -58,17 +61,26 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						aria-current="page" href="addItem" id="addItem">매물 등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
 					</li>
+					<c:if test="${id ne null}">
+						<li class="nav-item">
+							<a class="nav-link" href="myPage">${nickname}</a>
+						</li>
+				 	</c:if>
 				</ul>
-				<div class = "searchDiv border-success">
+				<div class="searchDiv border-success">
 					<form action="searchItem" method="get">
-						<input type="text" name="sword" placeholder="검색할 주소 입력" class = "inputSword">
-						<input type="submit" value="검색" class = "submitBtn btn-success">
+						<input type="text" name="sword" placeholder="검색할 주소 입력"
+							class="inputSword"> <input type="submit" value="검색"
+							class="submitBtn btn-success">
 					</form>
 				</div>
-				<span class = "navbar-text">
-					<button type="button" class="btn btn-outline-secondary" id = "logOutBtn">로그아웃</button>
+				<span class="navbar-text">
+					<button type="button" class="btn btn-outline-secondary"
+						id="logOutBtn">로그아웃</button>
 				</span>
 			</div>
 		</div>
@@ -89,7 +101,7 @@
 	<footer class="text-center text-lg-start bg-light text-muted">
 		<hr>
 		<!-- Section: Links  -->
-		<section class="">
+		<section class="footerSec">
 		<div class="container text-center text-md-start mt-5">
 			<!-- Grid row -->
 			<div class="row mt-3">
@@ -130,6 +142,7 @@
 	</footer>
 </body>
 <script type="text/javascript">
+	$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
 /* 	const hypenRealtorNo = (target) => { // 정규식으로 공인중개사 등록번호 입력제한
 		target.value = target.value
 	  	.replace(/[^0-9]/g, '');
@@ -173,10 +186,6 @@
                 }
             }  
         };
-	});
-	
-	$('#logOutBtn').on('click', () => {
-		location.href = "signOut";
 	});
 </script>
 </html>

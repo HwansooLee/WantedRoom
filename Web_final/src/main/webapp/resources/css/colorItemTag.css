@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.soldBtn{
+    background-color:lightcoral;
+}
+.positiveTag{
+    background-color: aquamarine;
+}
+.negativeTag{
+    background-color: lightcoral;
+}
+input[type="button"]:not(.submitBtn){
+    border: 1px solid black;
+    border-radius: 4px;
+}

@@ -30,7 +30,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link"
-						aria-current="page" href="" id="addItem">매물 등록</a></li>
+						aria-current="page" href = "" id = "addItem">매물 등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
 					</li>
 				</ul>

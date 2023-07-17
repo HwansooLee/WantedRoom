@@ -45,7 +45,6 @@ public class AddrToCooord {
     private boolean getConnection(){
         try {
             conn = DriverManager.getConnection(URL, USERNAME, PWD);
-            System.out.println("Connection established");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +55,6 @@ public class AddrToCooord {
     private void closeConnection(){
         try {
             conn.close();
-            System.out.println("Connection closed");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,7 +92,6 @@ public class AddrToCooord {
                 psmt.setDouble(2, latlon[1]);
                 psmt.setString(3, svo.getAddr());
                 psmt.executeUpdate();
-                psmt.close();
             }catch (Exception e){
                 e.printStackTrace();
             }

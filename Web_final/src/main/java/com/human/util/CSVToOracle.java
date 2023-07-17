@@ -39,7 +39,6 @@ public class CSVToOracle {
     private boolean getConnection(){
         try {
             conn = DriverManager.getConnection(URL, USERNAME, PWD);
-            System.out.println("Connection established");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +49,6 @@ public class CSVToOracle {
     private void closeConnection(){
         try {
             conn.close();
-            System.out.println("Connection closed");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,18 +56,17 @@ public class CSVToOracle {
 
     private void insert(StoreVO svo){
         String sql = "insert into store values (?, ?, ?, ?)";
-        if( getConnection() ){
-            try{
+        try{
+            if( !conn.isClosed() ) {
                 psmt = conn.prepareStatement(sql);
                 psmt.setString(1, svo.getAddr());
                 psmt.setString(2, svo.getName());
                 psmt.setDouble(3, svo.getCoordX());
                 psmt.setDouble(4, svo.getCoordY());
                 psmt.execute();
-            }catch (Exception e){
-                e.printStackTrace();
             }
-            closeConnection();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
     public CSVToOracle(String csvFilePath){
@@ -113,23 +110,25 @@ public class CSVToOracle {
         }catch (Exception e){
             e.printStackTrace();
         }
-        for(List<String> store : parsedResult.subList(1, parsedResult.size()) ){
-            List<String> storeInfo = new ArrayList<>();
-            for(int idx:indices)
-                if( store.size() > idx )
-                    storeInfo.add( store.get(idx) );
-            if( !storeInfo.get(0).equals("") && !storeInfo.get(1).equals("")
-                    && storeInfo.size() == 4 && !storeInfo.get(2).equals("") ){
-                storeInfo.set(0, storeInfo.get(0).replace("\"", ""));
-                storeInfo.set(1, storeInfo.get(1).replace("\"", ""));
-                StoreVO svo = new StoreVO( storeInfo.get(0), storeInfo.get(1),
-                                            storeInfo.get(2), storeInfo.get(3));
-                System.out.println( svo.getAddr() + " / " + svo.getName() + " / "
-                                    + svo.getCoordX() + " / " + svo.getCoordY() );
-//                storeDao.insertStore(svo);
-                insert(svo);
+        if( getConnection() ){
+            for(List<String> store : parsedResult.subList(1, parsedResult.size()) ){
+                List<String> storeInfo = new ArrayList<>();
+                for(int idx:indices)
+                    if( store.size() > idx )
+                        storeInfo.add( store.get(idx) );
+                if( !storeInfo.get(0).equals("") && !storeInfo.get(1).equals("")
+                        && storeInfo.size() == 4 && !storeInfo.get(2).equals("") ){
+                    storeInfo.set(0, storeInfo.get(0).replace("\"", ""));
+                    storeInfo.set(1, storeInfo.get(1).replace("\"", ""));
+                    StoreVO svo = new StoreVO( storeInfo.get(0), storeInfo.get(1),
+                                                storeInfo.get(2), storeInfo.get(3));
+                    System.out.println( svo.getAddr() + " / " + svo.getName() + " / "
+                                        + svo.getCoordX() + " / " + svo.getCoordY() );
+                    insert(svo);
+                }
             }
         }
+        closeConnection();
     }
     public void parseAndConvert(){
         parsedResult = new ArrayList<>();
@@ -142,17 +141,5 @@ public class CSVToOracle {
         }catch (Exception e){
             e.printStackTrace();
         }
-//        for(List<String> store : parsedResult.subList(1, parsedResult.size()) ){
-//            List<String> storeInfo = new ArrayList<>();
-//            for(int idx:indices)
-//                if( store.size() > idx )
-//                    storeInfo.add( store.get(idx) );
-//            if( !storeInfo.get(0).equals("") && !storeInfo.get(1).equals("") ){
-//                storeInfo.set(0, storeInfo.get(0).replace("\"", ""));
-//                storeInfo.set(1, storeInfo.get(1).replace("\"", ""));
-//                StoreVO svo = new StoreVO( storeInfo.get(0), storeInfo.get(1),
-//                        storeInfo.get(2), storeInfo.get(3));
-//            }
-//        }
     }
 }

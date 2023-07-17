@@ -13,8 +13,7 @@ import com.human.VO.ReplyVO;
 
 @Repository
 public class ReplyImpl implements IF_ReplyDAO{
-	
-	private static String mapperQuery = "com.human.dao.IF_ReplyDAO";
+	private final static String mapperQuery = "com.human.dao.IF_ReplyDAO";
 	
 	@Inject
 	private SqlSession sqlSession;
@@ -32,7 +31,6 @@ public class ReplyImpl implements IF_ReplyDAO{
 	@Override
 	public void deleteReply(int rno) throws Exception {
 		sqlSession.delete(mapperQuery+".delete",rno);
-		
 	}
 
 	@Override
@@ -54,5 +52,4 @@ public class ReplyImpl implements IF_ReplyDAO{
 	public int myReplyCnt(String id) throws Exception {
 		return sqlSession.selectOne(mapperQuery+".myReplyCnt",id);
 	}
-
 }

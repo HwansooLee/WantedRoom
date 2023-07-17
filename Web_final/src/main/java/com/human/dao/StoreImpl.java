@@ -23,7 +23,6 @@ public class StoreImpl implements IF_StoreDAO{
 
 	@Override
 	public List<StoreVO> selectStoreAll(BoundCoords bound) throws Exception {
-		System.out.println("doing select");
 		return sqlSession.selectList(mapperQuery+".selectNearbyStore", bound);
 	}
 

@@ -8,10 +8,6 @@ create table member(
     realtorNo varchar2(16) unique
 );
 
-insert into member values ('cc@ccc.com', 'ccc', 'hH1234!!', null, '김대업');
-
-insert into member values ('testUser1', 'testUser1', '1234', '12345-1234-12345');
-
 create table item(
 itemNo number primary key,
 id varchar2(30) not null,
@@ -29,8 +25,6 @@ alter table item modify status default '계약가능';
 alter table item add bcode varchar2(15) not null;
 
 create sequence itemNoSeq;
-
-select itemNoSeq.nextval from dual;
 
 create table itemAttach(
 itemNo number not null,
@@ -53,6 +47,7 @@ create table store(
     coordX number not null,
     coordY number not null
 );
+ALTER SYSTEM SET open_cursors = 4000 SCOPE=BOTH;
 alter table store add lat number;
 alter table store add lon number;
 
@@ -88,9 +83,6 @@ foreign key(id) references member(id) on delete cascade,
 itemNo number not null,
 foreign key (itemNo) references item(itemNo) on delete cascade
 );
-
-commit;
-
 
 -- 디버깅을 위한 임의의 회원 생성
 insert into member values ('testid','testnickname','testpwd','testrealorNo');

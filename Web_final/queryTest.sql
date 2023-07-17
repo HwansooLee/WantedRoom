@@ -149,5 +149,6 @@ select b.sentiment, count(b.sentiment) sentimentCnt
 		and itemNo = 383
 		GROUP by b.sentiment;
 
+select count(*) from store;
 select * from member;
 insert into member values ('bbb@bbb.com', 'testUser1', '1234', null, '나일반');

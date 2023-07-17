@@ -80,9 +80,7 @@ public class ItemController {
     }
     @RequestMapping(value = "/modifyItemForm", method = RequestMethod.POST)
     public String getModifyItemFrom(Locale locale, Model model,
-                                    @ModelAttribute("itemNo") int itemNo)
-            throws Exception{
-        System.out.println(itemNo);
+                                @ModelAttribute("itemNo") int itemNo) throws Exception{
         model.addAttribute("item", realtorsrv.getItemDetail(itemNo));
         model.addAttribute("attachs", realtorsrv.getAttachFileNames(itemNo));
         return "modifyItemForm";

@@ -8,9 +8,7 @@ public class StoreVO {
     private double lat;
     private double lon;
 
-    public StoreVO(){
-
-    }
+    public StoreVO(){}
 
     public StoreVO(String addr, String name, String coordX, String coordY){
         this.addr = addr;

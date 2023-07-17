@@ -55,7 +55,6 @@ public class PageVO {
 	public void calPage() {
 		final int perPageNum = 5;
 		final int perPostNum = 12;
-		
 		// 현재 페이지의 첫번째 글의 번호
 		startNo = (page - 1)*perPostNum + 1;
 		// 현재 페이지그룹의 마지막 페이지
@@ -65,22 +64,9 @@ public class PageVO {
 		startPage = temp - perPageNum + 1;
 		// 현재 페이지의 마지막 글의 번호
 		endNo = (page*perPostNum > totalCount) ? totalCount : page*perPostNum;
-		
 		prev = startPage != 1;
 		next = endPage*perPostNum < totalCount;
 	}
-	
-	public void prt() {
-		System.out.println("현재 페이지 : " + page);
-		System.out.println("전체 글 수 : " + totalCount);
-		System.out.println("현재 페이지의 첫번째 글 번호 : " + startNo);
-		System.out.println("현재 페이지의 마지막 글 번호 : " + endNo);
-		System.out.println("현재 페이지그룹의 첫번째 페이지 번호" + startPage);
-		System.out.println("현재 페이지 그룹의 마지막 페이지 번호" + endPage);
-		System.out.println("이전 페이지 그룹" + prev);
-		System.out.println("다음 페이지 그룹" + next);
-	}
-	
 	public Integer getPage() {
 		return page;
 	}

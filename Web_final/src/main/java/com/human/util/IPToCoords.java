@@ -44,7 +44,6 @@ public class IPToCoords {
 		}
 		in.close();
 		conn.disconnect();
-//		System.out.print(sb); // 요청이 정상적으로 이루어져 제대로된 값을 받아왔는가 확인
 		JSONParser jsonParser = new JSONParser();
 		JSONObject resultData = (JSONObject) jsonParser.parse(sb.toString());
 		double lat = (Double)resultData.get("latitude");

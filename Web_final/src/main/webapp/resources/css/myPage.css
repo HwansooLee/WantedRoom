@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.searchDiv{
+/* .searchDiv{
 	margin: 20px;
 	border: 1.5px solid;
 	width: 260px;
@@ -31,7 +31,7 @@
 	width: 200px;
 	display: block;
 	margin: -15px 0 -15px 0;
-}
+} */
 .card-img-top{
 	display: block;
 	margin: 10px auto;
@@ -52,12 +52,4 @@ a{
 	width: 30%;
 	height: 100%;
 	margin: 0 15px 0 15px;
-}
-body{
-	min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-footer{
-    margin-top: auto;
 }

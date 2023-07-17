@@ -117,6 +117,8 @@ public class MyPageController {
 	@RequestMapping(value = "/registerRealtorNo", method = RequestMethod.GET)
 	public String regRealtorNo(Locale locale, Model model,
 			HttpSession session) {
+		if( session.getAttribute("realtorNo") != null )
+			return "redirect:/";
 		model.addAttribute("userName",(String)session.getAttribute("name"));
 		return "regRealtorNo";
 	}

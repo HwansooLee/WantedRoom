@@ -47,6 +47,12 @@
 		-o-transition: all 2s ease-in-out;
 		transition: all 0.2s ease-in-out;
 	}
+	img{
+		display: block;
+		margin: auto;
+		width: 100%;
+		height: auto;
+	}
 	/* Inputs */
 	input{
 		font-family: 'Open Sans Condensed', sans-serif;
@@ -94,7 +100,6 @@
 	#logoArea{
 		border: none;
 		align-content: center;
-		
 	}
 	#submitBtn{
 		background-color: #14A44D;
@@ -117,11 +122,10 @@
 	    height: auto;
 	}
 	body{
-		min-height: 100%;
+		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
-		margin-bottom: -200px;
-	} 
+	}
 	footer{
 		margin-top: auto;
 	}

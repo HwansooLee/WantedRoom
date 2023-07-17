@@ -18,7 +18,14 @@
 	button[type="submit"]{
 		width: 100px;
 	}
-
+	.card-body{
+		margin: 0 auto;
+	}
+	.itemDiv{
+		margin-top: 20px;
+		margin-left: 10px;
+		width: 24%
+	}
 </style>
 <body>
 <!--nav-->

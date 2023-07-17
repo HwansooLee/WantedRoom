@@ -28,6 +28,10 @@
 	section{
 		text-align: center;
 	}
+	.table{
+		margin: 20px;
+		width: calc(100% - 40px);
+	}
 </style>
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">

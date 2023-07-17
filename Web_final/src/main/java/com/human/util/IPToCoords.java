@@ -31,17 +31,19 @@ public class IPToCoords {
 	
 	private final String ipstackURI = "http://api.ipstack.com/";
 	
-	public double[] getCoords(String IP) throws Exception{
+	private double[] getCoords(String IP) throws Exception{
 		String query = IP + "?access_key=" + locationKey + "&output=json";
 		URL url = new URL(ipstackURI + query);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		StringBuilder sb = new StringBuilder();
 		String getValue = in.readLine();
-		while(getValue != null && !getValue.isEmpty()) {
+		while(getValue != null && !getValue.isEmpty()) { // EOF
 			sb.append(getValue);
 			getValue = in.readLine();
 		}
+		in.close();
+		conn.disconnect();
 //		System.out.print(sb); // 요청이 정상적으로 이루어져 제대로된 값을 받아왔는가 확인
 		JSONParser jsonParser = new JSONParser();
 		JSONObject resultData = (JSONObject) jsonParser.parse(sb.toString());

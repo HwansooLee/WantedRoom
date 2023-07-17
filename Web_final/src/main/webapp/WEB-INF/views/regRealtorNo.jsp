@@ -12,9 +12,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
 	/* apply for all section exclude footerSec */
-	section:not(.footerSec){ 
-		width: 100%; 
-        height: 60vh; 
+	#regRealtor{
+		width: 100%;
+        height: 60vh;
         display: -webkit-box; 
         display: -moz-box;
         display: -ms-flexbox; 
@@ -40,7 +40,7 @@
 <body>
 	<jsp:include page="menuBar.jsp"/>
 	<!-- 공인중개사번호 입력 공간 -->
-	<section>
+	<section id="regRealtor">
 		<div class="card border border-success" style = "width: 30%;height:20%;">
 			<div class="card-body">
 			<div class="card-title">공인중개사 등록번호를 입력해주세요.</div>

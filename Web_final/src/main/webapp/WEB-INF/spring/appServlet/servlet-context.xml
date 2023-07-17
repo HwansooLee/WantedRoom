@@ -61,6 +61,7 @@
 			<mvc:exclude-mapping path="/mailChk**"/>
 			<mvc:exclude-mapping path="/getChartData**"/>
 			<mvc:exclude-mapping path="/getIPToCoords**"/>
+			<mvc:exclude-mapping path="/getRealtorInfo**"/>	
 			<beans:ref bean="authenInterceptor" /> <!-- instances which defines pre, post of included url -->
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -11,7 +11,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0a14867b453fb95c4b9fd54e4b68e47&libraries=services,clusterer,drawing"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src = "resources/script/apiKey.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href = "resources/css/home.css">
@@ -30,7 +29,7 @@
 	}
 </style>
 <body>
-	<!--nav-->
+	<!--nav for home-->
     <nav class="navbar bg-light fixed-top">
         <div class="container-fluid">
             <!--logo-->
@@ -102,52 +101,10 @@
 	<section>
 		<div class = "myMap" id="map" style="width:500px;height:400px;margin: 0 auto;margin-top: 100px;"></div>
 	</section>
-
-	<footer class="text-center text-lg-start bg-light text-muted">
-		<hr>
-		<!-- Section: Links  -->
-		<section class="">
-		<div class="container text-center text-md-start mt-5">
-			<!-- Grid row -->
-			<div class="row mt-3">
-			<!-- Grid column -->
-			<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-				<!-- Content -->
-				<h6 class="text-uppercase fw-bold mb-4">
-				<i class="fas fa-gem me-3"></i>Wanted Room
-				</h6>
-				<p>
-				</p>
-			</div>
-			<!-- Grid column -->
-			<!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<h6 class="text-uppercase fw-bold mb-4">Location</h6>
-				<p>Human Education Center, 100, Jungbu-daero, Paldal-gu, Suwon-si, Gyeonggi-do, Republic of Korea</p>
-			</div> -->
-			<!-- Grid column -->
-			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Developers</h6>
-				<p>Jaewan Song</p>
-				<p>Hwansoo Lee</p>
-			</div>
-			<!-- Grid column -->
-			<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-				<p>obliviat3@naver.com</p>
-				<p>hwansu29@naver.com</p>
-			</div>
-			<!-- Grid column -->
-			</div>
-			<!-- Grid row -->
-		</div>
-		</section>
-		<!-- Section: Links  -->
-	</footer>
+	<jsp:include page="footer.jsp"/>
 </body>
 <script>
-
+	$('head').append('<script src=\'././resources/script/linkAddItem.js\'><\/script>');
 	//submit
 	$('#custom-button').on('click', () => {
 	    $('#searchItem').submit();
@@ -230,17 +187,6 @@
 			}
 		}    
 	}
-
-
-	
-	$('#addItem').on('click', () => {
-		var authenticated = '${authenticated}';
-		if(authenticated == 'false'){
-			alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
-		}else{
-			$('#addItem').attr('href','addItemForm');
-		}
-	});
 	
 	const res = () => { // IP받아오는 함수
 		return fetch('http://geolocation-db.com/json/')

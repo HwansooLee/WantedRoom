@@ -2,14 +2,5 @@
 div.card{
 	text-align: center;
 	margin: 0 auto;
-	background-color: rgb(228, 248, 226);
-	
-}
-body{
-	min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-footer{
-    margin-top: auto;
+	background-color: rgb(228, 248, 226);	
 }

@@ -16,7 +16,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href = "resources/css/signUp.css">
+<!-- <link rel="stylesheet" href = "resources/css/signUp.css"> -->
 <style>
   	/* Login container */
 	#container{
@@ -27,6 +27,7 @@
 		border-radius: 5px;
 		background: white;
 		box-shadow: none;
+		margin-bottom: 20px;
 	}
 	a{
 		font-family: 'Open Sans Condensed', sans-serif;
@@ -45,6 +46,12 @@
 		-moz-transition: all 2s ease-in-out;
 		-o-transition: all 2s ease-in-out;
 		transition: all 0.2s ease-in-out;
+	}
+	img{
+		display: block;
+		margin: auto;
+		width: 100%;
+		height: auto;
 	}
 	/* Inputs */
 	input{
@@ -93,6 +100,8 @@
 	#logoArea{
 		border: none;
 		align-content: center;
+		display: block;
+		width: 27%;
 	}
 	#submitBtn{
 		background-color: #14A44D;
@@ -104,16 +113,11 @@
 		box-shadow: 3px 3px 10px #333;
 		opacity: 1;
 	}
-	#logoArea{
-		display: block;
-		width: 27%;
-	}
 	body{
-		min-height: 100%;
+		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
-		margin-bottom: -200px;
-	} 
+	}
 	footer{
 		margin-top: auto;
 	}

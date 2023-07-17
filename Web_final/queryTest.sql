@@ -43,7 +43,7 @@ delete from itemTags where itemNo=19;
 delete from itemAttach where itemNo=19;
 delete from item where itemNo=19;
 
-select * from member;
+select count(*) from member where id='aaa@aaa.com' and pwd='12345';
 
 update item set inDate=sysdate where itemNo=22;
 

@@ -12,6 +12,16 @@
 <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/menuBar.css">
 <link rel="stylesheet" href = "resources/css/board_list.css">
+<style>
+	.table{
+		margin: 0 20px 20px 20px;
+		width: calc(100% - 40px);
+	}
+	#writeBtn{
+		float: right;
+		margin-right: 20px;
+	}
+</style>
 <body>
 <!--nav-->
 <nav class="navbar navbar-expand-lg bg-light">

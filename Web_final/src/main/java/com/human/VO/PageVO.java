@@ -54,7 +54,7 @@ public class PageVO {
 
 	public void calPage() {
 		final int perPageNum = 5;
-		final int perPostNum = 10;
+		final int perPostNum = 12;
 		
 		// 현재 페이지의 첫번째 글의 번호
 		startNo = (page - 1)*perPostNum + 1;

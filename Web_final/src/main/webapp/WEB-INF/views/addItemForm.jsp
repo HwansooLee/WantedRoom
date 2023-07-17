@@ -13,7 +13,7 @@
 <style>
 	.card{
         text-align: center;
-        margin: 0 auto;
+        margin: 20px auto;
     }
 	textarea{
 		resize: none;

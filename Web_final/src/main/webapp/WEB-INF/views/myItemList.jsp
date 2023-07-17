@@ -15,6 +15,13 @@
 <link rel="stylesheet" href="resources/css/menuBar.css">
 <link rel="stylesheet" href="resources/css/itemList.css">
 <link rel="stylesheet" href="resources/css/colorItemTag.css">
+<style>
+	.itemDiv{
+		margin-top: 20px;
+		margin-left: 10px;
+		width: 24%
+	}
+</style>
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">
@@ -114,12 +121,14 @@
 							<table>
 								<tr>
 									<td>
-										<form action="modifyItemForm" method="post">
-											<input type="hidden" name="itemNo" value="${item.itemNo}">
-											<button type="submit" class="modifyItemBtn">
-												<img src = "resources/image/modify.png" width = "20">
-											</button>								
-										</form>
+										<c:if test="${item.status == '계약가능'}">
+											<form action="modifyItemForm" method="post">
+												<input type="hidden" name="itemNo" value="${item.itemNo}">
+												<button type="submit" class="modifyItemBtn">
+													<img src="resources/image/modify.png" width = "20">
+												</button>								
+											</form>
+										</c:if>
 									</td>
 									<td>
 										<form action="myItemList?sword=" class="deleteFrm">

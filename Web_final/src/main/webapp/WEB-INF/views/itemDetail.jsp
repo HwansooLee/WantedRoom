@@ -22,7 +22,7 @@
     }
     .card{
         text-align: center;
-        margin: 0 auto;
+        margin: 20px auto;
     }
     form{
         display: inline-block;
@@ -216,10 +216,12 @@
                 <c:if test="${id eq item.id}">
                     <tr>
                         <td colspan="4">
-                            <form action="modifyItemForm" method="post">
-                                <input type="submit" value="수정" class="modifyItemBtn">
-                                <input type="text" name="itemNo" value="${item.itemNo}" hidden>
-                            </form>
+                            <c:if test="${item.status == '계약가능'}">
+                                <form action="modifyItemForm" method="post">
+                                    <input type="submit" value="수정" class="modifyItemBtn">
+                                    <input type="text" name="itemNo" value="${item.itemNo}" hidden>
+                                </form>
+                            </c:if>
                             <form action="myItemList?sword=" id="frm">
                                 <input type="button" value="삭제" class="deleteItemBtn">
                                 <input type="hidden" value="${item.itemNo}">

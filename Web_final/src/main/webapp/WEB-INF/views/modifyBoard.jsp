@@ -52,7 +52,6 @@
 	<jsp:include page="footer.jsp"/>
 </body>
 <script type="text/javascript">
-	$('head').append('<script src=\'././resources/script/linkAddItem.js\'><\/script>');
 	$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
 	var btn = $('#saveBtn');
 	var input = $('.boardInput');

@@ -29,14 +29,15 @@ public class ItemController {
 
     @RequestMapping(value = "/addItemForm", method = RequestMethod.GET)
     public String showAddItemForm(Locale locale, Model model, HttpSession session) {
-        String id = (String)session.getAttribute("id");
-        if( (String)session.getAttribute("realtorNo") == null ){
-            model.addAttribute("authenticated", false);
-            return "redirect:/";
-        }
-        model.addAttribute("id", id);
+        model.addAttribute("id", (String)session.getAttribute("id"));
         return "addItemForm";
     }
+    @RequestMapping(value = "/checkAuthen", method = RequestMethod.GET)
+    @ResponseBody
+    public boolean isAuthen(Locale locale, Model model, HttpSession session){
+        return session.getAttribute("realtorNo") != null ;
+    }
+
     @RequestMapping(value = "/addItem", method = RequestMethod.POST)
     public String addItem(Locale locale, Model model, HttpSession session,
                           @ModelAttribute("newItem") ItemVO ivo, MultipartFile[] file) throws Exception{

@@ -119,15 +119,13 @@
 	<jsp:include page="footer.jsp"/>
 </body>
 <script type="text/javascript">
-	$('head').append('<script src=\'././resources/script/linkAddItem.js\'><\/script>');
 	$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
-	var boardNo = ${boardvo.boardNo};
-	var page = $('#page');
-	
 	$(document).ready(() =>{
 		getReplyList(page.val());
 	});
 	
+	var boardNo = ${boardvo.boardNo};
+	var page = $('#page');
 	function getReplyList(pageNum){ // 댓글 리스트 가져오는 함수.. 인자로 페이지 번호를 받는다.
 		let replyTable = $('#replyTable');
 		let pageArea = $('#pageArea');
@@ -267,7 +265,5 @@
 			}
     	});
 	}
-	
-	
 </script>
 </html>

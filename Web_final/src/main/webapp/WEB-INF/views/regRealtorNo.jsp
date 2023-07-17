@@ -54,7 +54,6 @@
 	<jsp:include page="footer.jsp"/>
 </body>
 <script type="text/javascript">
-	$('head').append('<script src=\'././resources/script/linkAddItem.js\'><\/script>');
 	$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
 /* 	const hypenRealtorNo = (target) => { // 정규식으로 공인중개사 등록번호 입력제한
 		target.value = target.value

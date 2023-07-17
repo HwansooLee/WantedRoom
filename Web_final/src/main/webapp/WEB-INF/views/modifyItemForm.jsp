@@ -147,7 +147,6 @@
 	<jsp:include page="footer.jsp"/>
 </body>
 	<script>
-		$('head').append('<script src=\'././resources/script/linkAddItem.js\'><\/script>');
 		$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
 		// 상세설명
 		let detail = $("[name='detail']");

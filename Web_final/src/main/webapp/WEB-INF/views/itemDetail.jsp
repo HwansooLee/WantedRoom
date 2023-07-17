@@ -186,7 +186,6 @@
 	<jsp:include page="footer.jsp"/>
 </body>
 	<script>
-        $('head').append('<script src=\'././resources/script/linkAddItem.js\'><\/script>');
         $('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
         $('head').append('<script src=\'././resources/script/colorItemTag.js\'><\/script>');
         let rentTextVal = $('#rentText').text().replace(' 원', '');

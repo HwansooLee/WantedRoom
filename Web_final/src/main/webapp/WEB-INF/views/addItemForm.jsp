@@ -107,7 +107,6 @@
 	<jsp:include page="footer.jsp"/>
 </body>
 	<script>
-		$('head').append('<script src=\'././resources/script/linkAddItem.js\'><\/script>');
 		$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
 		// 주소 입력
 		$('#inputAddr').on('click', ()=>{

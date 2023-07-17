@@ -9,6 +9,7 @@
 	width: 25%;
 	float: left;
 	display: flex;
+	margin-top: 20px;
 }
 a.fillDiv{
 	display: block;

@@ -54,7 +54,7 @@ public class SignInController {
 			HttpSession session,
 			@ModelAttribute("") MemberVO mvo) throws Exception{
 		// 회원인지 체크
-		mvo = realtorsrv.idChk(mvo.getId());
+		mvo = realtorsrv.idChk(mvo);
 		if(mvo == null) { // 회원이 아님
 			model.addAttribute("wrongInfo","잘못된 아이디,비밀번호 입니다.");
 			return "signIn";
@@ -78,7 +78,10 @@ public class SignInController {
 	@ResponseBody
 	public String mailChk(@RequestBody MemberVO mvo) throws Exception{
 		// 여기서는 메일을확인하고 인증번호를 생성, 인증번호를 메일로 전송후 인증번호를 응답해준다.
-		System.out.println(mvo.getId());
+		// 아이디가 존재하는지 먼저 확인후 존재한다면 false를 리턴해준다.
+		if(realtorsrv.reIdChk(mvo)) { // 존재하는 아이디인 경우
+			return "false";
+		}
 		return mailsrv.joinEmail(mvo.getId());
 	}
 }

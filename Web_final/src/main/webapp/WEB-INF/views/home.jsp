@@ -253,18 +253,21 @@
 	}
 	
 	const getLocation = async () => { // 좌표 받아오는 함수
-		const nowIp = await res();
-		const geoData = await fetch('http://api.ipstack.com/' + nowIp
-				+ '?access_key='+ locationConfig.apiKey +'&output=json') // 키를 분리해 별도의 js파일로 관리하긴 했으나 숨겨지진 않음.
-			.then((r) => r.json())
-			.then((r) => {
-				return r;
-			});
-		// 중심위치 현재 위치로 재지정
-		mapOption.center = new kakao.maps.LatLng(geoData.latitude, geoData.longitude);
-		map = new kakao.maps.Map(mapContainer, mapOption);
-		// 이벤트 재등록
-		allInOne();
+		const nowIp = await res();		
+		// 서버로 비동기로 요청 보내는 방식으로 변경
+		$.ajax({
+			url : "getIPToCoords?IP=" + nowIp
+			,type : "GET"
+			,dataType : "JSON"
+			,success : function(data){
+				mapOption.center = new kakao.maps.LatLng(data[0], data[1]);
+				map = new kakao.maps.Map(mapContainer, mapOption);
+				allInOne();
+			}
+			,error : function(){
+				console.log(2);
+			}
+		});
 	}
 	// 위치정보 동의를 사용자가 선택한 경우 함수 실행
 	// 유료라 무료버젼키는 한달에 100번 밖에 사용 못함 아껴써야 함..

@@ -30,11 +30,6 @@ public class ItemController {
     @RequestMapping(value = "/addItemForm", method = RequestMethod.GET)
     public String showAddItemForm(Locale locale, Model model, HttpSession session) {
         String id = (String)session.getAttribute("id");
-//        System.out.println((String) );
-//        if( (String)session.getAttribute("realtorNo") == null ){
-//            model.addAttribute("authenticated", false);
-//            return "redirect:/";
-//        }
         model.addAttribute("id", id);
         return "addItemForm";
     }

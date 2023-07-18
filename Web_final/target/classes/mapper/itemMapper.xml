@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 <![CDATA[ where rn <= 1) s
             )
         where newRn >= #{startNo} and newRn <= #{endNo} ]]>
+        order by itemNo desc
     </select>
     <select id="select" parameterType="int" resultType="com.human.VO.ItemVO">
         select i.*, t.PARKING, t.ELEVATOR, t.BUILDINGTYPE from item i, itemTags t

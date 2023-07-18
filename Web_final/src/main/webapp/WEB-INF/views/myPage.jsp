@@ -14,6 +14,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href = "resources/css/myPage.css">
+<link rel="stylesheet" href = "resources/css/menuBar.css">
 <body>
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-fluid">

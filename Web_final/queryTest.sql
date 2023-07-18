@@ -23,11 +23,12 @@ select * from (
             (select i.*, a.FILENAME, t.PARKING, t.ELEVATOR, t.BUILDINGTYPE, 
             ROW_NUMBER() over(PARTITION by i.itemNo order by a.fileName) as rn
                 from item i, ITEMATTACH a, ITEMTAGS t
-                where i.addr like '%상계동%' and i.ITEMNO = a.ITEMNO and a.ITEMNO = t.ITEMNO
+                where i.addr like '%노원구%' and i.ITEMNO = a.ITEMNO and a.ITEMNO = t.ITEMNO
                 )
             where rn <= 1) s
     )
-    where newRn > 10 and newRn <= 20;
+    where newRn > 0 and newRn <= 10
+    order by itemNo desc;
 
 -- combine above queries
 select * from (
@@ -43,7 +44,7 @@ delete from itemTags where itemNo=19;
 delete from itemAttach where itemNo=19;
 delete from item where itemNo=19;
 
-select * from member;
+select count(*) from member where id='aaa@aaa.com' and pwd='12345';
 
 update item set inDate=sysdate where itemNo=22;
 
@@ -149,5 +150,6 @@ select b.sentiment, count(b.sentiment) sentimentCnt
 		and itemNo = 383
 		GROUP by b.sentiment;
 
+select count(*) from store;
 select * from member;
 insert into member values ('bbb@bbb.com', 'testUser1', '1234', null, '나일반');

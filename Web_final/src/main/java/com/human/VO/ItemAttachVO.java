@@ -4,6 +4,12 @@ public class ItemAttachVO {
     private int itemNo;
     private String fileName;
 
+    public ItemAttachVO(){}
+    public ItemAttachVO(int itemNo, String fileName){
+        this.itemNo = itemNo;
+        this.fileName = fileName;
+    }
+
     public int getItemNo() {
         return itemNo;
     }
@@ -17,15 +23,6 @@ public class ItemAttachVO {
     }
 
     public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public ItemAttachVO(){
-
-    }
-
-    public ItemAttachVO(int itemNo, String fileName){
-        this.itemNo = itemNo;
         this.fileName = fileName;
     }
 }

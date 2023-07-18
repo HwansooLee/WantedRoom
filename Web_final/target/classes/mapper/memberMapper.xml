@@ -9,8 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id = "insert" parameterType = "com.human.VO.MemberVO">
 		insert into member values(#{id},#{nickname},#{pwd},null,#{name})
 	</insert>
-	<select id = "selectOne" parameterType = "String"
-	resultType = "com.human.VO.MemberVO">
+	<select id = "selectOne" parameterType = "String" resultType = "com.human.VO.MemberVO">
 		select * from member where id = #{value}
 	</select>
 	<update id="update" parameterType = "com.human.VO.MemberVO">

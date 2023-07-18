@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			 xmlns:beans="http://www.springframework.org/schema/beans"
-			 xmlns:context="http://www.springframework.org/schema/context"
-			 xmlns:mvc="http://www.springframework.org/schema/mvc"
-			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
-                  https://www.springframework.org/schema/mvc/spring-mvc.xsd
-                  http://www.springframework.org/schema/beans
-                  https://www.springframework.org/schema/beans/spring-beans.xsd
-                  http://www.springframework.org/schema/context
-                  https://www.springframework.org/schema/context/spring-context.xsd">
-
-
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -25,24 +19,16 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<!--
-       Inter~~~Resolver aa = new Inter~ ();
-       aa.setterPrefix("/WEB-INF/views/");
-       aa.setterSuffix(".jsp"); -->
 
 	<!--  파일 업로드 설정.. 스프링에서 파일 업로드 기능을 사용하기 위해서 bean(객체)설정 -->
 	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
 				id ="multipartResolver">
-		<beans:property name="maxUploadSize" value="10448760"></beans:property> <!-- 10메가 용량 제한 설정 -->
+		<beans:property name="maxUploadSize" value="10448760"/> <!-- 10메가 용량 제한 설정 -->
 	</beans:bean>
-	<!--
-       CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-       aa.setterMaxUploadSize("10448760"); -->
 
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="/tmp"></beans:constructor-arg>
+		<beans:constructor-arg value="/tmp"/>
 	</beans:bean>
-	<!--    String uploadPath = new String("/tmp")  자바코드로 생성하기 보다는 스프링에서 설정하고 가져다쓴다. -->
 
 	<beans:bean id="authenInterceptor" class="com.human.interceptor.AuthenticationInterceptor">
 	</beans:bean>
@@ -63,13 +49,12 @@
 			<mvc:exclude-mapping path="/resources/**"/>
 			<mvc:exclude-mapping path="/mailChk**"/>
 			<mvc:exclude-mapping path="/getChartData**"/>
+			<mvc:exclude-mapping path="/getIPToCoords**"/>
+			<mvc:exclude-mapping path="/getRealtorInfo**"/>	
 			<beans:ref bean="authenInterceptor" /> <!-- instances which defines pre, post of included url -->
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-
 	<!-- 스프링에게 객체를 설정하고.. 객체의 변수의 갑을 주입할때는 setter 또는 생성자로 할 수 있다.  -->
 	<context:component-scan base-package="com.human.realtor" />
 	<context:component-scan base-package="com.human.util" />
-
 </beans:beans>

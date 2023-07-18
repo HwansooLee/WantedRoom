@@ -24,20 +24,8 @@ public class MemberImpl implements IF_MemberDAO{
 	}
 
 	@Override
-	public List<MemberVO> selectMemberAll(PageVO pvo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public MemberVO selectMemberOne(String id) throws Exception {
 		return sqlSession.selectOne(mapperQuery+".selectOne",id);
-	}
-
-	@Override
-	public void deleteId(String id) throws Exception {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public interface IF_RealtorService {
 	public void likesFlag(LikesVO lvo) throws Exception;
 	public boolean nicknameChk(String nickname) throws Exception;
 	public void insertMember(MemberVO mvo) throws Exception;
-	public MemberVO idChk(String id) throws Exception;
+	public MemberVO idChk(MemberVO mvo) throws Exception;
 	public int getCnt(String sword, String id);
 	public int myBoardCnt(String id) throws Exception;
 	public List<BoardVO> myList(PageVO pvo) throws Exception;
@@ -43,4 +43,5 @@ public interface IF_RealtorService {
 	public void delReply(int replyNo) throws Exception;
 	public void regRealtorNo(MemberVO mvo) throws Exception;
 	public JSONObject getChartData(int itemNo) throws Exception;
+	public boolean reIdChk(MemberVO mvo) throws Exception;
 }

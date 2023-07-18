@@ -10,11 +10,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href = "././resources/css/detail_board.css"></link>
-<link rel="stylesheet" href="resources/css/menuBar.css">
 <style>
 	#like-button:hover {
 		cursor: pointer;
@@ -63,77 +60,30 @@
 	}
 </style>
 <body>
-	<nav class="navbar navbar-expand-lg bg-light">
-		<div class="container-fluid">
-			<!-- 홈페이지 로고 -->
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
-				class="logoImg" src="resources/image/logo.png">
-			</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarText"
-				aria-controls="navbarText" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link"
-						aria-current="page" href="addItemForm" id="addItem">매물 등록</a></li>
-					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
-					</li>
-					<c:if test="${id eq null}">
-						<li class="nav-item">
-							<a class="nav-link" href="signIn">로그인</a>
-                        </li>
-                        <li class="nav-item">
-                           	<a class="nav-link" href="signUp">회원가입</a>
-                        </li> 
-                    </c:if>
-                    <c:if test="${id ne null}">
-                       	<li class="nav-item">
-                           	<a class="nav-link" href="myPage">${nickname}</a>
-                       	</li>
-                    </c:if>
-				</ul>
-				<div class="searchDiv border-success">
-					<form action="searchItem" method="get">
-						<input type="text" name="sword" placeholder="검색할 주소 입력"
-							class="inputSword"> <input type="submit" value="검색"
-							class="submitBtn btn-success">
-					</form>
-				</div>
-				<c:if test="${id ne null}">
-					<span class="navbar-text">
-						<button type="button" class="btn btn-outline-secondary"
-							id="logOutBtn">로그아웃</button>
-					</span>
-				</c:if>
-			</div>
+	<jsp:include page="menuBar.jsp"/>
+	<div class="card border-success mb-3" style = "margin: 0 auto; width: 80%;margin-top: 50px;">
+		<div class="card-header">
+			<table class = "table">
+				<tr>
+					<td>제목</td>
+					<td colspan="5">${boardvo.title}</td>	
+				</tr>
+				<tr>
+					<td width="10%">닉네임</td>
+					<td width="25%">${boardvo.nickname}</td>
+					<td width="10%">주소지</td>
+					<td width="35%">${boardvo.addr}</td>
+					<td width="10%">조회수</td>
+					<td width="10%" style="text-align: right;">${boardvo.views}</td>
+				</tr>
+				<tr>
+					<td>게시글번호</td>
+					<td>${boardvo.boardNo}</td>
+					<td>작성일</td>
+					<td colspan="3">${boardvo.inDate}</td>
+				</tr>
+			</table>
 		</div>
-	</nav>
-<div class="card border-success mb-3" style = "margin: 0 auto; width: 80%;margin-top: 50px;">
-	 <div class="card-header">
-	 	<table class = "table">
-			<tr>
-				<td>제목</td>
-				<td colspan="5">${boardvo.title}</td>	
-			</tr>
-			<tr>
-				<td width="10%">닉네임</td>
-				<td width="25%">${boardvo.nickname}</td>
-				<td width="10%">주소지</td>
-				<td width="35%">${boardvo.addr}</td>
-				<td width="10%">조회수</td>
-				<td width="10%" style="text-align: right;">${boardvo.views}</td>
-			</tr>
-			<tr>
-				<td>게시글번호</td>
-				<td>${boardvo.boardNo}</td>
-				<td>작성일</td>
-				<td colspan="3">${boardvo.inDate}</td>
-			</tr>
-		</table>
-	 </div>
 	 <div class="card-body text-success" style = "text-align: center;">
 		<textarea id="contentText" readonly>${boardvo.content}</textarea>
 	</div>
@@ -166,58 +116,16 @@
 	<!-- pageArea -->
 	<div id = pageArea class = "pagination justify-content-center"></div>
 </div>
-	<footer class="text-center text-lg-start bg-light text-muted">
-		<hr>
-		<!-- Section: Links  -->
-		<section class="">
-		<div class="container text-center text-md-start mt-5">
-			<!-- Grid row -->
-			<div class="row mt-3">
-			<!-- Grid column -->
-			<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-				<!-- Content -->
-				<h6 class="text-uppercase fw-bold mb-4">
-				<i class="fas fa-gem me-3"></i>Wanted Room
-				</h6>
-				<p>
-				</p>
-			</div>
-			<!-- Grid column -->
-			<!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<h6 class="text-uppercase fw-bold mb-4">Location</h6>
-				<p>Human Education Center, 100, Jungbu-daero, Paldal-gu, Suwon-si, Gyeonggi-do, Republic of Korea</p>
-			</div> -->
-			<!-- Grid column -->
-			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Developers</h6>
-				<p>Jaewan Song</p>
-				<p>Hwansoo Lee</p>
-			</div>
-			<!-- Grid column -->
-			<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-				<p>obliviat3@naver.com</p>
-				<p>hwansu29@naver.com</p>
-			</div>
-			<!-- Grid column -->
-			</div>
-			<!-- Grid row -->
-		</div>
-		</section>
-		<!-- Section: Links  -->
-	</footer>
+	<jsp:include page="footer.jsp"/>
 </body>
 <script type="text/javascript">
 	$('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
-	var boardNo = ${boardvo.boardNo};
-	var page = $('#page');
-	
 	$(document).ready(() =>{
 		getReplyList(page.val());
 	});
 	
+	var boardNo = ${boardvo.boardNo};
+	var page = $('#page');
 	function getReplyList(pageNum){ // 댓글 리스트 가져오는 함수.. 인자로 페이지 번호를 받는다.
 		let replyTable = $('#replyTable');
 		let pageArea = $('#pageArea');
@@ -357,7 +265,5 @@
 			}
     	});
 	}
-	
-	
 </script>
 </html>

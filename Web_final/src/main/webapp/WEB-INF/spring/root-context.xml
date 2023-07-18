@@ -10,26 +10,18 @@
 	<bean
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		id="dataSource">
-		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" 
-			/> <property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl" 
-			/> -->
-		<property value="oracle.jdbc.driver.OracleDriver"
-			name="driverClassName" />
-		<property value="jdbc:oracle:thin:@localhost:1521:orcl"
-			name="url" />
+		<property value="oracle.jdbc.driver.OracleDriver" name="driverClassName" />
+		<property value="jdbc:oracle:thin:@localhost:1521:orcl" name="url" />
 		<!-- 오라클 사용자 이름 -->
 		<property value="final" name="username" />
 		<!-- 오라클 사용자 비밀번호 -->
 		<property value="1111" name="password" />
 	</bean>
 
-
 	<!-- mybatis사용하기 위한 객체를 설정 이것은 스프링이 구동되면서 객체를 만드어서 컨테이너에 등록 시킬 것이다.. -->
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
-		id="sqlSessionFactory">
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
 		<property name="dataSource" ref="dataSource" />
-		<property value="classpath:/mapper/*Mapper.xml"
-			name="mapperLocations" />         <!-- 메퍼지정 -->
+		<property value="classpath:/mapper/*Mapper.xml" name="mapperLocations" />         <!-- 메퍼지정 -->
 	</bean>
 	<!-- mybatis사용하기 위한 객체를 설정 이것은 스프링이 구동되면서 객체를 만드어서 컨테이너에 등록 시킬 것이다.. 지금 
 		설정하는 bean(객체)을 dao가 주소를 주입받아서 mybatis의 작업을 요청할 것이다 -->
@@ -57,19 +49,12 @@
 		</property>
 	</bean>
 
-	<bean id="textProcess" class="com.human.util.TextProcess">
-
-	</bean>
-	
+	<bean id="textProcess" class="com.human.util.TextProcess"></bean>
 	<!-- chartProcess bean 설정 -->
-	<bean id="chartProcess" class="com.human.util.ChartProcess">
-
-	</bean>
+	<bean id="chartProcess" class="com.human.util.ChartProcess"></bean>
 
 	<context:component-scan
 		base-package="com.human.dao" />
 	<context:component-scan
 		base-package="com.human.service" />
-
-
 </beans>

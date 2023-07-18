@@ -29,7 +29,7 @@
 	}
 </style>
 <body>
-	<!--nav-->
+	<!--nav for home-->
     <nav class="navbar bg-light fixed-top">
         <div class="container-fluid">
             <!--logo-->
@@ -101,52 +101,10 @@
 	<section>
 		<div class = "myMap" id="map" style="width:500px;height:400px;margin: 0 auto;margin-top: 100px;"></div>
 	</section>
-
-	<footer class="text-center text-lg-start bg-light text-muted">
-		<hr>
-		<!-- Section: Links  -->
-		<section class="">
-		<div class="container text-center text-md-start mt-5">
-			<!-- Grid row -->
-			<div class="row mt-3">
-			<!-- Grid column -->
-			<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-				<!-- Content -->
-				<h6 class="text-uppercase fw-bold mb-4">
-				<i class="fas fa-gem me-3"></i>Wanted Room
-				</h6>
-				<p>
-				</p>
-			</div>
-			<!-- Grid column -->
-			<!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<h6 class="text-uppercase fw-bold mb-4">Location</h6>
-				<p>Human Education Center, 100, Jungbu-daero, Paldal-gu, Suwon-si, Gyeonggi-do, Republic of Korea</p>
-			</div> -->
-			<!-- Grid column -->
-			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Developers</h6>
-				<p>Jaewan Song</p>
-				<p>Hwansoo Lee</p>
-			</div>
-			<!-- Grid column -->
-			<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-				<p>obliviat3@naver.com</p>
-				<p>hwansu29@naver.com</p>
-			</div>
-			<!-- Grid column -->
-			</div>
-			<!-- Grid row -->
-		</div>
-		</section>
-		<!-- Section: Links  -->
-	</footer>
+	<jsp:include page="footer.jsp"/>
 </body>
 <script>
-
+	$('head').append('<script src=\'././resources/script/linkAddItem.js\'><\/script>');
 	//submit
 	$('#custom-button').on('click', () => {
 	    $('#searchItem').submit();
@@ -229,17 +187,6 @@
 			}
 		}    
 	}
-
-
-	
-	$('#addItem').on('click', () => {
-		var authenticated = '${authenticated}';
-		if(authenticated == 'false'){
-			alert('부동산 중개업자 인증한 사용자만 매물 등록이 가능합니다.');
-		}else{
-			$('#addItem').attr('href','addItemForm');
-		}
-	});
 	
 	const res = () => { // IP받아오는 함수
 		return fetch('http://geolocation-db.com/json/')
@@ -252,18 +199,21 @@
 	}
 	
 	const getLocation = async () => { // 좌표 받아오는 함수
-		const nowIp = await res();
-		const geoData = await fetch('http://api.ipstack.com/' + nowIp
-				+ '?access_key=1d043620c06ab6fd6949c2058e955df4&output=json')
-			.then((r) => r.json())
-			.then((r) => {
-				return r;
-			});
-		// 중심위치 현재 위치로 재지정
-		mapOption.center = new kakao.maps.LatLng(geoData.latitude, geoData.longitude);
-		map = new kakao.maps.Map(mapContainer, mapOption);
-		// 이벤트 재등록
-		allInOne();
+		const nowIp = await res();		
+		// 서버로 비동기로 요청 보내는 방식으로 변경
+		$.ajax({
+			url : "getIPToCoords?IP=" + nowIp
+			,type : "GET"
+			,dataType : "JSON"
+			,success : function(data){
+				mapOption.center = new kakao.maps.LatLng(data[0], data[1]);
+				map = new kakao.maps.Map(mapContainer, mapOption);
+				allInOne();
+			}
+			,error : function(){
+				console.log(2);
+			}
+		});
 	}
 	// 위치정보 동의를 사용자가 선택한 경우 함수 실행
 	// 유료라 무료버젼키는 한달에 100번 밖에 사용 못함 아껴써야 함..

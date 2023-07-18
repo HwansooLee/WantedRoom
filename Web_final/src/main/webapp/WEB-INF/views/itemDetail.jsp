@@ -6,14 +6,12 @@
 <head>
 	<title>Home</title>
 </head>
-<link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- include kakao map API with clusterer, services, drawing libraries -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d0a14867b453fb95c4b9fd54e4b68e47&libraries=services,clusterer,drawing"></script>
 <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 구글 차트 호출을 위한 js 파일 -->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<link rel="stylesheet" href="resources/css/menuBar.css">
 <link rel="stylesheet" href="resources/css/colorItemTag.css">
 <style>
     #slider{
@@ -22,7 +20,7 @@
     }
     .card{
         text-align: center;
-        margin: 0 auto;
+        margin: 20px auto;
     }
     form{
         display: inline-block;
@@ -75,54 +73,7 @@
     }
 </style>
 <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-		<div class="container-fluid">
-			<!-- 홈페이지 로고 -->
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
-				class="logoImg" src="resources/image/logo.png">
-			</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarText"
-				aria-controls="navbarText" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link"
-						aria-current="page" href="addItemForm" id="addItem">매물 등록</a></li>
-					<li class="nav-item"><a class="nav-link" href="boardList">리뷰게시판</a>
-					</li>
-					<c:if test="${id eq null}">
-						<li class="nav-item">
-							<a class="nav-link" href="signIn">로그인</a>
-                        </li>
-                        <li class="nav-item">
-                           	<a class="nav-link" href="signUp">회원가입</a>
-                        </li> 
-                    </c:if>
-                    <c:if test="${id ne null}">
-                       	<li class="nav-item">
-                           	<a class="nav-link" href="myPage">${nickname}</a>
-                       	</li>
-                    </c:if>
-				</ul>
-				<div class="searchDiv border-success">
-					<form action="searchItem" method="get">
-						<input type="text" name="sword" placeholder="검색할 주소 입력"
-							class="inputSword"> <input type="submit" value="검색"
-							class="submitBtn btn-success">
-					</form>
-				</div>
-				<c:if test="${id ne null}">
-					<span class="navbar-text">
-						<button type="button" class="btn btn-outline-secondary"
-							id="logOutBtn">로그아웃</button>
-					</span>
-				</c:if>
-			</div>
-		</div>
-	</nav>
+    <jsp:include page="menuBar.jsp"/>
     <div class="card border border-success" style="width: 76%;height: 140%">
 		<div class="card-body" style="width: 100%;height: 100%">
             <table id="itemTable" class="table" style="width: 100%;height: 100%">
@@ -216,10 +167,12 @@
                 <c:if test="${id eq item.id}">
                     <tr>
                         <td colspan="4">
-                            <form action="modifyItemForm" method="post">
-                                <input type="submit" value="수정" class="modifyItemBtn">
-                                <input type="text" name="itemNo" value="${item.itemNo}" hidden>
-                            </form>
+                            <c:if test="${item.status == '계약가능'}">
+                                <form action="modifyItemForm" method="post">
+                                    <input type="submit" value="수정" class="modifyItemBtn">
+                                    <input type="text" name="itemNo" value="${item.itemNo}" hidden>
+                                </form>
+                            </c:if>
                             <form action="myItemList?sword=" id="frm">
                                 <input type="button" value="삭제" class="deleteItemBtn">
                                 <input type="hidden" value="${item.itemNo}">
@@ -230,48 +183,7 @@
             </table>
         </div>
     </div>
-    <footer class="text-center text-lg-start bg-light text-muted">
-		<hr>
-		<!-- Section: Links  -->
-		<section class="">
-		<div class="container text-center text-md-start mt-5">
-			<!-- Grid row -->
-			<div class="row mt-3">
-			<!-- Grid column -->
-			<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-				<!-- Content -->
-				<h6 class="text-uppercase fw-bold mb-4">
-				<i class="fas fa-gem me-3"></i>Wanted Room
-				</h6>
-				<p>
-				</p>
-			</div>
-			<!-- Grid column -->
-			<!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<h6 class="text-uppercase fw-bold mb-4">Location</h6>
-				<p>Human Education Center, 100, Jungbu-daero, Paldal-gu, Suwon-si, Gyeonggi-do, Republic of Korea</p>
-			</div> -->
-			<!-- Grid column -->
-			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Developers</h6>
-				<p>Jaewan Song</p>
-				<p>Hwansoo Lee</p>
-			</div>
-			<!-- Grid column -->
-			<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-				<p>obliviat3@naver.com</p>
-				<p>hwansu29@naver.com</p>
-			</div>
-			<!-- Grid column -->
-			</div>
-			<!-- Grid row -->
-		</div>
-		</section>
-		<!-- Section: Links  -->
-	</footer>
+	<jsp:include page="footer.jsp"/>
 </body>
 	<script>
         $('head').append('<script src=\'././resources/script/logout.js\'><\/script>');
@@ -300,17 +212,18 @@
                 });
                 infowindow.open(map, marker);
                 map.setCenter(coords);
-                getMartInfo(coords);
+                getMartInfo();
             } 
         });
         $("#map").on('mousewheel', (e)=>{
-            getMartInfo(map.getCenter());
+            getMartInfo();
         });
+        // dragend event는 kakao에서 따로 리스너를 만들어 둠(일반 리스터로는 동작 안 됨)
         kakao.maps.event.addListener(map, 'dragend', function() {
-            getMartInfo(map.getCenter());
+            getMartInfo();
         });
 
-        function getMartInfo(coords){
+        function getMartInfo(){
             let bounds = map.getBounds();
             let data = {
                 upperLat : bounds.pa,
@@ -325,7 +238,7 @@
                 success: (martInfo)=>{
                     displayMartInfo(martInfo);
                 }
-            });            
+            });
         }
         const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png';
         const imageSize = new kakao.maps.Size(24, 35);

@@ -169,8 +169,12 @@ public class RealtorServiceImpl implements IF_RealtorService{
 	}
 
 	@Override
-	public MemberVO idChk(String id) throws Exception {
-		return memberdao.selectMemberOne(id);
+	public MemberVO idChk(MemberVO mvo) throws Exception {
+		MemberVO nowvo = memberdao.selectMemberOne(mvo.getId());
+		if(nowvo != null && nowvo.getPwd().equals(mvo.getPwd())) {
+			return nowvo;
+		}
+		return null;
 	}
 
 	@Override
@@ -238,5 +242,13 @@ public class RealtorServiceImpl implements IF_RealtorService{
 		 */
 		List<BoardVO> cntList = boarddao.getItemSentimentCnt(itemNo); // 실행시킨 결과 리스트	
 		return chartProcess.getChartData(cntList);
+	}
+
+	@Override
+	public boolean reIdChk(MemberVO mvo) throws Exception {
+		if(memberdao.selectMemberOne(mvo.getId()) != null) { // 존재하는 아이디라면 true
+			return true;
+		}
+		return false;
 	}
 }

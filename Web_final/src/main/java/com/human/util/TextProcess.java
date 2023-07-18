@@ -27,9 +27,8 @@ public class TextProcess {
         rest.getMessageConverters()
                 .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
     }
-
+    @SuppressWarnings("all")
     public String getEmotion(String text) throws Exception{
-        System.out.println(text);
         URI uri = new URI(rawURI);
         JSONObject dataObj = new JSONObject();
         dataObj.put("content", text);
@@ -39,10 +38,8 @@ public class TextProcess {
         JSONObject body = (JSONObject) jsonParser.parse(res.getBody());
         String emotion = null;
         if( !body.isEmpty() ){
-            System.out.println(body);
             JSONObject docu = (JSONObject)body.get("document");
             emotion = (String)docu.get("sentiment");
-            System.out.println( docu.get("sentiment") );
         }
         return emotion;
     }

@@ -12,11 +12,6 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href = "resources/css/signUp.css">
 <style>
   	/* Login container */
 	#container{
@@ -27,6 +22,7 @@
 		border-radius: 5px;
 		background: white;
 		box-shadow: none;
+		margin-bottom: 20px;
 	}
 	a{
 		font-family: 'Open Sans Condensed', sans-serif;
@@ -45,6 +41,12 @@
 		-moz-transition: all 2s ease-in-out;
 		-o-transition: all 2s ease-in-out;
 		transition: all 0.2s ease-in-out;
+	}
+	img{
+		display: block;
+		margin: auto;
+		width: 100%;
+		height: auto;
 	}
 	/* Inputs */
 	input{
@@ -108,14 +110,11 @@
 		display: block;
 		width: 27%;
 	}
-	body{
-		min-height: 100%;
-		display: flex;
-		flex-direction: column;
-		margin-bottom: -200px;
-	} 
-	footer{
-		margin-top: auto;
+	img{
+	    display: block;
+	    margin: auto;
+	    width: 100%;
+	    height: auto;
 	}
 </style>
 <body>
@@ -146,48 +145,7 @@
             <input type = "button" id = "submitBtn" value = "회원가입">
         </form>
     </div>
-	<footer class="text-center text-lg-start bg-light text-muted">
-		<hr>
-		<!-- Section: Links  -->
-		<section class="">
-		<div class="container text-center text-md-start mt-5">
-			<!-- Grid row -->
-			<div class="row mt-3">
-			<!-- Grid column -->
-			<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-				<!-- Content -->
-				<h6 class="text-uppercase fw-bold mb-4">
-				<i class="fas fa-gem me-3"></i>Wanted Room
-				</h6>
-				<p>
-				</p>
-			</div>
-			<!-- Grid column -->
-			<!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<h6 class="text-uppercase fw-bold mb-4">Location</h6>
-				<p>Human Education Center, 100, Jungbu-daero, Paldal-gu, Suwon-si, Gyeonggi-do, Republic of Korea</p>
-			</div> -->
-			<!-- Grid column -->
-			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Developers</h6>
-				<p>Jaewan Song</p>
-				<p>Hwansoo Lee</p>
-			</div>
-			<!-- Grid column -->
-			<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-				<!-- Links -->
-				<h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-				<p>obliviat3@naver.com</p>
-				<p>hwansu29@naver.com</p>
-			</div>
-			<!-- Grid column -->
-			</div>
-			<!-- Grid row -->
-		</div>
-		</section>
-		<!-- Section: Links  -->
-	</footer>
+	<jsp:include page="footer.jsp"/>
 </body>
 <script type="text/javascript">
 	
@@ -199,8 +157,8 @@
 	var code = '';
 	
 	$('#certiNumber').keyup(function(){
-		const mailFlag = $(mailChk);
-		if(code == $('#certiNumber').val()){
+		const mailFlag = $('#mailChk');
+		if(code == $('#certiNumber').val() && code != 'false'){
 			mailFlag.attr("color","green");
 			mailFlag.html('일치합니다.');
 			codeFlag = true;
@@ -213,8 +171,8 @@
 	
 	$('#certification').on('click', () => {
 		let email = $('#id').val(); // 사용자가 입력한 이메일 가져옴
+		const mailFlag = $('#mailChk');
 		const mailChk = $('#certiNumber');
-		console.log(email);
 		// 비동기 방식으로 본인인증을 진행한다.
 		let maildata = {
 				"id" : email
@@ -225,11 +183,15 @@
 			,dataType : "JSON"
 			,data : JSON.stringify(maildata)
 			,contentType : "application/json"
-			,success : function(nowdata){ // data는 인증번호를 의미한다.
+			,success : function(nowdata){
 				mailChk.attr('disabled',false);
-				alert('인증번호가 발송되었습니다.');
 				code = nowdata;
-				console.log(nowdata);
+				if(!code){
+					mailFlag.attr("color","red");
+					mailFlag.html('이미 존재하는 아이디 입니다.');
+				}else{
+					alert('인증번호가 발송되었습니다.');
+				}
 			}
 			,error : function(jqXHR,textStatus,errorThrown){
 				console.log(jqXHR);

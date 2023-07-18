@@ -19,7 +19,6 @@ public class AddrToCooord {
     private final HttpHeaders headers = new HttpHeaders();
     private final String appkey = "KakaoAK 794cf8d819dc6b10375238d6419e6a6b";
     private HttpEntity<String> entity = null;
-    //       x=160710.37729270622&y=-4388.879299157299&input_coord=WTM&output_coord=WGS84
     private final String rawURI = "https://dapi.kakao.com/v2/local/geo/transcoord.json?";
 
     private Connection conn=null;
@@ -45,7 +44,6 @@ public class AddrToCooord {
     private boolean getConnection(){
         try {
             conn = DriverManager.getConnection(URL, USERNAME, PWD);
-            System.out.println("Connection established");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,14 +54,15 @@ public class AddrToCooord {
     private void closeConnection(){
         try {
             conn.close();
-            System.out.println("Connection closed");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public double[] convert(double x, double y, String inputCoord, String outputCoord) throws Exception{
-        String query = "x=" + x + "&y=" + y + "&input_coord=" + inputCoord + "&output_coord=" + outputCoord;
+    public double[] convert(double x, double y, String inputCoord, String outputCoord)
+            throws Exception{
+        String query = "x=" + x + "&y=" + y + "&input_coord=" + inputCoord
+                + "&output_coord=" + outputCoord;
         URI uri = new URI(rawURI + query);
         ResponseEntity<String> res = rest.exchange(uri, HttpMethod.GET, entity, String.class);
         JSONParser jsonParser = new JSONParser();

@@ -29,15 +29,15 @@ public class ItemController {
 
     @RequestMapping(value = "/addItemForm", method = RequestMethod.GET)
     public String showAddItemForm(Locale locale, Model model, HttpSession session) {
-        String id = (String)session.getAttribute("id");
-//        System.out.println((String) );
-//        if( (String)session.getAttribute("realtorNo") == null ){
-//            model.addAttribute("authenticated", false);
-//            return "redirect:/";
-//        }
-        model.addAttribute("id", id);
+        model.addAttribute("id", (String)session.getAttribute("id"));
         return "addItemForm";
     }
+    @RequestMapping(value = "/checkAuthen", method = RequestMethod.GET)
+    @ResponseBody
+    public boolean isAuthen(Locale locale, Model model, HttpSession session){
+        return session.getAttribute("realtorNo") != null ;
+    }
+
     @RequestMapping(value = "/addItem", method = RequestMethod.POST)
     public String addItem(Locale locale, Model model, HttpSession session,
                           @ModelAttribute("newItem") ItemVO ivo, MultipartFile[] file) throws Exception{
@@ -80,9 +80,7 @@ public class ItemController {
     }
     @RequestMapping(value = "/modifyItemForm", method = RequestMethod.POST)
     public String getModifyItemFrom(Locale locale, Model model,
-                                    @ModelAttribute("itemNo") int itemNo)
-            throws Exception{
-        System.out.println(itemNo);
+                                @ModelAttribute("itemNo") int itemNo) throws Exception{
         model.addAttribute("item", realtorsrv.getItemDetail(itemNo));
         model.addAttribute("attachs", realtorsrv.getAttachFileNames(itemNo));
         return "modifyItemForm";

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.human.dao.IF_ItemAttachDAO">
+    <insert id="insert" parameterType="com.human.VO.ItemAttachVO">
+        insert into itemAttach values (#{itemNo}, #{fileName})
+    </insert>
+    <select id="selectAll" parameterType="int" resultType="com.human.VO.ItemAttachVO">
+        select * from itemAttach where itemNo=#{itemNo} order by fileName desc
+    </select>
+    <delete id="delete" parameterType="int">
+        delete from itemAttach where itemNo=#{itemNo}
+    </delete>
+    <delete id="deleteByName" parameterType="String">
+        delete from itemAttach where fileName=#{fileName}
+    </delete>
+</mapper>

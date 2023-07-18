@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.human.dao.IF_LikesDAO">
+	<insert id = "insert" parameterType = "com.human.VO.LikesVO">
+		insert into likes values (#{replyNo},#{id})
+	</insert>
+	<delete id="delete" parameterType = "com.human.VO.LikesVO">
+		delete from likes 
+		where replyNo = #{replyNo}
+		and id = #{id}
+	</delete>
+</mapper>

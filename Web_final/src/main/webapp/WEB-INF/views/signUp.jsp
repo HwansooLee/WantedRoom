@@ -173,7 +173,6 @@
 		let email = $('#id').val(); // 사용자가 입력한 이메일 가져옴
 		const mailFlag = $('#mailChk');
 		const mailChk = $('#certiNumber');
-		console.log(email);
 		// 비동기 방식으로 본인인증을 진행한다.
 		let maildata = {
 				"id" : email
@@ -184,7 +183,7 @@
 			,dataType : "JSON"
 			,data : JSON.stringify(maildata)
 			,contentType : "application/json"
-			,success : function(nowdata){ // data는 인증번호를 의미한다.
+			,success : function(nowdata){
 				mailChk.attr('disabled',false);
 				code = nowdata;
 				if(!code){

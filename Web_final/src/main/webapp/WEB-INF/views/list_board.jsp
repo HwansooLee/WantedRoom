@@ -29,7 +29,7 @@
 	</section>    
 	
 	<form action="boardList" method = "get" id = "frm">
-		<select id = "sel" name = "sorted">
+		<select id = "sel" name = "sorted" style = "margin-left: 20px">
 			<option value="">==정렬기준==</option>
 			<option value="nickname" ${pagevo.sorted eq "nickname" ? 'selected' : '' }>닉네임순</option>
 			<option value="inDate" ${pagevo.sorted eq "inDate" ? 'selected' : '' }>등록일순</option>

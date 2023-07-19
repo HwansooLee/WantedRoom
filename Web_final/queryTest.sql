@@ -23,11 +23,12 @@ select * from (
             (select i.*, a.FILENAME, t.PARKING, t.ELEVATOR, t.BUILDINGTYPE, 
             ROW_NUMBER() over(PARTITION by i.itemNo order by a.fileName) as rn
                 from item i, ITEMATTACH a, ITEMTAGS t
-                where i.addr like '%상계동%' and i.ITEMNO = a.ITEMNO and a.ITEMNO = t.ITEMNO
+                where i.addr like '%노원구%' and i.ITEMNO = a.ITEMNO and a.ITEMNO = t.ITEMNO
                 )
             where rn <= 1) s
     )
-    where newRn > 10 and newRn <= 20;
+    where newRn > 0 and newRn <= 10
+    order by itemNo desc;
 
 -- combine above queries
 select * from (

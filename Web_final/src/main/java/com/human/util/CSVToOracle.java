@@ -110,7 +110,7 @@ public class CSVToOracle {
         }catch (Exception e){
             e.printStackTrace();
         }
-        if( getConnection() ){
+        if( getConnection() )
             for(List<String> store : parsedResult.subList(1, parsedResult.size()) ){
                 List<String> storeInfo = new ArrayList<>();
                 for(int idx:indices)
@@ -127,7 +127,6 @@ public class CSVToOracle {
                     insert(svo);
                 }
             }
-        }
         closeConnection();
     }
     public void parseAndConvert(){

@@ -212,17 +212,18 @@
                 });
                 infowindow.open(map, marker);
                 map.setCenter(coords);
-                getMartInfo(coords);
+                getMartInfo();
             } 
         });
         $("#map").on('mousewheel', (e)=>{
-            getMartInfo(map.getCenter());
+            getMartInfo();
         });
+        // dragend event는 kakao에서 따로 리스너를 만들어 둠(일반 리스터로는 동작 안 됨)
         kakao.maps.event.addListener(map, 'dragend', function() {
-            getMartInfo(map.getCenter());
+            getMartInfo();
         });
 
-        function getMartInfo(coords){
+        function getMartInfo(){
             let bounds = map.getBounds();
             let data = {
                 upperLat : bounds.pa,
@@ -237,7 +238,7 @@
                 success: (martInfo)=>{
                     displayMartInfo(martInfo);
                 }
-            });            
+            });
         }
         const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png';
         const imageSize = new kakao.maps.Size(24, 35);

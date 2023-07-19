@@ -26,11 +26,14 @@
 	.readonlyBox{
 		background-color: whitesmoke;
 	}
-	textarea{
+	textarea[name="detail"]{
 		resize: none;
 		border-radius: 4px;
         border: 1px solid gray;
 	}
+	/* input[name="addr"]{
+		size: 50;
+	} */
 </style>
 <body>
     <!-- 홈페이지 로고 -->
@@ -50,7 +53,7 @@
 					<tr>
 						<td>주소</td>
 						<td>
-							<input class="readonlyBox" type="text" name="addr" value="${item.addr}" readonly>
+							<input class="readonlyBox" type="text" name="addr" value="${item.addr}" size="50" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -219,14 +222,15 @@
 			document.getElementById('fileList').deleteRow(rowNum);
 			setHeight(Type.DECREASE);
 		}
-		let removeList = new Set();
+		let removeList = new Array();
 		function addRemoveList(elem){
 			let rowNum = elem.parentNode.parentNode.rowIndex;
 			document.getElementById('fileList').deleteRow(rowNum);
 			setHeight(Type.REMOVE_IMG);
-			let attachNameVal = elem.parentNode.parentNode.childNodes[1].children[0].getAttribute('src');
+			let attachNameVal = elem.parentNode.parentNode.
+								childNodes[1].children[0].getAttribute('src');
 			attachNameVal = attachNameVal.split('fileName=')[1];
-			removeList.add(attachNameVal);
+			removeList.push(attachNameVal);
 		}
 		function removeAttach(removeList){
 			for( fileName of removeList )

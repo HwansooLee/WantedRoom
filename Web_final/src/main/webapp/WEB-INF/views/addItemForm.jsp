@@ -13,7 +13,7 @@
         text-align: center;
         margin: 20px auto;
     }
-	textarea{
+	textarea[name="detail"]{
 		resize: none;
 		border-radius: 4px;
 		border: 1px solid gray;
@@ -141,7 +141,6 @@
 		const EXT_ERROR_MSG = '첨부파일은 ' + ALLOWED_EXT.join() + ' 형식만 가능합니다.';
 		let fileInput = $("[name='file']");
 		let fileList = [];
-		// drag and drop
 	
 		// 선택한 파일 삭제
 		function removeFile(index) {
@@ -150,7 +149,7 @@
 			for (let i = 0; i < files.length; i++) {
 				const file = files[i];
 				if (index !== i)
-				dt.items.add(file);
+					dt.items.add(file);
 			}
 			fileInput[0].files = dt.files;
 		}
@@ -163,11 +162,9 @@
 		function setHeight(type){
 			if(type == Type.INCREASE){
 				currentHeight += HEIGHT_PER_LINE;
-				console.log(currentHeight);
 				$('.card')[0].style.height = String(currentHeight) + '%';
 			}else if(type == Type.DECREASE){
 				currentHeight -= HEIGHT_PER_LINE;
-				console.log(currentHeight);
 				$('.card')[0].style.height = String(currentHeight) + '%';
 			}
 		}

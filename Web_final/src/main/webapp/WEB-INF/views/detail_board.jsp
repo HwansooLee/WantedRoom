@@ -141,8 +141,6 @@
 			,data : JSON.stringify(data)
 			,contentType : "application/json"
 			,success : function(data){ // data가 의미하는것은 controller로부터 받아오는 response 객체를 의미한다.
-				// console.log(data.pagevo.page); // pagevo 받아와서 사용하는 방법
-				// console.log(data.rlist[1].content); // rlist 받아와서 사용하는 방법
 				page.val(data.pagevo.page); // 댓글 페이지 번호 갱신
 				replyTable.html(''); // 댓글이 중복되지 않도록 기존 댓글 비워주기
 				$.each(data.rlist, function(idx,item){
@@ -210,7 +208,7 @@
 				,dataType : "JSON"
 				,data : JSON.stringify(data) // 제대로 보내지는지 확인이 필요하다.
 				,contentType : "application/json" // 여기까지는 서버로 전송
-				,success : function(data){ // data가 의미하는것은 controller로부터 받아오는 response 객체를 의미한다.
+				,success : function(data){ // data가 의미하는것은 controller로부터 받아오는 response 객체
 					// console.log(data); 데이터 확인용
 					// 이곳에서 댓글리스트를 갱신해준다.
 					getReplyList(page.val());

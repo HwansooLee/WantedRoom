@@ -234,7 +234,7 @@ public class RealtorServiceImpl implements IF_RealtorService{
 		 * select b.sentiment, count(b.sentiment) cnt 
 		 * from board b , item i 
 		 * where b.bcode = i.bcode 
-		 * and itemNo = 14 
+		 * and itemNo = ? 
 		 * GROUP by b.sentiment
 		 * 
 		 * dao로 위 쿼리를 실행을 시킨 결과를 받아와서

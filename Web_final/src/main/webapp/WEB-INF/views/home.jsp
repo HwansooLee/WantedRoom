@@ -222,13 +222,13 @@
 	$('#findNowLoc').on('click', () => {
 		if($('input:checkbox[id = "findNowLoc"]').is(":checked")){ // switch on
 			// 테스트용 좌표
-			let lat = 37.3939;
+			/* let lat = 37.3939;
 			let lon = 127.1250;
 			mapOption.center = new kakao.maps.LatLng(lat, lon);
 			map = new kakao.maps.Map(mapContainer, mapOption);
-			allInOne();
+			allInOne(); */
 			// 실제 서비스 구현
-			// userGeoLocation(); 
+			userGeoLocation(); 
 		}else{ // switch off
 			allInOne();
 		}

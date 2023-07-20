@@ -52,10 +52,6 @@
 	var btn = $('#saveBtn');
 	var input = $('.boardInput');
 	var frm = $('#frm');
-	// 여기서는 유효성 체크를 한다
-	// 제목이 비어있는가
-	// 유효한 주소인가 >> v2.0
-	// 내용이 비어있는가
 	btn.on('click',() => {
 		for(i = 0; i < 3; i++){
 			if(input[i].value == '') {

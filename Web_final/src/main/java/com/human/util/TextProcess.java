@@ -27,6 +27,7 @@ public class TextProcess {
         rest.getMessageConverters()
                 .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
     }
+    
     @SuppressWarnings("all")
     public String getEmotion(String text) throws Exception{
         URI uri = new URI(rawURI);

@@ -59,7 +59,7 @@ public class RealtorNoProcess {
 	
 	@RequestMapping(value = "/getRealtorInfo")
 	@ResponseBody
-    public JSONObject chartData(@RequestBody MemberVO mvo) throws Exception{ // 비동기 통신		
+    public JSONObject chartData(@RequestBody MemberVO mvo) throws Exception{ // 비동기		
         return getRealtorInfo(mvo);
     }
 }

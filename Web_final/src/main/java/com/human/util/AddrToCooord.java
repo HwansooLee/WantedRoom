@@ -4,7 +4,10 @@ import com.human.VO.StoreVO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -14,10 +17,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+@Controller
+@PropertySource("resources/config/config.properties")
 public class AddrToCooord {
+    @Value("${config.kakaoKey}")
+    public String kakaoKey;
+
     private final RestTemplate rest = new RestTemplate();
     private final HttpHeaders headers = new HttpHeaders();
-    private final String appkey = "KakaoAK 794cf8d819dc6b10375238d6419e6a6b";
+    private String appkey = "KakaoAK " + kakaoKey;
     private HttpEntity<String> entity = null;
     private final String rawURI = "https://dapi.kakao.com/v2/local/geo/transcoord.json?";
 
